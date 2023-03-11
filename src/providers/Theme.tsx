@@ -16,7 +16,7 @@ export const ThemeProvider: FC = ({ children }) => {
   )
 }
 
-const brandColor = '#00b8d4'
+export const primaryMain = '#202033'
 const createThemeHelper = (theme: 'dark' | 'light') => {
   const isDark = theme === 'dark'
   return createTheme({
@@ -27,7 +27,7 @@ const createThemeHelper = (theme: 'dark' | 'light') => {
         paper: isDark ? '#242526' : '#ffffff'
       },
       primary: {
-        main: brandColor
+        main: primaryMain
       },
       error: {
         main: 'rgb(232, 51, 51)'

@@ -3,6 +3,7 @@ import Checker from 'vite-plugin-checker'
 import { resolve } from 'path'
 import { UserConfig } from 'vite'
 import { visualizer } from 'rollup-plugin-visualizer'
+import svgr from 'vite-plugin-svgr'
 
 function pathResolve(dir: string) {
   return resolve(__dirname, '.', dir)
@@ -27,6 +28,7 @@ const config: UserConfig = {
   },
   plugins: [
     react(),
+    svgr(),
     Checker({
       typescript: true,
       overlay: true,
