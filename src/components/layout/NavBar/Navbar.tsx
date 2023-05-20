@@ -2,7 +2,7 @@
 import { ReactComponent as Logo } from '@/assets/logo.svg'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { useContainer } from './useContainer'
+import { useContainer } from './Navbar.container'
 import { LinkStyled, StyledAppBar, ToolbarStyled } from './Navbar.styled'
 import { primaryMain } from '@/providers'
 

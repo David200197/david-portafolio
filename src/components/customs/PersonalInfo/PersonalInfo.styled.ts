@@ -43,12 +43,14 @@ export const PersonalInfoDescription = styled(Typography)(({ theme }) => ({
   }
 }))
 
-export const Avatar = styled('img')({
-  width: 300,
+export const Avatar = styled('img')(({ theme }) => ({
   height: 'auto',
-  clipPath: 'circle(var(80px) at var(0) var(0))',
-  borderRadius: '50%'
-})
+  borderRadius: '50%',
+  width: 300,
+  [theme.breakpoints.down('md')]: {
+    width: 250
+  }
+}))
 
 export const StyledGrid = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
