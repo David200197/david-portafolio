@@ -1,5 +1,5 @@
 import MuiAppBar from '@mui/material/AppBar'
-import { styled } from '@mui/material'
+import { Box, styled } from '@mui/material'
 import Toolbar from '@mui/material/Toolbar'
 import isPropValid from '@emotion/is-prop-valid'
 import { Link } from 'react-router-dom'
@@ -23,11 +23,19 @@ export const StyledAppBar = styled(MuiAppBar, { shouldForwardProp: isPropValid }
 }))
 
 export const ToolbarStyled = styled(Toolbar)({
-  alignItems: 'center'
+  alignItems: 'center',
+  justifyContent: 'space-between'
 })
 
 export const LinkStyled = styled(Link)({
   textDecoration: 'none',
   display: 'flex',
   alignItems: 'center'
+})
+
+export const DrawerContainer = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '10px',
+  alignItems: 'start'
 })
