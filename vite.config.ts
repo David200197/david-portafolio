@@ -11,9 +11,9 @@ function pathResolve(dir: string) {
 
 const shouldAnalyze = process.env.ANALYZE
 
-export default defineConfig(({ command }) => {
+export default defineConfig(() => {
   const config: UserConfig = {
-    base: command !== 'serve' ? '/david-portafolio/' : '',
+    base: '/david-portafolio/',
     resolve: {
       alias: [
         {

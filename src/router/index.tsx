@@ -14,5 +14,5 @@ export const router = createBrowserRouter(
       )
     }
   ],
-  { basename: import.meta.env.DEV ? '/' : '/david-portafolio/' }
+  { basename: '/david-portafolio/' }
 )
