@@ -10,6 +10,7 @@ import NavigateButton from './components/NavigateButton'
 import { DesktopMedia, MobileMedia } from '@/components/customs/Media'
 import MenuIcon from '@mui/icons-material/Menu'
 import { IconButton, SwipeableDrawer } from '@mui/material'
+import { Link } from 'react-scroll'
 
 const NavBar = () => {
   const { isInitialPosition, drawer, toggle } = useContainer()
@@ -20,9 +21,11 @@ const NavBar = () => {
           <LinkStyled to=''>
             <Logo width={'35px'} height={'35px'} fill={primaryMain} />
             <DesktopMedia>
-              <Typography marginLeft={1.5} color={'black'} variant='h1' fontSize={26}>
-                David's Portafolio
-              </Typography>
+              <Link to={BANNER_MARK} spy smooth hashSpy duration={800}>
+                <Typography marginLeft={1.5} color={'black'} variant='h1' fontSize={26}>
+                  David's Portafolio
+                </Typography>
+              </Link>
             </DesktopMedia>
           </LinkStyled>
           <MobileMedia>

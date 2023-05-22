@@ -5,7 +5,7 @@ import TitleBanner from './TitleBanner'
 const BigBanner = () => (
   <>
     <TitleBanner />
-    <DownButton onClick={() => {}} />
+    <DownButton />
     <BackgroundParticles />
   </>
 )
