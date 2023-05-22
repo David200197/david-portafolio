@@ -2,7 +2,7 @@ import MuiAppBar from '@mui/material/AppBar'
 import { Box, styled } from '@mui/material'
 import Toolbar from '@mui/material/Toolbar'
 import isPropValid from '@emotion/is-prop-valid'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-scroll'
 
 export const StyledAppBar = styled(MuiAppBar, { shouldForwardProp: isPropValid })<{
   isInitialPosition: boolean
