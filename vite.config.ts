@@ -12,7 +12,6 @@ function pathResolve(dir: string) {
 const shouldAnalyze = process.env.ANALYZE
 
 const config: UserConfig = {
-  base: '/',
   resolve: {
     alias: [
       {
