@@ -1,3 +1,4 @@
+import CardHeader from '@mui/material/CardHeader'
 import { Avatar, styled } from '@mui/material'
 import Card from '@mui/material/Card'
 import Box from '@mui/material/Box'
@@ -36,3 +37,7 @@ export const JobCard = styled(Card)(({ theme }) => ({
   flexDirection: 'column',
   justifyContent: 'space-between'
 }))
+
+export const CardHeaderStyled = styled(CardHeader)({
+  height: 65
+})

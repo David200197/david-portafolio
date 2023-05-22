@@ -1,11 +1,10 @@
 import { Box, Button } from '@mui/material'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
-import CardHeader from '@mui/material/CardHeader'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { Fragment } from 'react'
-import { AvatarWork, ContainerSvg, JobCard } from './Work.styled'
+import { CardHeaderStyled, ContainerSvg, JobCard } from './Work.styled'
 
 type Props = {
   title: string
@@ -15,12 +14,13 @@ type Props = {
   time: string
   skills: JSX.Element[]
   link?: string
+  logoSrc: string
 }
 
-const Work = ({ title, image, alt, description, time, skills, link }: Props) => (
+const Work = ({ title, image, alt, description, time, skills, link, logoSrc }: Props) => (
   <JobCard variant='outlined'>
-    <CardHeader
-      avatar={<AvatarWork aria-label='recipe'>{title[0].toUpperCase()}</AvatarWork>}
+    <CardHeaderStyled
+      avatar={<img alt={title} src={logoSrc} width={35} height='auto' />}
       title={title}
       subheader={time}
     />
