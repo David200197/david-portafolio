@@ -6,6 +6,7 @@ export const ContainerSvg = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'start',
   alignItems: 'center',
+  padding: 5,
   width: '150px',
   '& svg': {
     width: '20px',
@@ -30,5 +31,8 @@ export const JobCard = styled(Card)(({ theme }) => ({
   },
   '&:hover': {
     boxShadow: 'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px'
-  }
+  },
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between'
 }))

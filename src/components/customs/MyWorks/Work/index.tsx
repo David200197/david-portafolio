@@ -31,7 +31,7 @@ const Work = ({ title, image, alt, description, time, skills, link }: Props) => 
       </Typography>
     </CardContent>
     <CardActions disableSpacing>
-      <Box display='flex' justifyContent='space-between' alignItems='center' width='100%'>
+      <Box display='flex' justifyContent='space-between' alignItems='center' width='100%' height='100%'>
         <ContainerSvg>
           {skills.map((skill, index) => (
             <Fragment key={`${title.split(' ').join(' ')}-${index}`}>{skill}</Fragment>
