@@ -1,5 +1,6 @@
 {
   "name": "vite-ts-material-ui",
+  "homepage": "https://David200197.github.io/david-portafolio",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -8,7 +9,9 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "analyze": "ANALYZE=true yarn build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "predeploy":"npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@caldwell619/react-hooks": "^0.0.6",
@@ -40,6 +43,7 @@
     "@vitejs/plugin-react": "^1.0.1",
     "eslint": "^7.32.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "gh-pages": "^5.0.0",
     "prettier": "^2.4.1",
     "rc": "^1.2.8",
     "react-scripts": "^4.0.3",
