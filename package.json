@@ -10,8 +10,9 @@
     "build": "tsc --noEmit && vite build",
     "analyze": "ANALYZE=true yarn build",
     "serve": "vite preview",
-    "predeploy":"npm run build",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
+    "package-only-install": "npm install --package-lock-only"
   },
   "dependencies": {
     "@caldwell619/react-hooks": "^0.0.6",
