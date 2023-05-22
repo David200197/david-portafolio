@@ -13,7 +13,7 @@ const shouldAnalyze = process.env.ANALYZE
 
 export default defineConfig(() => {
   const config: UserConfig = {
-    base: '/david-portafolio/',
+    base: '/',
     resolve: {
       alias: [
         {
