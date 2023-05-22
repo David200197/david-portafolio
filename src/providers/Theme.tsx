@@ -1,12 +1,9 @@
-import { FC, useContext, useMemo } from 'react'
+import { FC, useMemo } from 'react'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles'
 
-import { ChosenTheme } from './ChosenTheme'
-
 export const ThemeProvider: FC = ({ children }) => {
-  const { theme } = useContext(ChosenTheme)
-  const muiTheme = useMemo(() => createThemeHelper(theme), [theme])
+  const muiTheme = useMemo(() => createThemeHelper(), [])
 
   return (
     <MuiThemeProvider theme={muiTheme}>
@@ -17,14 +14,12 @@ export const ThemeProvider: FC = ({ children }) => {
 }
 
 export const primaryMain = '#202033'
-const createThemeHelper = (theme: 'dark' | 'light') => {
-  const isDark = theme === 'dark'
+const createThemeHelper = () => {
   return createTheme({
     palette: {
-      mode: theme,
       background: {
-        default: isDark ? '#303030;' : '#f0f0f0',
-        paper: isDark ? '#242526' : '#ffffff'
+        default: '#f0f0f0',
+        paper: '#ffffff'
       },
       primary: {
         main: primaryMain
