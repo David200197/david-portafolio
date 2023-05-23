@@ -19,7 +19,7 @@ import {
 
 const Skills = () => (
   <Box width={250} mt={3}>
-    <Grid container spacing={1}>
+    <Grid container rowSpacing={4} columnSpacing={8}>
       <JavascriptSkill />
       <HtmlSkill />
       <CssSkill />
