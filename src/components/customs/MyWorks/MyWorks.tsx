@@ -19,7 +19,11 @@ export const MyWorks = () => (
           image='work-001.png'
           title='Teigee'
           time='January 2021 - Present'
-          skills={[<NextSkill />, <MuiSkill />, <GraphqlSkill />]}
+          skills={[
+            <NextSkill showMobileText={false} />,
+            <MuiSkill showMobileText={false} />,
+            <GraphqlSkill showMobileText={false} />
+          ]}
           link='http://www.teigee.com'
         />
       </Grid>
@@ -31,7 +35,7 @@ export const MyWorks = () => (
           image='work-003.webp'
           title='Luvsuit'
           time='December 2022 - May 2023'
-          skills={[<NestSkill />]}
+          skills={[<NestSkill showMobileText={false} />]}
         />
       </Grid>
       <Grid item xs={12} md={4} display='flex' justifyContent='center'>
@@ -42,7 +46,7 @@ export const MyWorks = () => (
           image='work-002.png'
           title='Leiizy'
           time='Febrary 2023 - Present'
-          skills={[<NextSkill />, <MuiSkill />]}
+          skills={[<NextSkill showMobileText={false} />, <MuiSkill showMobileText={false} />]}
           link='https://www.leiizy.com'
         />
       </Grid>
