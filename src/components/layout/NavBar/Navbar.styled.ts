@@ -30,7 +30,8 @@ export const ToolbarStyled = styled(Toolbar)({
 export const LinkStyled = styled(Link)({
   textDecoration: 'none',
   display: 'flex',
-  alignItems: 'center'
+  alignItems: 'center',
+  cursor: 'pointer'
 })
 
 export const DrawerContainer = styled(Box)({
