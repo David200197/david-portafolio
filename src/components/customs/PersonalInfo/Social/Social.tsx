@@ -19,7 +19,7 @@ const Social = () => (
     <SocialLink
       title='Download CV'
       icon={FileDownloadIcon}
-      to={'https://drive.google.com/file/d/1SC8OpHYbWsTpAjjLmze6zMsrhB2rsnM6/view?usp=sharing'}
+      to={'https://drive.google.com/file/d/1lkw5GQdeoch6R-v96X8OsCqu4hyvBk9h/view?usp=drive_link'}
     />
   </Box>
 )
