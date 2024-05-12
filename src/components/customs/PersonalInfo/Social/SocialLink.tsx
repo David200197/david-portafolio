@@ -1,13 +1,10 @@
-import { SvgIconTypeMap } from '@mui/material'
+import { IconMui } from '@/interface/icon'
 import Tooltip from '@mui/material/Tooltip'
-import { OverridableComponent } from '@mui/material/OverridableComponent'
 
 type Props = {
   to: string
   title: string
-  icon: OverridableComponent<SvgIconTypeMap<{}, 'svg'>> & {
-    muiName: string
-  }
+  icon: IconMui
 }
 const SocialLink = ({ to, title, icon: IconProp }: Props) => (
   <Tooltip arrow title={title}>

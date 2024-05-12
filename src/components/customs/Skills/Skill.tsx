@@ -1,13 +1,9 @@
 import Grid from '@mui/material/Grid'
 import Tooltip from '@mui/material/Tooltip'
-import { FunctionComponent } from 'react'
 import { DesktopMedia, MobileMedia } from '../Media'
 import { styled } from '@mui/material'
-type Icon = FunctionComponent<
-  React.SVGProps<SVGSVGElement> & {
-    title?: string | undefined
-  }
->
+import { Icon } from '@/interface/icon'
+
 type Props = { title: string; to: string; icon: Icon; showMobileText?: boolean }
 const Skill = ({ title, to, icon: IconProp, showMobileText = true }: Props) => (
   <Grid item xs={3} display='flex' justifyContent='center' alignItems='center'>

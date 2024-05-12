@@ -1,39 +1,21 @@
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
-import {
-  ApolloSkill,
-  CssSkill,
-  ExpressSkill,
-  GraphqlSkill,
-  HtmlSkill,
-  JavascriptSkill,
-  MuiSkill,
-  NestSkill,
-  NextSkill,
-  NodeSkill,
-  ReactSkill,
-  SassSkill,
-  TailwindSkill,
-  TypescriptSkill
-} from '../../Skills'
+import { Skill as SkillType } from '@/interface/db'
+import Skill from '../../Skills/Skill'
 
-const Skills = () => (
+type Props = { skills: SkillType[] }
+const Skills = ({ skills }: Props) => (
   <Box width={250} mt={3}>
     <Grid container rowSpacing={4} columnSpacing={8}>
-      <JavascriptSkill />
-      <HtmlSkill />
-      <CssSkill />
-      <TypescriptSkill />
-      <NodeSkill />
-      <ReactSkill />
-      <NextSkill />
-      <MuiSkill />
-      <ExpressSkill />
-      <TailwindSkill />
-      <NestSkill />
-      <ApolloSkill />
-      <GraphqlSkill />
-      <SassSkill />
+      {skills.map((props, index) => (
+        <Skill
+          key={`skill_${index}`}
+          icon={props.icon}
+          title={props.title}
+          to={props.to}
+          showMobileText={props.showMobileText}
+        />
+      ))}
     </Grid>
   </Box>
 )

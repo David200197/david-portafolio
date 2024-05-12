@@ -10,6 +10,7 @@ import {
 } from './PersonalInfo.styled'
 import Skills from './Skills'
 import Social from './Social'
+import db from '@/db'
 
 const PersonalInfo = () => {
   return (
@@ -21,18 +22,15 @@ const PersonalInfo = () => {
         </PersonalInfoTitle>
         <Grid container spacing={2} mt={3} alignItems='center'>
           <StyledGrid item xs={12} md={6} textAlign='center'>
-            <Avatar src='avatar.svg' alt='avatar' />
-            <PersonalInfoDescription variant='body1'>
-              Hi! I am David Alfonso Pereira, a fullstack developer with more than 3 years of experience, master various
-              technologies and with a teamwork mentality
-            </PersonalInfoDescription>
-            <Social />
+            <Avatar src={db.profile.avatar} alt='avatar' />
+            <PersonalInfoDescription variant='body1'>{db.profile.description}</PersonalInfoDescription>
+            <Social socials={db.socials} />
           </StyledGrid>
           <StyledGrid item xs={12} md={6} display='flex' flexDirection='column' alignItems='center'>
             <PersonalInfoTitle variant='h5' mt={2}>
               Skills
             </PersonalInfoTitle>
-            <Skills />
+            <Skills skills={db.skills} />
           </StyledGrid>
         </Grid>
       </InfoStyled>

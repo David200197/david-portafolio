@@ -14,7 +14,7 @@ import {
   SassSvg,
   TailwindSvg,
   TypescriptSvg
-} from '@/components/svgs'
+} from '@/components/svg'
 
 type Props = { showMobileText?: boolean }
 
