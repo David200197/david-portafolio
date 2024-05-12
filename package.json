@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
+    "@emotion/is-prop-valid": "^1.2.2",
     "@emotion/react": "11.4.1",
     "@emotion/styled": "11.3.0",
     "@hookform/resolvers": "^3.1.0",

@@ -1,6 +1,6 @@
-import { RecursivePartial, IOptions } from 'tsparticles-engine'
+import { RecursivePartial } from '@/interface/recursive-partial'
 
-export const particlesOptions: RecursivePartial<IOptions> = {
+export const particlesOptions: RecursivePartial = {
   background: {
     size: 'cover',
     repeat: 'no-repeat',

@@ -15,7 +15,7 @@ export const BlurScreen = styled(Box)({
   filter: isBlackdropFilterSupported ? undefined : 'blur(18px)'
 })
 
-export const Container = styled(Box)(({ theme }) => ({
+export const Container = styled(Box)(() => ({
   position: 'relative',
   height: '115vh',
   '@media screen and (min-width: 720px)': {
