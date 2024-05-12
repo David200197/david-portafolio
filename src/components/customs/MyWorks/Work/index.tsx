@@ -5,6 +5,8 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { Fragment } from 'react'
 import { CardHeaderStyled, ContainerSvg, JobCard } from './Work.styled'
+import { Skill as SkillType } from '@/interface/db'
+import Skill from '../../Skills/Skill'
 
 type Props = {
   title: string
@@ -12,7 +14,7 @@ type Props = {
   image: string
   description: string
   time: string
-  skills: JSX.Element[]
+  skills: SkillType[]
   link?: string
   logoSrc: string
 }
@@ -34,7 +36,9 @@ const Work = ({ title, image, alt, description, time, skills, link, logoSrc }: P
       <Box display='flex' justifyContent='space-between' alignItems='center' width='100%' height='100%'>
         <ContainerSvg>
           {skills.map((skill, index) => (
-            <Fragment key={`${title.split(' ').join(' ')}-${index}`}>{skill}</Fragment>
+            <Fragment key={`${title.split(' ').join(' ')}-${index}`}>
+              <Skill icon={skill.icon} title={skill.title} to={skill.to} showMobileText={skill.showMobileText} />
+            </Fragment>
           ))}
         </ContainerSvg>
         {link && (

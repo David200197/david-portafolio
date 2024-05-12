@@ -1,9 +1,9 @@
 import Grid from '@mui/material/Grid'
 import { Section } from './MyWork.styled'
 import Work from './Work'
-import { GraphqlSkill, MuiSkill, NestSkill, NextSkill } from '../Skills'
 import Typography from '@mui/material/Typography'
 import { primaryMain } from '@/providers'
+import db from '@/db'
 
 export const MyWorks = () => (
   <Section>
@@ -11,45 +11,20 @@ export const MyWorks = () => (
       My Jobs
     </Typography>
     <Grid container spacing={2} mt={3}>
-      <Grid item xs={12} md={4} display='flex' justifyContent='center'>
-        <Work
-          alt=''
-          logoSrc='teigee.webp'
-          description='Teigee is a platform to search, compare and review products, activities and characteristics from local businesses around you. We collaborate closely with our partners to keep our information trustworthy and up to date.'
-          image='work-001.png'
-          title='Teigee'
-          time='January 2021 - Present'
-          skills={[
-            <NextSkill showMobileText={false} />,
-            <MuiSkill showMobileText={false} />,
-            <GraphqlSkill showMobileText={false} />
-          ]}
-          link='http://www.teigee.com'
-        />
-      </Grid>
-      <Grid item xs={12} md={4} display='flex' justifyContent='center'>
-        <Work
-          alt=''
-          logoSrc='luvsuite.webp'
-          description='Luvsuite is an application that allows users to find and book accommodation online. It offers a wide variety of accommodation options, from hotels and motels to apartments, houses or private rooms.'
-          image='work-003.webp'
-          title='Luvsuit'
-          time='December 2022 - May 2023'
-          skills={[<NestSkill showMobileText={false} />]}
-        />
-      </Grid>
-      <Grid item xs={12} md={4} display='flex' justifyContent='center'>
-        <Work
-          alt=''
-          logoSrc='leiizy.webp'
-          description='Leiizy is an AI-powered content generation platform that utilizes ChatGPT technology to help users create custom content for various tasks, such as writing emails, crafting social media posts, or composing video descriptions.'
-          image='work-002.png'
-          title='Leiizy'
-          time='Febrary 2023 - Present'
-          skills={[<NextSkill showMobileText={false} />, <MuiSkill showMobileText={false} />]}
-          link='https://www.leiizy.com'
-        />
-      </Grid>
+      {db.jobs.map((job, index) => (
+        <Grid item xs={12} md={4} display='flex' justifyContent='center'>
+          <Work
+            key={`job_${index}`}
+            alt={job.alt}
+            logoSrc={job.logoSrc}
+            description={job.description}
+            image={job.image}
+            title={job.title}
+            time={job.time}
+            skills={job.skills}
+          />
+        </Grid>
+      ))}
     </Grid>
   </Section>
 )

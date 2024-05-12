@@ -59,6 +59,46 @@ const db: Db = {
     { icon: GraphqlSvg, title: 'Graphql', to: 'https://graphql.org/' },
     { icon: SassSvg, title: 'Sass', to: 'https://sass-lang.com/' }
   ],
-  jobs: []
+  jobs: [
+    {
+      alt: 'teigee',
+      logoSrc: 'teigee.webp',
+      description:
+        'Teigee is a platform to search, compare and review products, activities and characteristics from local businesses around you. We collaborate closely with our partners to keep our information trustworthy and up to date.',
+      image: 'work-001.png',
+      title: 'Teigee',
+      time: 'January 2021 - Present',
+      skills: [
+        { icon: NextSvg, title: 'Next', to: 'https://nextjs.org/' },
+        { icon: MaterialUISvg, title: 'Material-ui', to: 'https://mui.com/' },
+        { icon: GraphqlSvg, title: 'Graphql', to: 'https://graphql.org/' }
+      ],
+      link: 'http://www.teigee.com'
+    },
+    {
+      alt: 'luvsuite',
+      logoSrc: 'luvsuite.webp',
+      description:
+        'Luvsuite is an application that allows users to find and book accommodation online. It offers a wide variety of accommodation options, from hotels and motels to apartments, houses or private rooms.',
+      image: 'work-003.webp',
+      title: 'Luvsuit',
+      time: 'December 2022 - May 2023',
+      skills: [{ icon: NextSvg, title: 'Next', to: 'https://nextjs.org/' }]
+    },
+    {
+      alt: '',
+      logoSrc: 'leiizy.webp',
+      description:
+        'Leiizy is an AI-powered content generation platform that utilizes ChatGPT technology to help users create custom content for various tasks, such as writing emails, crafting social media posts, or composing video descriptions.',
+      image: 'work-002.png',
+      title: 'Leiizy',
+      time: 'Febrary 2023 - Present',
+      skills: [
+        { icon: NextSvg, title: 'Next', to: 'https://nextjs.org/' },
+        { icon: MaterialUISvg, title: 'Material-ui', to: 'https://mui.com/' }
+      ],
+      link: 'https://www.leiizy.com'
+    }
+  ]
 }
 export default db
