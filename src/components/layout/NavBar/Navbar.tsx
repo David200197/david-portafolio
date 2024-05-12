@@ -21,7 +21,7 @@ const NavBar = () => {
             <Logo width={'35px'} height={'35px'} fill={primaryMain} />
             <DesktopMedia>
               <Typography marginLeft={1.5} color={'black'} variant='h1' fontSize={26}>
-                David's Portafolio
+                David's Portfolio
               </Typography>
             </DesktopMedia>
           </LinkStyled>
