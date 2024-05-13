@@ -69,9 +69,9 @@ const db: Db = {
       title: 'Teigee',
       time: 'January 2021 - Present',
       skills: [
-        { icon: NextSvg, title: 'Next', to: 'https://nextjs.org/' },
-        { icon: MaterialUISvg, title: 'Material-ui', to: 'https://mui.com/' },
-        { icon: GraphqlSvg, title: 'Graphql', to: 'https://graphql.org/' }
+        { icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false },
+        { icon: MaterialUISvg, title: 'Material-ui', to: 'https://mui.com/', showMobileText: false },
+        { icon: GraphqlSvg, title: 'Graphql', to: 'https://graphql.org/', showMobileText: false }
       ],
       link: 'http://www.teigee.com'
     },
@@ -83,7 +83,7 @@ const db: Db = {
       image: 'work-003.webp',
       title: 'Luvsuit',
       time: 'December 2022 - May 2023',
-      skills: [{ icon: NextSvg, title: 'Next', to: 'https://nextjs.org/' }]
+      skills: [{ icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false }]
     },
     {
       alt: '',
@@ -94,8 +94,8 @@ const db: Db = {
       title: 'Leiizy',
       time: 'Febrary 2023 - Present',
       skills: [
-        { icon: NextSvg, title: 'Next', to: 'https://nextjs.org/' },
-        { icon: MaterialUISvg, title: 'Material-ui', to: 'https://mui.com/' }
+        { icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false },
+        { icon: MaterialUISvg, title: 'Material-ui', to: 'https://mui.com/', showMobileText: false }
       ],
       link: 'https://www.leiizy.com'
     }
