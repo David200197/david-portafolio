@@ -22,6 +22,7 @@ export const MyWorks = () => (
             title={job.title}
             time={job.time}
             skills={job.skills}
+            link={job.link}
           />
         </Grid>
       ))}

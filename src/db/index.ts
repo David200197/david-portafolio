@@ -67,7 +67,7 @@ const db: Db = {
         'Teigee is a platform to search, compare and review products, activities and characteristics from local businesses around you. We collaborate closely with our partners to keep our information trustworthy and up to date.',
       image: 'work-001.png',
       title: 'Teigee',
-      time: 'January 2021 - Present',
+      time: 'January 2021 - January 2024',
       skills: [
         { icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false },
         { icon: MaterialUISvg, title: 'Material-ui', to: 'https://mui.com/', showMobileText: false },
@@ -76,28 +76,29 @@ const db: Db = {
       link: 'http://www.teigee.com'
     },
     {
-      alt: 'luvsuite',
-      logoSrc: 'luvsuite.webp',
-      description:
-        'Luvsuite is an application that allows users to find and book accommodation online. It offers a wide variety of accommodation options, from hotels and motels to apartments, houses or private rooms.',
-      image: 'work-003.webp',
-      title: 'Luvsuit',
-      time: 'December 2022 - May 2023',
-      skills: [{ icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false }]
-    },
-    {
       alt: '',
       logoSrc: 'leiizy.webp',
       description:
         'Leiizy is an AI-powered content generation platform that utilizes ChatGPT technology to help users create custom content for various tasks, such as writing emails, crafting social media posts, or composing video descriptions.',
       image: 'work-002.png',
       title: 'Leiizy',
-      time: 'Febrary 2023 - Present',
+      time: 'Febrary 2023 - January 2024',
       skills: [
         { icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false },
         { icon: MaterialUISvg, title: 'Material-ui', to: 'https://mui.com/', showMobileText: false }
       ],
       link: 'https://www.leiizy.com'
+    },
+    {
+      alt: 'ibx',
+      logoSrc: 'ibx.svg',
+      description:
+        'IBX is a trading platform that offers investors access to multiple global markets, as well as a wide range of assets, such as: stocks, advanced technical and chart analysis tools, sophisticated order types and ultra-fast operations execution',
+      image: 'work-003.png',
+      title: 'Ibx',
+      time: 'March 2024 - Present',
+      skills: [{ icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false }],
+      link: 'https://app.ibx.exchange/perp/PERP_ETH_USDC/'
     }
   ]
 }
