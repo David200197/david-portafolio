@@ -6,7 +6,7 @@ import { Icon } from '@/interface/icon'
 
 type Props = { title: string; to: string; icon: Icon; showMobileText?: boolean }
 const Skill = ({ title, to, icon: IconProp, showMobileText = true }: Props) => (
-  <Grid item xs={3} display='flex' justifyContent='center' alignItems='center'>
+  <Grid data-skill={title} item xs={3} display='flex' justifyContent='center' alignItems='center'>
     <Tooltip arrow title={title}>
       <>
         <DesktopMedia>

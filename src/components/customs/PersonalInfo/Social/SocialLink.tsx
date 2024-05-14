@@ -7,7 +7,7 @@ type Props = {
   icon: IconMui
 }
 const SocialLink = ({ to, title, icon: IconProp }: Props) => (
-  <Tooltip arrow title={title}>
+  <Tooltip data-social={title} arrow title={title}>
     <a href={to} style={{ margin: '0 10px' }} target='_blank' rel='noreferrer'>
       <IconProp fontSize='large' htmlColor='white' />
     </a>

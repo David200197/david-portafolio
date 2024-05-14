@@ -12,7 +12,8 @@
     "serve": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "package-only-install": "npm install --package-lock-only"
+    "package-only-install": "npm install --package-lock-only",
+    "update-cv": "ts-node scripts/update-cv/index.ts"
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
@@ -32,6 +33,7 @@
     "react-tsparticles": "^2.9.3",
     "react-ui-scrollspy": "^2.3.0",
     "react-useanimations": "^2.10.0",
+    "ts-node": "^10.9.2",
     "tsparticles": "^2.9.3",
     "typed.js": "^2.0.12",
     "zod": "^3.21.4",
@@ -42,10 +44,13 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@vitejs/plugin-react": "^1.0.1",
+    "dotenv": "^16.4.5",
     "eslint": "^7.32.0",
     "eslint-plugin-prettier": "^4.0.0",
     "gh-pages": "^5.0.0",
+    "handlebars": "^4.7.8",
     "prettier": "^2.4.1",
+    "puppeteer-core": "^22.8.0",
     "rc": "^1.2.8",
     "react-scripts": "^4.0.3",
     "rollup-plugin-visualizer": "^5.5.2",

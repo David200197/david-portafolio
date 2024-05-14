@@ -1,4 +1,3 @@
-import { Db } from '@/interface/db'
 import {
   ApolloSvg,
   CssSvg,
@@ -21,6 +20,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import TelegramIcon from '@mui/icons-material/Telegram'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
+import { Db } from '@/interface/db'
 
 const db: Db = {
   profile: {
