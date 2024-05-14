@@ -73,10 +73,11 @@ const db: Db = {
         { icon: MaterialUISvg, title: 'Material-ui', to: 'https://mui.com/', showMobileText: false },
         { icon: GraphqlSvg, title: 'Graphql', to: 'https://graphql.org/', showMobileText: false }
       ],
-      link: 'http://www.teigee.com'
+      link: 'http://www.teigee.com',
+      type: 'Frontend Developer'
     },
     {
-      alt: '',
+      alt: 'leiizy',
       logoSrc: 'leiizy.webp',
       description:
         'Leiizy is an AI-powered content generation platform that utilizes ChatGPT technology to help users create custom content for various tasks, such as writing emails, crafting social media posts, or composing video descriptions.',
@@ -87,7 +88,8 @@ const db: Db = {
         { icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false },
         { icon: MaterialUISvg, title: 'Material-ui', to: 'https://mui.com/', showMobileText: false }
       ],
-      link: 'https://www.leiizy.com'
+      link: 'https://www.leiizy.com',
+      type: 'Frontend Developer'
     },
     {
       alt: 'ibx',
@@ -98,7 +100,8 @@ const db: Db = {
       title: 'Ibx',
       time: 'March 2024 - Present',
       skills: [{ icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false }],
-      link: 'https://app.ibx.exchange/perp/PERP_ETH_USDC/'
+      link: 'https://app.ibx.exchange/',
+      type: 'Frontend Developer'
     }
   ]
 }

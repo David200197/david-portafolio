@@ -22,6 +22,7 @@ type Props = {
 const Work = ({ title, image, alt, description, time, skills, link, logoSrc }: Props) => (
   <JobCard variant='outlined'>
     <CardHeaderStyled
+      className='job-header'
       avatar={<img alt={title} src={logoSrc} width={35} height='auto' />}
       title={title}
       subheader={time}
@@ -42,7 +43,7 @@ const Work = ({ title, image, alt, description, time, skills, link, logoSrc }: P
           ))}
         </ContainerSvg>
         {link && (
-          <Button href={link} target='_blank' rel='noreferrer'>
+          <Button className='job-to' href={link} target='_blank' rel='noreferrer'>
             View
           </Button>
         )}

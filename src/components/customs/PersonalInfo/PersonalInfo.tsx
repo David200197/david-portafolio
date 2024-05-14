@@ -14,7 +14,7 @@ import db from '@/db'
 
 const PersonalInfo = () => {
   return (
-    <Container>
+    <Container id='personal_info'>
       <InitialCurveStyled />
       <InfoStyled>
         <PersonalInfoTitle variant='h5' mt={2}>

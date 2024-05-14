@@ -12,7 +12,16 @@ export const MyWorks = () => (
     </Typography>
     <Grid container spacing={2} mt={3}>
       {db.jobs.map((job, index) => (
-        <Grid data-job={job.title} key={`job_${index}`} item xs={12} md={4} display='flex' justifyContent='center'>
+        <Grid
+          data-job={job.title}
+          data-job-type={job.type}
+          key={`job_${index}`}
+          item
+          xs={12}
+          md={4}
+          display='flex'
+          justifyContent='center'
+        >
           <Work
             alt={job.alt}
             logoSrc={job.logoSrc}

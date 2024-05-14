@@ -27,6 +27,7 @@ export type Job = {
   skills: Skill[]
   link?: string
   logoSrc: string
+  type: 'Frontend Developer' | 'Backend Developer' | 'Fullstack Developer'
 }
 
 export type Db = {
