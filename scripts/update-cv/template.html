@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+        font-family: sans-serif;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-height: 100vh;
+      }
+
+      .box-container {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .box-container-column {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .box-flex {
+        display: flex;
+        align-items: center;
+      }
+
+      .box-black {
+        background: #0e1327;
+        color: #fff;
+      }
+
+      .box-white {
+        background: #fff;
+        color: #0e1327;
+      }
+
+      .box-left {
+        max-width: 300px;
+        width: 100%;
+      }
+
+      .box-right {
+        max-width: 600px;
+        width: 100%;
+      }
+
+      .box-first-col {
+        min-height: 200px;
+      }
+
+      .box-second-col {
+        min-height: 50px;
+      }
+
+      .box-third-col {
+        min-height: 100px;
+      }
+
+      .box-fourth-col {
+        min-height: 50px;
+      }
+
+      .box-fifth-col {
+        min-height: 500px;
+      }
+
+      .box-fifth-col-sub-first {
+        min-height: 80px;
+      }
+
+      .box-fifth-col-sub-second {
+        min-height: 50px;
+      }
+
+      .box-fifth-col-sub-third {
+        min-height: 370px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box-container">
+        <div class="box-first-col box-left box-white"></div>
+        <div class="box-first-col box-right box-black"></div>
+      </div>
+      <div class="box-container">
+        <div class="box-flex box-second-col box-left box-black">
+          <svg
+            style="margin: 0 20px 0 30px"
+            fill="#fff"
+            width="20px"
+            height="20px"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3.135 6.89c.933-.725 1.707-.225 2.74.971.116.135.272-.023.361-.1.088-.078 1.451-1.305 1.518-1.361.066-.059.146-.169.041-.292a36.238 36.238 0 0 1-.743-.951c-1.808-2.365 4.946-3.969 3.909-3.994-.528-.014-2.646-.039-2.963-.004-1.283.135-2.894 1.334-3.705 1.893-1.061.726-1.457 1.152-1.522 1.211-.3.262-.048.867-.592 1.344-.575.503-.934.122-1.267.414-.165.146-.627.492-.759.607-.133.117-.157.314-.021.471 0 0 1.264 1.396 1.37 1.52.105.122.391.228.567.071.177-.156.632-.553.708-.623.078-.066-.05-.861.358-1.177zm5.708.517c-.12-.139-.269-.143-.397-.029L7.012 8.63a.289.289 0 0 0-.027.4l8.294 9.439c.194.223.53.246.751.053l.97-.813a.54.54 0 0 0 .052-.758L8.843 7.407zM19.902 3.39c-.074-.494-.33-.391-.463-.182-.133.211-.721 1.102-.963 1.506-.24.4-.832 1.191-1.934.41-1.148-.811-.749-1.377-.549-1.758.201-.383.818-1.457.907-1.59.089-.135-.015-.527-.371-.363-.357.164-2.523 1.025-2.823 2.26-.307 1.256.257 2.379-.85 3.494l-1.343 1.4 1.349 1.566 1.654-1.57c.394-.396 1.236-.781 1.998-.607 1.633.369 2.524-.244 3.061-1.258.482-.906.402-2.814.327-3.308zM2.739 17.053a.538.538 0 0 0 0 .758l.951.93c.208.209.538.121.746-.088l4.907-4.824-1.503-1.714-5.101 4.938z"
+            />
+          </svg>
+          <p>SKILLS</p>
+        </div>
+        <div class="box-flex box-second-col box-right box-white">
+          <svg
+            style="margin: 1px 20px 0 30px"
+            width="28px"
+            height="28px"
+            viewBox="0 0 1024 1024"
+            class="icon"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M338.358857 510.317714a124.635429 124.635429 0 0 0-115.2 95.085715c-2.779429 11.044571-15.067429 15.798857-25.746286 14.116571-11.629714-1.828571-17.554286-17.188571-13.165714-30.354286 15.579429-47.616 47.323429-84.114286 88.795429-103.862857a112.932571 112.932571 0 0 1 70.948571-200.996571c62.464 0 113.152 50.761143 113.152 113.078857 0 34.523429-15.579429 65.462857-40.009143 86.308571 42.715429 19.090286 75.190857 56.027429 92.672 103.643429 4.827429 13.165714 1.682286 26.258286-9.289143 32.182857a23.332571 23.332571 0 0 1-30.500571-16.091429c-14.628571-56.173714-59.977143-91.209143-117.394286-93.257142a114.029714 114.029714 0 0 1-14.262857 0.146285z m586.313143 134.070857V537.453714c0-16.384 15.067429-29.403429 32.548571-29.403428a29.257143 29.257143 0 0 1 30.208 29.403428v133.193143a109.714286 109.714286 0 0 1-109.714285 109.714286H172.690286c-75.044571 0-136.118857-55.588571-136.118857-124.342857V170.569143A109.714286 109.714286 0 0 1 146.285714 60.854857L851.236571 60.708571c75.117714 0 136.192 55.588571 136.192 124.416l-0.146285 213.577143c-0.512 15.872-13.165714 27.282286-30.061715 27.282286-17.042286 0-31.963429-11.410286-32.548571-27.428571l-0.219429-213.430858c0-36.132571-32.914286-61.366857-73.142857-61.366857H172.617143a73.142857 73.142857 0 0 0-73.142857 73.142857V656.091429c0 36.059429 32.914286 61.513143 73.142857 61.513142h678.838857a73.142857 73.142857 0 0 0 73.142857-73.142857zM344.064 333.750857a63.707429 63.707429 0 0 0 0 127.268572 63.707429 63.707429 0 0 0 0-127.268572z m440.32 283.209143H618.057143c-19.529143 0-35.84-12.434286-35.84-28.525714s16.310857-28.452571 35.84-28.452572h166.180571c19.602286 0 35.84 12.361143 35.84 28.525715 0 16.091429-16.310857 28.452571-35.84 28.452571z m0-275.748571H618.057143c-19.529143 0-35.84-12.361143-35.84-28.452572s16.310857-28.452571 35.84-28.452571h166.180571c19.602286 0 35.84 12.361143 35.84 28.525714 0 16.091429-16.310857 28.379429-35.84 28.379429z m0 126.537142H618.057143c-19.529143 0-35.84-12.288-35.84-28.452571 0-16.091429 16.310857-28.452571 35.84-28.452571h166.180571c19.529143 0 35.84 12.361143 35.84 28.525714 0 16.091429-16.237714 28.379429-35.84 28.379428z"
+              fill="#0e1327"
+            />
+            <p>PERSONAL INFORMATION</p>
+          </svg>
+        </div>
+      </div>
+      <div class="box-container">
+        <div class="box-third-col box-left box-white"></div>
+        <div class="box-third-col box-right box-black"></div>
+      </div>
+      <div class="box-container">
+        <div class="box-fourth-col box-left box-black">
+          <p>TECHNOLOGIES</p>
+        </div>
+        <div class="box-fourth-col box-right box-white">
+          <p>STUDIES</p>
+        </div>
+      </div>
+      <div class="box-container">
+        <div class="box-fifth-col box-left box-white"></div>
+        <div class="box-fifth-col box-right box-container-column">
+          <div class="box-fifth-col-sub-first box-black">
+            <p>Computer Engineering Degree (2016 - 2021) University of Matanzas Camilo Cienfuegos - Cuba</p>
+          </div>
+          <div class="box-fifth-col-sub-second box-white">
+            <p>WORK EXPERIENCE</p>
+          </div>
+          <div class="box-fifth-col-sub-third box-black"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

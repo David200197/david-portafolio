@@ -2,13 +2,14 @@
 
 import dotenv from 'dotenv'
 import puppeteer from 'puppeteer-core'
+import express from 'express'
+import path from 'path'
 dotenv.config()
 
-const GOOGLE_DRIVE_API_KEY = process.env.GOOGLE_DRIVE_API_KEY
-const PUPPETEER_EXECUTABLE_PATH = process.env.PUPPETER_EXECUTABLE_PATH
-const WEB_SCRAPING_URL = process.env.WEB_SCRAPING_URL || ''
-
 const bootstrap = async () => {
+  const GOOGLE_DRIVE_API_KEY = process.env.GOOGLE_DRIVE_API_KEY
+  const PUPPETEER_EXECUTABLE_PATH = process.env.PUPPETER_EXECUTABLE_PATH
+
   const browser = await puppeteer.launch({
     channel: 'chrome',
     executablePath: PUPPETEER_EXECUTABLE_PATH,
@@ -16,7 +17,7 @@ const bootstrap = async () => {
     headless: false
   })
   const webScrapingPage = await browser.newPage()
-  await webScrapingPage.goto(WEB_SCRAPING_URL)
+  await webScrapingPage.goto('http://localhost:1997/david-portafolio')
   await webScrapingPage.waitForSelector('div')
   const data = await webScrapingPage.evaluate(() => {
     const serializer = new XMLSerializer()
@@ -67,7 +68,14 @@ const bootstrap = async () => {
     return { skills, socials, jobs, profile }
   })
 
-  console.log(data.profile)
+  console.log(data)
   //await browser.close()
+  //process.exit(1)
 }
-bootstrap()
+
+const dist = path.join(process.cwd(), 'dist')
+const app = express()
+
+app.use('/david-portafolio', express.static(dist))
+
+app.listen(1997, bootstrap)
