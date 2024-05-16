@@ -13,7 +13,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "package-only-install": "npm install --package-lock-only",
-    "update-cv": "ts-node scripts/update-cv/index.ts"
+    "update-cv": "ts-node scripts/update-cv/script.ts"
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",

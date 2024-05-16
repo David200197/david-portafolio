@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -11,79 +10,77 @@
         margin: 0;
         font-family: sans-serif;
       }
-
       .container {
         display: flex;
         flex-direction: column;
         width: 100%;
         min-height: 100vh;
       }
-
       .box-container {
         display: flex;
         flex-direction: row;
       }
-
       .box-container-column {
         display: flex;
         flex-direction: column;
       }
-
       .box-flex {
         display: flex;
         align-items: center;
       }
-
       .box-black {
         background: #0e1327;
         color: #fff;
       }
-
       .box-white {
         background: #fff;
         color: #0e1327;
       }
-
       .box-left {
         max-width: 300px;
         width: 100%;
       }
-
       .box-right {
         max-width: 600px;
         width: 100%;
       }
-
       .box-first-col {
         min-height: 200px;
       }
-
       .box-second-col {
         min-height: 50px;
       }
-
       .box-third-col {
         min-height: 100px;
       }
-
       .box-fourth-col {
         min-height: 50px;
       }
-
       .box-fifth-col {
         min-height: 500px;
       }
-
       .box-fifth-col-sub-first {
         min-height: 80px;
       }
-
       .box-fifth-col-sub-second {
         min-height: 50px;
       }
-
       .box-fifth-col-sub-third {
-        min-height: 370px;
+        height: 594px;
+      }
+      .job-line {
+        margin: -8px 0 0 38px;
+        border-left: solid #fff 8px;
+        padding: 10px 30px 0px 30px;
+      }
+      .job-point {
+        background: #fff;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        left: -46px;
+        top: 5px;
       }
     </style>
   </head>
@@ -129,7 +126,9 @@
       </div>
       <div class="box-container">
         <div class="box-third-col box-left box-white"></div>
-        <div class="box-third-col box-right box-black"></div>
+        <div class="box-third-col box-right box-black">
+          <p style="margin: 20px 10px 0 30px">{{profile.description}}</p>
+        </div>
       </div>
       <div class="box-container">
         <div class="box-flex box-fourth-col box-left box-black">
@@ -211,7 +210,9 @@
                 d="M17.4,22.6C17,22.9,16.5,23,16,23s-1-0.1-1.4-0.4L6,18.1V22c0,3.1,4.9,6,10,6s10-2.9,10-6v-3.9L17.4,22.6z"
               />
             </svg>
-            <p>Computer Engineering Degree (2016 - 2021) University of Matanzas Camilo Cienfuegos - Cuba</p>
+            <p style="margin-right: 10px">
+              Computer Engineering Degree (2016 - 2021) University of Matanzas Camilo Cienfuegos - Cuba
+            </p>
           </div>
           <div class="box-flex box-fifth-col-sub-second box-white">
             <svg
@@ -237,7 +238,16 @@
             </svg>
             <p>WORK EXPERIENCE</p>
           </div>
-          <div class="box-fifth-col-sub-third box-black"></div>
+          <div class="box-fifth-col-sub-third box-black">
+            <div class="job-line">
+              {{#each jobs}}
+              <div style="position: relative">
+                <div class="job-point"></div>
+                <p>{{this.time}} | {{this.title}} | {{this.type}}</p>
+              </div>
+              {{/each}}
+            </div>
+          </div>
         </div>
       </div>
     </div>

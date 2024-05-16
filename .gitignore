@@ -6,3 +6,4 @@ dist-ssr
 bundle-size
 pnpm-lock.yaml
 .env
+local

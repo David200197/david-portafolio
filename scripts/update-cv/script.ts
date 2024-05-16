@@ -4,6 +4,9 @@ import dotenv from 'dotenv'
 import puppeteer from 'puppeteer-core'
 import express from 'express'
 import path from 'path'
+import fs from 'fs/promises'
+import Handlebars from 'handlebars'
+
 dotenv.config()
 
 const getData = () => {
@@ -63,21 +66,37 @@ const bootstrap = async () => {
     channel: 'chrome',
     executablePath: PUPPETEER_EXECUTABLE_PATH,
     waitForInitialPage: true,
-    headless: false
+    headless: true,
+    defaultViewport: {
+      width: 760,
+      height: 570
+    }
   })
   const webScrapingPage = await browser.newPage()
   await webScrapingPage.goto('http://localhost:1997/david-portafolio')
   await webScrapingPage.waitForSelector('div')
   const data = await webScrapingPage.evaluate(getData)
 
-  console.log(data)
-  //await browser.close()
-  //process.exit(1)
+  const htmlContent = await fs.readFile(path.join(__dirname, 'template.html'), {
+    encoding: 'utf-8'
+  })
+  const fileCompiled = Handlebars.compile(htmlContent)
+  const template = fileCompiled(data)
+  const templatePage = await browser.newPage()
+  templatePage.setContent(template)
+  const cvPdf = await templatePage.pdf({
+    format: 'A4',
+    displayHeaderFooter: false,
+    preferCSSPageSize: false,
+    printBackground: true
+  })
+  await fs.writeFile(path.join(process.cwd(), 'local', 'template.html'), template)
+  await fs.writeFile(path.join(process.cwd(), 'local', 'cv.pdf'), cvPdf)
+  await browser.close()
+  process.exit(1)
 }
 
 const dist = path.join(process.cwd(), 'dist')
 const app = express()
-
 app.use('/david-portafolio', express.static(dist))
-
 app.listen(1997, bootstrap)
