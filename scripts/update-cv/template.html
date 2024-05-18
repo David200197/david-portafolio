@@ -66,7 +66,7 @@
         min-height: 50px;
       }
       .box-fifth-col-sub-third {
-        height: 594px;
+        height: 536px;
       }
       .job-line {
         margin: -8px 0 0 38px;
@@ -82,13 +82,120 @@
         left: -46px;
         top: 5px;
       }
+
+      .skill-icon {
+        margin: -1px 13px 0 27px;
+      }
+
+      .skill-icon svg {
+        fill: #0e1327;
+        width: 25px;
+        height: 25px;
+      }
+
+      .skill-icon svg path {
+        fill: #0e1327;
+      }
+
+      .social-icon {
+        margin: -1px 10px 0 10px;
+      }
+
+      .social-icon svg {
+        fill: #fff;
+        width: 25px;
+        height: 25px;
+      }
+
+      .social-icon svg path {
+        fill: #fff;
+      }
+
+      .box-info p {
+        margin: 8px 0;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="box-container">
         <div class="box-first-col box-left box-white"></div>
-        <div class="box-first-col box-right box-black"></div>
+        <div class="box-first-col box-right box-black box-info">
+          <div style="margin-top: 10px" class="box-flex">
+            <svg
+              style="margin: 0 10px 0 10px"
+              xmlns="http://www.w3.org/2000/svg"
+              width="25px"
+              height="25px"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <circle cx="12" cy="6" r="4" fill="#fff" />
+              <path
+                d="M20 17.5C20 19.9853 20 22 12 22C4 22 4 19.9853 4 17.5C4 15.0147 7.58172 13 12 13C16.4183 13 20 15.0147 20 17.5Z"
+                fill="#fff"
+              />
+            </svg>
+            <p>David Alfonso Pereira</p>
+          </div>
+          <div class="box-flex">
+            <svg
+              style="margin: -1px 13px 0 12px"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="20px"
+              height="20px"
+              viewBox="0 -2.5 20 20"
+              version="1.1"
+            >
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Dribbble-Light-Preview" transform="translate(-340.000000, -922.000000)" fill="#fff">
+                  <g id="icons" transform="translate(56.000000, 160.000000)">
+                    <path
+                      d="M294,774.474 L284,765.649 L284,777 L304,777 L304,765.649 L294,774.474 Z M294.001,771.812 L284,762.981 L284,762 L304,762 L304,762.981 L294.001,771.812 Z"
+                      id="email-[#1572]"
+                    ></path>
+                  </g>
+                </g>
+              </g>
+            </svg>
+            <p>{{profile.email}}</p>
+          </div>
+          <a href="{{profile.portfolio}}" class="box-flex" style="color: #fff; text-decoration: none">
+            <svg
+              style="margin: -1px 10px 0 10px"
+              xmlns="http://www.w3.org/2000/svg"
+              width="25px"
+              height="25px"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path d="M4 15L20 15" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M4 9L20 9" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <circle
+                cx="12"
+                cy="12"
+                r="9"
+                stroke="#fff"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M12.0004 20.8182L11.2862 21.5181C11.4742 21.7101 11.7317 21.8182 12.0004 21.8182C12.2691 21.8182 12.5265 21.7101 12.7146 21.5181L12.0004 20.8182ZM12.0004 3.18188L12.7146 2.48198C12.5265 2.29005 12.2691 2.18188 12.0004 2.18188C11.7317 2.18188 11.4742 2.29005 11.2861 2.48198L12.0004 3.18188ZM14.6004 12.0001C14.6004 15.1611 13.3373 18.0251 11.2862 20.1183L12.7146 21.5181C15.1173 19.0662 16.6004 15.7053 16.6004 12.0001H14.6004ZM11.2861 3.88178C13.3373 5.97501 14.6004 8.83903 14.6004 12.0001H16.6004C16.6004 8.29478 15.1173 4.93389 12.7146 2.48198L11.2861 3.88178ZM9.40039 12.0001C9.40039 8.83903 10.6634 5.97501 12.7146 3.88178L11.2861 2.48198C8.88347 4.93389 7.40039 8.29478 7.40039 12.0001H9.40039ZM12.7146 20.1183C10.6634 18.0251 9.40039 15.1611 9.40039 12.0001H7.40039C7.40039 15.7053 8.88348 19.0662 11.2862 21.5181L12.7146 20.1183Z"
+                fill="#fff"
+              />
+            </svg>
+            <p>{{profile.portfolio}}</p>
+          </a>
+          {{#each socials}}
+          <a href="{{this.to}}" class="box-flex" style="color: #fff; text-decoration: none">
+            <div class="social-icon" data-social="{{this.title}}"></div>
+            <p>{{this.to}}</p>
+          </a>
+          {{/each}}
+          <div style="margin-bottom: 10px"></div>
+        </div>
       </div>
       <div class="box-container">
         <div class="box-flex box-second-col box-left box-black">
@@ -125,7 +232,54 @@
         </div>
       </div>
       <div class="box-container">
-        <div class="box-third-col box-left box-white"></div>
+        <div class="box-third-col box-left box-white">
+          <div style="display: flex; flex-direction: column">
+            <div class="box-flex">
+              <svg
+                style="margin: -1px 18px 0 28px"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                fill="#0e1327"
+                height="25px"
+                width="25px"
+                version="1.2"
+                baseProfile="tiny"
+                id="shape"
+                viewBox="0 0 256 256"
+                xml:space="preserve"
+              >
+                <path
+                  d="M237,19H19c-8.2,0-14.9,6.7-14.9,14.9v188.3c0,8.2,6.7,14.9,14.9,14.9h218c8.2,0,14.9-6.7,14.9-14.9V33.9  C251.9,25.7,245.2,19,237,19z M199.8,28.9c5.4,0,9.9,4.5,9.9,9.9c0,5.5-4.5,9.9-9.9,9.9s-9.9-4.5-9.9-9.9S194.4,28.9,199.8,28.9z   M172.6,28.9c5.4,0,9.9,4.5,9.9,9.9c0,5.5-4.5,9.9-9.9,9.9s-9.9-4.5-9.9-9.9S167.1,28.9,172.6,28.9z M237,223.9H19V58.6h218V223.9z   M227.1,48.7c-5.4,0-9.9-4.5-9.9-9.9s4.5-9.9,9.9-9.9s9.9,4.5,9.9,9.9C237,44.3,232.5,48.7,227.1,48.7z M96,74h76.1v14.4H96V74z   M126,106.9h96.3v14.3H126V106.9z M126,135.5h96.3v14.3H126V135.5z M126,164.5h96.3v14.3H126V164.5z M32.6,193.1h189.8v14.3H32.6  V193.1z M32.6,106.9h67.8v70.7H32.6V106.9z"
+                />
+              </svg>
+              <p>Frontend Develop</p>
+            </div>
+            <div class="box-flex">
+              <svg
+                style="margin: -1px 18px 0 28px"
+                xmlns="http://www.w3.org/2000/svg"
+                width="25px"
+                height="25px"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M3.5155 15.7248C3.78702 15.7062 4.13391 15.7059 4.63158 15.7059H19.3684C19.8661 15.7059 20.213 15.7062 20.4845 15.7248C20.7513 15.7431 20.9067 15.7774 21.0253 15.8268C21.4122 15.988 21.7196 16.2972 21.8798 16.6863C21.9289 16.8056 21.963 16.9619 21.9812 17.2303C21.9997 17.5034 22 17.8523 22 18.3529C22 18.8535 21.9997 19.2025 21.9812 19.4756C21.963 19.744 21.9289 19.9002 21.8798 20.0196C21.7196 20.4087 21.4122 20.7179 21.0253 20.8791C20.9067 20.9285 20.7513 20.9628 20.4845 20.9811C20.213 20.9997 19.8661 21 19.3684 21H4.63158C4.13391 21 3.78702 20.9997 3.5155 20.9811C3.2487 20.9628 3.09333 20.9285 2.97471 20.8791C2.58782 20.7179 2.28044 20.4087 2.12019 20.0196C2.07105 19.9002 2.03701 19.744 2.01881 19.4756C2.00028 19.2025 2 18.8535 2 18.3529C2 17.8523 2.00028 17.5034 2.01881 17.2303C2.03701 16.9619 2.07105 16.8056 2.12019 16.6863C2.28044 16.2972 2.58782 15.988 2.97471 15.8268C3.09333 15.7774 3.2487 15.7431 3.5155 15.7248ZM4.63158 19.4118C5.21293 19.4118 5.68421 18.9377 5.68421 18.3529C5.68421 17.7682 5.21293 17.2941 4.63158 17.2941C4.05023 17.2941 3.57895 17.7682 3.57895 18.3529C3.57895 18.9377 4.05023 19.4118 4.63158 19.4118Z"
+                  fill="#0e1327"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M4.63158 8.29412C4.13391 8.29412 3.78702 8.29383 3.5155 8.2752C3.2487 8.25689 3.09333 8.22265 2.97471 8.17322C2.58782 8.01202 2.28044 7.70284 2.12019 7.31367C2.07105 7.19435 2.03701 7.03807 2.01881 6.7697C2.00028 6.49658 2 6.14765 2 5.64706C2 5.14647 2.00028 4.79753 2.01881 4.52441C2.03701 4.25605 2.07105 4.09977 2.12019 3.98044C2.28044 3.59128 2.58782 3.28209 2.97471 3.1209C3.09333 3.07147 3.2487 3.03723 3.5155 3.01892C3.78702 3.00029 4.13391 3 4.63158 3H19.3684C19.8661 3 20.213 3.00029 20.4845 3.01892C20.7513 3.03723 20.9067 3.07147 21.0253 3.1209C21.4122 3.28209 21.7196 3.59128 21.8798 3.98044C21.9289 4.09977 21.963 4.25605 21.9812 4.52441C21.9997 4.79753 22 5.14647 22 5.64706C22 6.14765 21.9997 6.49658 21.9812 6.7697C21.963 7.03807 21.9289 7.19435 21.8798 7.31367C21.7196 7.70284 21.4122 8.01202 21.0253 8.17322C20.9067 8.22265 20.7513 8.25689 20.4845 8.2752C20.213 8.29383 19.8661 8.29412 19.3684 8.29412H4.63158ZM4.63158 9.35294C4.13391 9.35294 3.78702 9.35323 3.5155 9.37186C3.2487 9.39017 3.09333 9.42441 2.97471 9.47384C2.58782 9.63503 2.28044 9.94422 2.12019 10.3334C2.07105 10.4527 2.03701 10.609 2.01881 10.8774C2.00028 11.1505 2 11.4994 2 12C2 12.5006 2.00028 12.8495 2.01881 13.1226C2.03701 13.391 2.07105 13.5473 2.12019 13.6666C2.28044 14.0558 2.58782 14.365 2.97471 14.5262C3.09333 14.5756 3.2487 14.6098 3.5155 14.6281C3.78702 14.6468 4.13391 14.6471 4.63158 14.6471H19.3684C19.8661 14.6471 20.213 14.6468 20.4845 14.6281C20.7513 14.6098 20.9067 14.5756 21.0253 14.5262C21.4122 14.365 21.7196 14.0558 21.8798 13.6666C21.9289 13.5473 21.963 13.391 21.9812 13.1226C21.9997 12.8495 22 12.5006 22 12C22 11.4994 21.9997 11.1505 21.9812 10.8774C21.963 10.609 21.9289 10.4527 21.8798 10.3334C21.7196 9.94422 21.4122 9.63503 21.0253 9.47384C20.9067 9.42441 20.7513 9.39017 20.4845 9.37186C20.213 9.35323 19.8661 9.35294 19.3684 9.35294H4.63158ZM5.68421 12C5.68421 12.5848 5.21293 13.0588 4.63158 13.0588C4.05023 13.0588 3.57895 12.5848 3.57895 12C3.57895 11.4152 4.05023 10.9412 4.63158 10.9412C5.21293 10.9412 5.68421 11.4152 5.68421 12ZM4.63158 6.70588C5.21293 6.70588 5.68421 6.23183 5.68421 5.64706C5.68421 5.06229 5.21293 4.58824 4.63158 4.58824C4.05023 4.58824 3.57895 5.06229 3.57895 5.64706C3.57895 6.23183 4.05023 6.70588 4.63158 6.70588Z"
+                  fill="#0e1327"
+                />
+              </svg>
+              <p>Backend Develop</p>
+            </div>
+          </div>
+        </div>
         <div class="box-third-col box-right box-black">
           <p style="margin: 20px 10px 0 30px">{{profile.description}}</p>
         </div>
@@ -133,7 +287,7 @@
       <div class="box-container">
         <div class="box-flex box-fourth-col box-left box-black">
           <svg
-            style="margin: 0 15px 0 25px"
+            style="margin: -1px 19px 0 28px"
             xmlns="http://www.w3.org/2000/svg"
             width="25px"
             height="25px"
@@ -178,7 +332,16 @@
         </div>
       </div>
       <div class="box-container">
-        <div class="box-fifth-col box-left box-white"></div>
+        <div class="box-fifth-col box-left box-white">
+          <div style="display: flex; flex-direction: column; margin-top: 10px">
+            {{#each skills}}
+            <a class="box-flex" href="{{this.to}}" style="color: #0e1327; text-decoration: none">
+              <div class="skill-icon" data-skill="{{this.title}}"></div>
+              <p style="margin: 8px">{{this.title}}</p>
+            </a>
+            {{/each}}
+          </div>
+        </div>
         <div class="box-fifth-col box-right box-container-column">
           <div class="box-flex box-fifth-col-sub-first box-black">
             <svg
@@ -243,7 +406,10 @@
               {{#each jobs}}
               <div style="position: relative">
                 <div class="job-point"></div>
-                <p>{{this.time}} | {{this.title}} | {{this.type}}</p>
+                <p>
+                  {{this.time}} | <a href="{{this.to}}" style="color: #fff; text-decoration: none">{{this.title}}</a> |
+                  {{this.type}}
+                </p>
               </div>
               {{/each}}
             </div>
