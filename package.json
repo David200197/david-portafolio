@@ -10,7 +10,7 @@
     "build": "tsc --noEmit && vite build",
     "analyze": "ANALYZE=true yarn build",
     "serve": "vite preview",
-    "predeploy": "npm run build",
+    "predeploy": "npm run update-cv && npm run build",
     "deploy": "gh-pages -d dist",
     "package-only-install": "npm install --package-lock-only",
     "update-cv": "ts-node scripts/update-cv/script.ts"

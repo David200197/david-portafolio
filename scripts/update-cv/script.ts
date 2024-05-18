@@ -112,7 +112,6 @@ const convertToSvg = (data: Data) => {
 }
 
 const bootstrap = async () => {
-  const GOOGLE_DRIVE_API_KEY = process.env.GOOGLE_DRIVE_API_KEY
   const PUPPETEER_EXECUTABLE_PATH = process.env.PUPPETER_EXECUTABLE_PATH
   const EMAIL = process.env.EMAIL
   const PORTFOLIO = process.env.PORTFOLIO
@@ -147,8 +146,9 @@ const bootstrap = async () => {
     preferCSSPageSize: false,
     printBackground: true
   })
+  await fs.writeFile(path.join(process.cwd(), 'public', 'cv.pdf'), cvPdf)
   await browser.close()
-  process.exit(1)
+  process.exit()
 }
 
 const dist = path.join(process.cwd(), 'dist')

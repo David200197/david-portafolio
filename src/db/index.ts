@@ -36,7 +36,7 @@ const db: Db = {
     {
       title: 'Download CV',
       icon: FileDownloadIcon,
-      to: 'https://drive.google.com/file/d/1lkw5GQdeoch6R-v96X8OsCqu4hyvBk9h/view?usp=drive_link'
+      to: '/david-portafolio/cv.pdf'
     }
   ],
   skills: [
