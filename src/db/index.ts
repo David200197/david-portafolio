@@ -1,4 +1,5 @@
 import {
+  AdonisSvg,
   ApolloSvg,
   CssSvg,
   ExpressSvg,
@@ -9,6 +10,7 @@ import {
   NestSvg,
   NextSvg,
   NodeSvg,
+  PlasmoSvg,
   ReactSvg,
   SassSvg,
   TailwindSvg,
@@ -57,7 +59,9 @@ const db: Db = {
     { icon: NestSvg, title: 'Nest', to: 'https://nestjs.com/' },
     { icon: ApolloSvg, title: 'Apollo', to: 'https://www.apollographql.com/' },
     { icon: GraphqlSvg, title: 'Graphql', to: 'https://graphql.org/' },
-    { icon: SassSvg, title: 'Sass', to: 'https://sass-lang.com/' }
+    { icon: SassSvg, title: 'Sass', to: 'https://sass-lang.com/' },
+    { icon: AdonisSvg, title: 'Adonis', to: 'https://adonisjs.com/' },
+    { icon: PlasmoSvg, title: 'Plasmo', to: 'https://docs.plasmo.com/' }
   ],
   jobs: [
     {
