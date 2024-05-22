@@ -96,6 +96,28 @@ const db: Db = {
       type: 'Frontend Developer'
     },
     {
+      alt: 'eneldo laboral',
+      logoSrc: 'eneldo_laboral.svg',
+      description:
+        'Eneldo Laborar is a complete job board management system designed to connect companies and job seekers efficiently. It offers a comprehensive platform to manage the entire hiring process, from posting job offers to selecting and hiring candidates.',
+      image: 'work-004.png',
+      title: 'Eneldo Laboral',
+      time: 'November 2023 - Present',
+      skills: [{ icon: NestSvg, title: 'Nest', to: 'https://nestjs.com/' }],
+      type: 'Backend Developer'
+    },
+    {
+      alt: 'construccions precises',
+      logoSrc: 'construccions_precises.svg',
+      description:
+        'Construccions Precises is designed specifically to meet the unique budget management needs of architecture firms. With powerful features and an easy-to-use interface, the app allows architects and project managers to control and optimize their budgets efficiently.',
+      image: 'work-005.png',
+      title: 'Construccions Precises',
+      time: 'January 2024 - Present',
+      skills: [{ icon: NestSvg, title: 'Nest', to: 'https://nestjs.com/' }],
+      type: 'Backend Developer'
+    },
+    {
       alt: 'ibx',
       logoSrc: 'ibx.svg',
       description:
