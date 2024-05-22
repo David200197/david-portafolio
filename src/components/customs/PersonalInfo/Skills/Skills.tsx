@@ -14,6 +14,7 @@ const Skills = ({ skills }: Props) => (
           title={props.title}
           to={props.to}
           showMobileText={props.showMobileText}
+          leftTooltip={props.leftTooltip}
         />
       ))}
     </Grid>

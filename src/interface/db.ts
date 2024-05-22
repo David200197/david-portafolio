@@ -16,6 +16,7 @@ export type Skill = {
   to: string
   icon: Icon
   showMobileText?: boolean
+  leftTooltip?: string
 }
 
 export type Job = {

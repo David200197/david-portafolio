@@ -45,23 +45,24 @@ const db: Db = {
     {
       icon: JavascriptSvg,
       title: 'Javascript',
-      to: 'https://developer.mozilla.org/es/docs/Learn/JavaScript/First_steps/What_is_JavaScript'
+      to: 'https://developer.mozilla.org/es/docs/Learn/JavaScript/First_steps/What_is_JavaScript',
+      leftTooltip: '30px'
     },
-    { icon: HtmlSvg, title: 'Html', to: 'https://www.w3.org/html/' },
-    { icon: CssSvg, title: 'Css', to: 'https://www.w3.org/Style/CSS/Overview.en.html' },
-    { icon: TypescriptSvg, title: 'Typescript', to: 'https://www.typescriptlang.org/' },
-    { icon: NodeSvg, title: 'Node', to: 'https://nodejs.org/en/' },
-    { icon: ReactSvg, title: 'React', to: 'https://reactjs.org/' },
-    { icon: NextSvg, title: 'Next', to: 'https://nextjs.org/' },
-    { icon: MaterialUISvg, title: 'Material-ui', to: 'https://mui.com/' },
-    { icon: ExpressSvg, title: 'Express', to: 'https://expressjs.com/' },
-    { icon: TailwindSvg, title: 'Tailwind', to: 'https://tailwindcss.com/' },
-    { icon: NestSvg, title: 'Nest', to: 'https://nestjs.com/' },
-    { icon: ApolloSvg, title: 'Apollo', to: 'https://www.apollographql.com/' },
-    { icon: GraphqlSvg, title: 'Graphql', to: 'https://graphql.org/' },
-    { icon: SassSvg, title: 'Sass', to: 'https://sass-lang.com/' },
-    { icon: AdonisSvg, title: 'Adonis', to: 'https://adonisjs.com/' },
-    { icon: PlasmoSvg, title: 'Plasmo', to: 'https://docs.plasmo.com/' }
+    { icon: HtmlSvg, title: 'Html', to: 'https://www.w3.org/html/', leftTooltip: '30px' },
+    { icon: CssSvg, title: 'Css', to: 'https://www.w3.org/Style/CSS/Overview.en.html', leftTooltip: '30px' },
+    { icon: TypescriptSvg, title: 'Typescript', to: 'https://www.typescriptlang.org/', leftTooltip: '30px' },
+    { icon: NodeSvg, title: 'Node', to: 'https://nodejs.org/en/', leftTooltip: '30px' },
+    { icon: ReactSvg, title: 'React', to: 'https://reactjs.org/', leftTooltip: '30px' },
+    { icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', leftTooltip: '30px' },
+    { icon: MaterialUISvg, title: 'Material-ui', to: 'https://mui.com/', leftTooltip: '30px' },
+    { icon: ExpressSvg, title: 'Express', to: 'https://expressjs.com/', leftTooltip: '30px' },
+    { icon: TailwindSvg, title: 'Tailwind', to: 'https://tailwindcss.com/', leftTooltip: '30px' },
+    { icon: NestSvg, title: 'Nest', to: 'https://nestjs.com/', leftTooltip: '30px' },
+    { icon: ApolloSvg, title: 'Apollo', to: 'https://www.apollographql.com/', leftTooltip: '30px' },
+    { icon: GraphqlSvg, title: 'Graphql', to: 'https://graphql.org/', leftTooltip: '30px' },
+    { icon: SassSvg, title: 'Sass', to: 'https://sass-lang.com/', leftTooltip: '30px' },
+    { icon: AdonisSvg, title: 'Adonis', to: 'https://adonisjs.com/', leftTooltip: '30px' },
+    { icon: PlasmoSvg, title: 'Plasmo', to: 'https://docs.plasmo.com/', leftTooltip: '30px' }
   ],
   jobs: [
     {

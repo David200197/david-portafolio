@@ -1,13 +1,13 @@
 import Grid from '@mui/material/Grid'
-import Tooltip from '@mui/material/Tooltip'
 import { DesktopMedia, MobileMedia } from '../Media'
 import { styled } from '@mui/material'
 import { Icon } from '@/interface/icon'
+import { CustomTooltip } from './Skill.styled'
 
-type Props = { title: string; to: string; icon: Icon; showMobileText?: boolean }
-const Skill = ({ title, to, icon: IconProp, showMobileText = true }: Props) => (
-  <Grid data-skill={title} item xs={3} display='flex' justifyContent='center' alignItems='center'>
-    <Tooltip arrow title={title}>
+type Props = { title: string; to: string; icon: Icon; showMobileText?: boolean; leftTooltip?: string }
+const Skill = ({ title, to, icon: IconProp, showMobileText = true, leftTooltip }: Props) => (
+  <CustomTooltip arrow title={title} left={leftTooltip}>
+    <Grid data-skill={title} item xs={3} display='flex' justifyContent='center' alignItems='center'>
       <>
         <DesktopMedia>
           <a href={to} style={{ margin: '0 10px' }} target='_blank' rel='noreferrer'>
@@ -21,8 +21,8 @@ const Skill = ({ title, to, icon: IconProp, showMobileText = true }: Props) => (
           {showMobileText && <span>{title}</span>}
         </MobileMediaContainer>
       </>
-    </Tooltip>
-  </Grid>
+    </Grid>
+  </CustomTooltip>
 )
 export default Skill
 
