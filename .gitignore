@@ -7,3 +7,5 @@ bundle-size
 pnpm-lock.yaml
 .env
 local
+yarn.lock
+yarn-error.log
