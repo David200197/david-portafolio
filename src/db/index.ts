@@ -80,7 +80,7 @@ const db: Db = {
         { icon: MaterialUISvg, title: 'Material-ui', to: 'https://mui.com/', showMobileText: false },
         { icon: GraphqlSvg, title: 'Graphql', to: 'https://graphql.org/', showMobileText: false }
       ],
-      link: 'http://www.teigee.com',
+      //link: 'http://www.teigee.com',
       type: 'Frontend Developer'
     },
     {
