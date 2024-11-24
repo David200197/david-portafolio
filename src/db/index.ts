@@ -8,7 +8,6 @@ import {
   HtmlSvg,
   JavascriptSvg,
   MaterialUISvg,
-  NegativeCapacitorJsSvg,
   NestSvg,
   NextSvg,
   NodeSvg,
@@ -143,7 +142,7 @@ const db: Db = {
       time: 'November 2024 - Present',
       skills: [
         { icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false },
-        { icon: NegativeCapacitorJsSvg, title: 'Capacitor', to: 'https://capacitorjs.com/', showMobileText: false }
+        { icon: CapacitorJsSvg, title: 'Capacitor', to: 'https://capacitorjs.com/', showMobileText: false }
       ],
       type: 'Frontend Developer'
     }
