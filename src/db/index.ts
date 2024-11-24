@@ -63,6 +63,7 @@ const db: Db = {
     { icon: SassSvg, title: 'Sass', to: 'https://sass-lang.com/', leftTooltip: '30px' },
     { icon: AdonisSvg, title: 'Adonis', to: 'https://adonisjs.com/', leftTooltip: '30px' },
     { icon: PlasmoSvg, title: 'Plasmo', to: 'https://docs.plasmo.com/', leftTooltip: '30px' }
+    //{ icon: CapacitorJsSvg, title: 'Capacitor', to: 'https://capacitorjs.com/', leftTooltip: '30px' }
   ],
   jobs: [
     {
@@ -128,6 +129,17 @@ const db: Db = {
       time: 'March 2024 - Present',
       skills: [{ icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false }],
       link: 'https://app.ibx.exchange/',
+      type: 'Frontend Developer'
+    },
+    {
+      alt: 'Shell Condo',
+      logoSrc: 'shell-condo.png',
+      description:
+        'CondoShell is a comprehensive platform designed to streamline the management of condominium communities. It offers a range of features to facilitate communication, financial oversight, and maintenance scheduling.',
+      image: 'work-006.png',
+      title: 'Shell Condo',
+      time: 'November 2024 - Present',
+      skills: [{ icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false }],
       type: 'Frontend Developer'
     }
   ]
