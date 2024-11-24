@@ -112,7 +112,7 @@ const convertToSvg = (data: Data) => {
 }
 
 const bootstrap = async () => {
-  const PUPPETEER_EXECUTABLE_PATH = process.env.PUPPETER_EXECUTABLE_PATH
+  const PUPPETEER_EXECUTABLE_PATH = process.env.BROWSER_EXECUTABLE_PATH
   const EMAIL = process.env.EMAIL
   const PORTFOLIO = process.env.PORTFOLIO
 
