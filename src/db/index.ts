@@ -134,7 +134,8 @@ const db: Db = {
     {
       alt: 'Shell Condo',
       logoSrc: 'shell-condo.png',
-      description: 'TODO: DESCRIPTION',
+      description:
+        'CondoShell is a comprehensive platform designed to streamline the management of condominium communities. It offers a range of features to facilitate communication, financial oversight, and maintenance scheduling.',
       image: 'work-006.png',
       title: 'Shell Condo',
       time: 'November 2024 - Present',
