@@ -1,12 +1,14 @@
 import {
   AdonisSvg,
   ApolloSvg,
+  CapacitorJsSvg,
   CssSvg,
   ExpressSvg,
   GraphqlSvg,
   HtmlSvg,
   JavascriptSvg,
   MaterialUISvg,
+  NegativeCapacitorJsSvg,
   NestSvg,
   NextSvg,
   NodeSvg,
@@ -62,8 +64,8 @@ const db: Db = {
     { icon: GraphqlSvg, title: 'Graphql', to: 'https://graphql.org/', leftTooltip: '30px' },
     { icon: SassSvg, title: 'Sass', to: 'https://sass-lang.com/', leftTooltip: '30px' },
     { icon: AdonisSvg, title: 'Adonis', to: 'https://adonisjs.com/', leftTooltip: '30px' },
-    { icon: PlasmoSvg, title: 'Plasmo', to: 'https://docs.plasmo.com/', leftTooltip: '30px' }
-    //{ icon: CapacitorJsSvg, title: 'Capacitor', to: 'https://capacitorjs.com/', leftTooltip: '30px' }
+    { icon: PlasmoSvg, title: 'Plasmo', to: 'https://docs.plasmo.com/', leftTooltip: '30px' },
+    { icon: CapacitorJsSvg, title: 'Capacitor', to: 'https://capacitorjs.com/', leftTooltip: '30px' }
   ],
   jobs: [
     {
@@ -139,7 +141,10 @@ const db: Db = {
       image: 'work-006.png',
       title: 'Shell Condo',
       time: 'November 2024 - Present',
-      skills: [{ icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false }],
+      skills: [
+        { icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false },
+        { icon: NegativeCapacitorJsSvg, title: 'Capacitor', to: 'https://capacitorjs.com/', showMobileText: false }
+      ],
       type: 'Frontend Developer'
     }
   ]
