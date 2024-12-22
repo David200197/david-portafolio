@@ -1,17 +1,27 @@
-import HomePage from '@/views'
+import { PageWrapper } from '@/components/layout/PageWrapper'
 import { createBrowserRouter } from 'react-router-dom'
-import Navbar from '@/components/layout/NavBar/Navbar'
 
 export const router = createBrowserRouter(
   [
     {
-      path: '/',
-      element: (
-        <>
-          <Navbar />
-          <HomePage />
-        </>
-      )
+      path: '',
+      Component: PageWrapper,
+      children: [
+        {
+          path: '/',
+          lazy: async () => {
+            const component = await import('@/views/HomePage')
+            return { Component: component.default }
+          }
+        },
+        {
+          path: '/blog',
+          lazy: async () => {
+            const component = await import('@/views/BlogPage')
+            return { Component: component.default }
+          }
+        }
+      ]
     }
   ],
   { basename: '/david-portafolio/' }

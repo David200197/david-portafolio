@@ -5,11 +5,12 @@ import Typography from '@mui/material/Typography'
 import { useContainer } from './Navbar.container'
 import { DrawerContainer, LinkStyled, StyledAppBar, ToolbarStyled } from './Navbar.styled'
 import { primaryMain } from '@/providers'
-import { BANNER_MARK, CONTACT_US_MARK, MY_WORK_MARK, PERSONAL_INFO_MARK } from '@/constant'
-import NavigateButton from './components/NavigateButton'
+import { BANNER_MARK, BLOG_PATH, CONTACT_US_MARK, MY_WORK_MARK, PERSONAL_INFO_MARK } from '@/constant'
+import ScrollNavigateButton from './components/ScrollNavigateButton'
 import { DesktopMedia, MobileMedia } from '@/components/customs/Media'
 import MenuIcon from '@mui/icons-material/Menu'
 import { IconButton, SwipeableDrawer } from '@mui/material'
+import NavigateButton from './components/NavigateButton'
 
 const NavBar = () => {
   const { isInitialPosition, drawer, toggle } = useContainer()
@@ -31,30 +32,34 @@ const NavBar = () => {
             </IconButton>
             <SwipeableDrawer anchor={'right'} open={drawer} onClose={toggle} onOpen={toggle}>
               <DrawerContainer>
-                <NavigateButton to={BANNER_MARK} onClick={toggle}>
+                <ScrollNavigateButton to={BANNER_MARK} onClick={toggle}>
                   Home
-                </NavigateButton>
-                <NavigateButton to={PERSONAL_INFO_MARK} offset={-120} onClick={toggle}>
+                </ScrollNavigateButton>
+                <ScrollNavigateButton to={PERSONAL_INFO_MARK} offset={-120} onClick={toggle}>
                   About me
-                </NavigateButton>
-                <NavigateButton to={MY_WORK_MARK} offset={150} onClick={toggle}>
+                </ScrollNavigateButton>
+                <ScrollNavigateButton to={MY_WORK_MARK} offset={150} onClick={toggle}>
                   My Jobs
-                </NavigateButton>
-                <NavigateButton to={CONTACT_US_MARK} onClick={toggle}>
+                </ScrollNavigateButton>
+                <ScrollNavigateButton to={CONTACT_US_MARK} onClick={toggle}>
                   Contact Me
+                </ScrollNavigateButton>
+                <NavigateButton to={BLOG_PATH} onClick={toggle}>
+                  Blogs
                 </NavigateButton>
               </DrawerContainer>
             </SwipeableDrawer>
           </MobileMedia>
           <DesktopMedia>
-            <NavigateButton to={BANNER_MARK}>Home</NavigateButton>
-            <NavigateButton to={PERSONAL_INFO_MARK} offset={-120}>
+            <ScrollNavigateButton to={BANNER_MARK}>Home</ScrollNavigateButton>
+            <ScrollNavigateButton to={PERSONAL_INFO_MARK} offset={-120}>
               About me
-            </NavigateButton>
-            <NavigateButton to={MY_WORK_MARK} offset={150}>
+            </ScrollNavigateButton>
+            <ScrollNavigateButton to={MY_WORK_MARK} offset={150}>
               My Jobs
-            </NavigateButton>
-            <NavigateButton to={CONTACT_US_MARK}>Contact Me</NavigateButton>
+            </ScrollNavigateButton>
+            <ScrollNavigateButton to={CONTACT_US_MARK}>Contact Me</ScrollNavigateButton>
+            <NavigateButton to={BLOG_PATH}>Blogs</NavigateButton>
           </DesktopMedia>
         </ToolbarStyled>
       </StyledAppBar>
