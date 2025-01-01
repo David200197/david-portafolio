@@ -1,0 +1,1 @@
+import{j as e}from"./index.397f134c.js";const t=()=>e("div",{style:{minHeight:"105vh",background:"white",marginTop:"-25px",paddingTop:"80px",display:"flex",justifyContent:"center",alignItems:"center"},children:e("h1",{children:"This is a Blog Page"})});export{t as default};
