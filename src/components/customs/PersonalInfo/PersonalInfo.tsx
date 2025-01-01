@@ -1,4 +1,4 @@
-import { Avatar, StyledGrid } from './PersonalInfo.styled'
+import { AstronautDeveloper, StyledGrid } from './PersonalInfo.styled'
 import Grid from '@mui/material/Grid'
 import {
   Container,
@@ -22,7 +22,7 @@ const PersonalInfo = () => {
         </PersonalInfoTitle>
         <Grid container spacing={2} mt={3} alignItems='center'>
           <StyledGrid item xs={12} md={6} textAlign='center'>
-            <Avatar src={db.profile.avatar} alt='avatar' />
+            <AstronautDeveloper src={'astronaut_developer.svg'} alt='avatar' />
             <PersonalInfoDescription variant='body1'>{db.profile.description}</PersonalInfoDescription>
             <Social socials={db.socials} />
           </StyledGrid>

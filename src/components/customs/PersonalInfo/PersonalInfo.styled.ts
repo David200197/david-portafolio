@@ -35,7 +35,7 @@ export const PersonalInfoTitle = styled(Typography)(({ theme }) => ({
 }))
 
 export const PersonalInfoDescription = styled(Typography)(({ theme }) => ({
-  marginTop: theme.spacing(2),
+  marginTop: theme.spacing(3),
   textAlign: 'center',
   padding: 0,
   [theme.breakpoints.down('md')]: {
@@ -43,10 +43,13 @@ export const PersonalInfoDescription = styled(Typography)(({ theme }) => ({
   }
 }))
 
-export const Avatar = styled('img')(({ theme }) => ({
+export const AstronautDeveloper = styled('img')(({ theme }) => ({
   height: 'auto',
-  borderRadius: '50%',
-  width: 300,
+  width: 250,
+  animation: 'spinner 200s linear infinite',
+  '@keyframes spinner': {
+    to: { transform: 'rotate(360deg)' }
+  },
   [theme.breakpoints.down('md')]: {
     width: 250
   }

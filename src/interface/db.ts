@@ -2,7 +2,6 @@ import { FC } from 'react'
 import { Icon, IconMui } from './icon'
 
 export type Profile = {
-  avatar: string
   description: string
 }
 
@@ -35,10 +34,13 @@ export type Job = {
 export type Navigation = {
   mark: string
   to?: string
-  section: FC<{}>
+  section: FC<NavigationProps>
   label: string
   offset?: number
+  disabled?: boolean
 }
+
+export type NavigationProps = { navigation: Navigation }
 
 export type Db = {
   navigations: Navigation[]

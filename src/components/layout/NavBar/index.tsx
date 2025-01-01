@@ -36,12 +36,23 @@ const NavBar = () => {
                 {db.navigations.map(navigator => {
                   if (navigator.to)
                     return (
-                      <NavigateButton to={navigator.to} onClick={toggle} mark={navigator.mark} key={navigator.mark}>
+                      <NavigateButton
+                        to={navigator.to}
+                        onClick={toggle}
+                        mark={navigator.mark}
+                        key={navigator.mark}
+                        disabled={navigator.disabled}
+                      >
                         {navigator.label}
                       </NavigateButton>
                     )
                   return (
-                    <ScrollNavigateButton mark={navigator.mark} key={navigator.mark} onClick={toggle}>
+                    <ScrollNavigateButton
+                      mark={navigator.mark}
+                      key={navigator.mark}
+                      onClick={toggle}
+                      disabled={navigator.disabled}
+                    >
                       {navigator.label}
                     </ScrollNavigateButton>
                   )
@@ -53,12 +64,17 @@ const NavBar = () => {
             {db.navigations.map(navigator => {
               if (navigator.to)
                 return (
-                  <NavigateButton to={navigator.to} mark={navigator.mark} key={navigator.mark}>
+                  <NavigateButton
+                    to={navigator.to}
+                    mark={navigator.mark}
+                    key={navigator.mark}
+                    disabled={navigator.disabled}
+                  >
                     {navigator.label}
                   </NavigateButton>
                 )
               return (
-                <ScrollNavigateButton mark={navigator.mark} key={navigator.mark}>
+                <ScrollNavigateButton mark={navigator.mark} key={navigator.mark} disabled={navigator.disabled}>
                   {navigator.label}
                 </ScrollNavigateButton>
               )

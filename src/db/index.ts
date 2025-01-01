@@ -52,11 +52,11 @@ const db: Db = {
       label: 'Blogs',
       mark: BLOG_MARK,
       section: BlogBanner,
-      to: BLOG_PATH
+      to: BLOG_PATH,
+      disabled: true
     }
   ],
   profile: {
-    avatar: 'avatar.svg',
     description:
       'Hi! I am David Alfonso Pereira, a fullstack developer with more than 3 years of experience, master various technologies and with a teamwork mentality'
   },
