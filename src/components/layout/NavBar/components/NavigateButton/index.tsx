@@ -1,8 +1,8 @@
 import { ButtonStyled } from './NavigateButton.styled'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-type Props = { to: string; children: string; onClick?: () => void }
-const NavigateButton = ({ to, children, onClick }: Props) => {
+type Props = { to: string; children: string; onClick?: () => void; mark?: string }
+const NavigateButton = ({ to, children, onClick, mark }: Props) => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
@@ -12,7 +12,11 @@ const NavigateButton = ({ to, children, onClick }: Props) => {
   }
 
   return (
-    <ButtonStyled className={pathname === to ? 'active-scroll-spy' : ''} onClickCapture={onClickHandler}>
+    <ButtonStyled
+      className={pathname === to ? 'active-scroll-spy' : ''}
+      onClickCapture={onClickHandler}
+      data-to-scrollspy-id={mark}
+    >
       {children}
     </ButtonStyled>
   )

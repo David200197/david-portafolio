@@ -13,7 +13,6 @@ import {
   NodeSvg,
   PlasmoSvg,
   ReactSvg,
-  SassSvg,
   TailwindSvg,
   TypescriptSvg
 } from '@/components/svg'
@@ -24,8 +23,38 @@ import TelegramIcon from '@mui/icons-material/Telegram'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import { Db } from '@/interface/db'
+import { BANNER_MARK, BLOG_MARK, BLOG_PATH, MY_WORK_MARK, PERSONAL_INFO_MARK } from '@/constant'
+import BigBanner from '@/components/customs/BigBanner'
+import PersonalInfo from '@/components/customs/PersonalInfo'
+import MyWorks from '@/components/customs/MyWorks'
+import BlogBanner from '@/components/customs/BlogBanner'
 
 const db: Db = {
+  navigations: [
+    {
+      label: 'Home',
+      mark: BANNER_MARK,
+      section: BigBanner
+    },
+    {
+      label: 'About me',
+      mark: PERSONAL_INFO_MARK,
+      section: PersonalInfo,
+      offset: -120
+    },
+    {
+      label: 'Jobs',
+      mark: MY_WORK_MARK,
+      section: MyWorks,
+      offset: 150
+    },
+    {
+      label: 'Blogs',
+      mark: BLOG_MARK,
+      section: BlogBanner,
+      to: BLOG_PATH
+    }
+  ],
   profile: {
     avatar: 'avatar.svg',
     description:
@@ -61,7 +90,6 @@ const db: Db = {
     { icon: NestSvg, title: 'Nest', to: 'https://nestjs.com/', leftTooltip: '30px' },
     { icon: ApolloSvg, title: 'Apollo', to: 'https://www.apollographql.com/', leftTooltip: '30px' },
     { icon: GraphqlSvg, title: 'Graphql', to: 'https://graphql.org/', leftTooltip: '30px' },
-    { icon: SassSvg, title: 'Sass', to: 'https://sass-lang.com/', leftTooltip: '30px' },
     { icon: AdonisSvg, title: 'Adonis', to: 'https://adonisjs.com/', leftTooltip: '30px' },
     { icon: PlasmoSvg, title: 'Plasmo', to: 'https://docs.plasmo.com/', leftTooltip: '30px' },
     { icon: CapacitorJsSvg, title: 'Capacitor', to: 'https://capacitorjs.com/', leftTooltip: '30px' }

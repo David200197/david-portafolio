@@ -2,8 +2,8 @@ import { Link } from 'react-scroll'
 import { ButtonStyled } from './NavigateButton.styled'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-type Props = { to: string; children: string; offset?: number; onClick?: () => void }
-const ScrollNavigateButton = ({ to, children, offset = 0, onClick }: Props) => {
+type Props = { mark: string; children: string; offset?: number; onClick?: () => void }
+const ScrollNavigateButton = ({ mark, children, offset = 0, onClick }: Props) => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const isHomePath = pathname === '/'
@@ -14,8 +14,12 @@ const ScrollNavigateButton = ({ to, children, offset = 0, onClick }: Props) => {
   }
 
   return (
-    <ButtonStyled className={isHomePath ? '' : 'none-style'} onClickCapture={onClickHandler} data-to-scrollspy-id={to}>
-      <Link to={to} spy smooth hashSpy offset={offset} duration={800}>
+    <ButtonStyled
+      className={isHomePath ? '' : 'none-style'}
+      onClickCapture={onClickHandler}
+      data-to-scrollspy-id={mark}
+    >
+      <Link to={mark} spy smooth hashSpy offset={offset} duration={800}>
         {children}
       </Link>
     </ButtonStyled>

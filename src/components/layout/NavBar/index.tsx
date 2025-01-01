@@ -5,12 +5,13 @@ import Typography from '@mui/material/Typography'
 import { useContainer } from './Navbar.container'
 import { DrawerContainer, LinkStyled, StyledAppBar, ToolbarStyled } from './Navbar.styled'
 import { primaryMain } from '@/providers'
-import { BANNER_MARK, BLOG_PATH, CONTACT_US_MARK, MY_WORK_MARK, PERSONAL_INFO_MARK } from '@/constant'
+import { BANNER_MARK } from '@/constant'
 import ScrollNavigateButton from './components/ScrollNavigateButton'
 import { DesktopMedia, MobileMedia } from '@/components/customs/Media'
 import MenuIcon from '@mui/icons-material/Menu'
 import { IconButton, SwipeableDrawer } from '@mui/material'
 import NavigateButton from './components/NavigateButton'
+import db from '@/db'
 
 const NavBar = () => {
   const { isInitialPosition, drawer, toggle } = useContainer()
@@ -32,34 +33,36 @@ const NavBar = () => {
             </IconButton>
             <SwipeableDrawer anchor={'right'} open={drawer} onClose={toggle} onOpen={toggle}>
               <DrawerContainer>
-                <ScrollNavigateButton to={BANNER_MARK} onClick={toggle}>
-                  Home
-                </ScrollNavigateButton>
-                <ScrollNavigateButton to={PERSONAL_INFO_MARK} offset={-120} onClick={toggle}>
-                  About me
-                </ScrollNavigateButton>
-                <ScrollNavigateButton to={MY_WORK_MARK} offset={150} onClick={toggle}>
-                  My Jobs
-                </ScrollNavigateButton>
-                <ScrollNavigateButton to={CONTACT_US_MARK} onClick={toggle}>
-                  Contact Me
-                </ScrollNavigateButton>
-                <NavigateButton to={BLOG_PATH} onClick={toggle}>
-                  Blogs
-                </NavigateButton>
+                {db.navigations.map(navigator => {
+                  if (navigator.to)
+                    return (
+                      <NavigateButton to={navigator.to} onClick={toggle} mark={navigator.mark} key={navigator.mark}>
+                        {navigator.label}
+                      </NavigateButton>
+                    )
+                  return (
+                    <ScrollNavigateButton mark={navigator.mark} key={navigator.mark} onClick={toggle}>
+                      {navigator.label}
+                    </ScrollNavigateButton>
+                  )
+                })}
               </DrawerContainer>
             </SwipeableDrawer>
           </MobileMedia>
           <DesktopMedia>
-            <ScrollNavigateButton to={BANNER_MARK}>Home</ScrollNavigateButton>
-            <ScrollNavigateButton to={PERSONAL_INFO_MARK} offset={-120}>
-              About me
-            </ScrollNavigateButton>
-            <ScrollNavigateButton to={MY_WORK_MARK} offset={150}>
-              My Jobs
-            </ScrollNavigateButton>
-            <ScrollNavigateButton to={CONTACT_US_MARK}>Contact Me</ScrollNavigateButton>
-            <NavigateButton to={BLOG_PATH}>Blogs</NavigateButton>
+            {db.navigations.map(navigator => {
+              if (navigator.to)
+                return (
+                  <NavigateButton to={navigator.to} mark={navigator.mark} key={navigator.mark}>
+                    {navigator.label}
+                  </NavigateButton>
+                )
+              return (
+                <ScrollNavigateButton mark={navigator.mark} key={navigator.mark}>
+                  {navigator.label}
+                </ScrollNavigateButton>
+              )
+            })}
           </DesktopMedia>
         </ToolbarStyled>
       </StyledAppBar>

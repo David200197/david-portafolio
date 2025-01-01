@@ -8,7 +8,7 @@ import db from '@/db'
 export const MyWorks = () => (
   <Section>
     <Typography color={primaryMain} textAlign='center' variant='h5' component={'h1'}>
-      My Jobs
+      Jobs
     </Typography>
     <Grid container spacing={2} mt={3}>
       {db.jobs.map((job, index) => (

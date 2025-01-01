@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import { Icon, IconMui } from './icon'
 
 export type Profile = {
@@ -31,7 +32,16 @@ export type Job = {
   type: 'Frontend Developer' | 'Backend Developer' | 'Fullstack Developer'
 }
 
+export type Navigation = {
+  mark: string
+  to?: string
+  section: FC<{}>
+  label: string
+  offset?: number
+}
+
 export type Db = {
+  navigations: Navigation[]
   profile: Profile
   socials: Social[]
   skills: Skill[]

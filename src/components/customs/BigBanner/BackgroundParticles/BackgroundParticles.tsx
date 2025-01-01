@@ -4,9 +4,7 @@ import { particlesOptions } from './particles-options'
 import { Engine } from '@/interface/engine'
 
 const BackgroundParticles = () => {
-  const particlesInit = async (main: Engine) => {
-    await loadFull(main)
-  }
+  const particlesInit = async (main: Engine) => await loadFull(main)
 
   return (
     <Container>
