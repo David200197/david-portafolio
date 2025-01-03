@@ -2,7 +2,7 @@ import Grid from '@mui/material/Grid'
 import { Section } from './MyWork.styled'
 import Work from './Work'
 import Typography from '@mui/material/Typography'
-import { primaryMain } from '@/providers'
+import { primaryMain } from '@/providers/Theme'
 import db from '@/db'
 
 export const MyWorks = () => (

@@ -1,14 +1,16 @@
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 
-import { ThemeProvider } from '@/providers'
+import '@/locales/i18n'
+import { ThemeProvider } from '@/providers/Theme'
 import App from './App'
+import { composeProviders } from './utils/providers'
+
+const Provider = composeProviders([StrictMode, ThemeProvider])
 
 ReactDOM.render(
-  <StrictMode>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
-  </StrictMode>,
+  <Provider>
+    <App />
+  </Provider>,
   document.getElementById('root')
 )

@@ -14,7 +14,8 @@
     "deploy": "gh-pages -d dist",
     "only-deploy": "gh-pages -d dist",
     "package-only-install": "npm install --package-lock-only",
-    "update-cv": "ts-node scripts/update-cv/script.ts"
+    "update-cv": "ts-node scripts/update-cv/script.ts",
+    "translate-locales": "ts-node scripts/translate-locales/script.ts"
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
@@ -26,10 +27,12 @@
     "@mui/material": "^5.0.1",
     "@types/express": "^4.17.21",
     "@types/react-scroll": "^1.8.7",
+    "i18next": "^24.2.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-hook-form": "^7.43.9",
     "react-hot-toast": "^2.4.1",
+    "react-i18next": "^15.4.0",
     "react-router-dom": "^6.8.2",
     "react-scroll": "^1.8.9",
     "react-tsparticles": "^2.9.3",
