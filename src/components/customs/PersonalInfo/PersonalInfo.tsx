@@ -21,7 +21,7 @@ const PersonalInfo = () => {
       <InitialCurveStyled />
       <InfoStyled>
         <PersonalInfoTitle variant='h5' mt={2}>
-          {t(`navigations.about_me`)}
+          {t(`about_me`)}
         </PersonalInfoTitle>
         <Grid container spacing={2} mt={3} alignItems='center'>
           <StyledGrid item xs={12} md={6} textAlign='center'>

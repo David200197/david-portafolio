@@ -1,10 +1,11 @@
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 
-import '@/locales/i18n'
 import { ThemeProvider } from '@/providers/Theme'
 import App from './App'
 import { composeProviders } from './utils/providers'
+
+import './locales/i18n'
 
 const Provider = composeProviders([StrictMode, ThemeProvider])
 
