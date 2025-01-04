@@ -27,7 +27,7 @@ export const particlesOptions: ISourceOptions = {
   delay: 0,
   fullScreen: {
     enable: true,
-    zIndex: 0
+    zIndex: -1
   },
   detectRetina: true,
   duration: 0,
