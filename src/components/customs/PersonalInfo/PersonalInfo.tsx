@@ -11,24 +11,27 @@ import {
 import Skills from './Skills'
 import Social from './Social'
 import db from '@/db'
+import { useTranslation } from 'react-i18next'
 
 const PersonalInfo = () => {
+  const { t } = useTranslation()
+
   return (
     <Container id='personal_info'>
       <InitialCurveStyled />
       <InfoStyled>
         <PersonalInfoTitle variant='h5' mt={2}>
-          About me...
+          {t(`navigations.about_me`)}
         </PersonalInfoTitle>
         <Grid container spacing={2} mt={3} alignItems='center'>
           <StyledGrid item xs={12} md={6} textAlign='center'>
             <AstronautDeveloper src={'astronaut_developer.svg'} alt='avatar' />
-            <PersonalInfoDescription variant='body1'>{db.profile.description}</PersonalInfoDescription>
+            <PersonalInfoDescription variant='body1'>{t(db.profile.description)}</PersonalInfoDescription>
             <Social socials={db.socials} />
           </StyledGrid>
           <StyledGrid item xs={12} md={6} display='flex' flexDirection='column' alignItems='center'>
             <PersonalInfoTitle variant='h5' mt={2}>
-              Skills
+              {t('skills')}
             </PersonalInfoTitle>
             <Skills skills={db.skills} />
           </StyledGrid>

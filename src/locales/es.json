@@ -1,3 +1,9 @@
 {
-    "lng": "es"
+  "lng": "es",
+  "about_me": "Sobre Mí",
+  "blogs": "Blogs",
+  "home": "Home",
+  "jobs": "Trabajos",
+  "skills": "Habilidades",
+  "profile_description": "¡Hola! Soy David Alfonso Pereira, Un Fullstack Developer Con Más De 4 Años De Experiencia, Domino Diversas Tecnologías Y Con Mentalidad De Trabajo En Equipo"
 }

@@ -32,24 +32,24 @@ import BlogBanner from '@/components/customs/BlogBanner'
 const db: Db = {
   navigations: [
     {
-      label: 'Home',
+      label: 'home',
       mark: BANNER_MARK,
       section: BigBanner
     },
     {
-      label: 'About me',
+      label: 'about_me',
       mark: PERSONAL_INFO_MARK,
       section: PersonalInfo,
       offset: -120
     },
     {
-      label: 'Jobs',
+      label: 'jobs',
       mark: MY_WORK_MARK,
       section: MyWorks,
       offset: 150
     },
     {
-      label: 'Blogs',
+      label: 'blogs',
       mark: BLOG_MARK,
       section: BlogBanner,
       to: BLOG_PATH,
@@ -57,8 +57,7 @@ const db: Db = {
     }
   ],
   profile: {
-    description:
-      'Hi! I am David Alfonso Pereira, a fullstack developer with more than 3 years of experience, master various technologies and with a teamwork mentality'
+    description: 'profile_description'
   },
   socials: [
     { title: 'GitHub', icon: GitHubIcon, to: 'https://github.com/David200197' },
