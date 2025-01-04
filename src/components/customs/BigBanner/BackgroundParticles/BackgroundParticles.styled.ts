@@ -1,6 +1,6 @@
 import { styled } from '@mui/material'
 import Box from '@mui/material/Box'
-import Particles from 'react-tsparticles'
+import Particles from '@tsparticles/react'
 
 const isBlackdropFilterSupported = CSS.supports('backdrop-filter', 'blur(4px)')
 
