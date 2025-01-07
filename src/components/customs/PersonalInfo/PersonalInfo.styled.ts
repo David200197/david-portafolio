@@ -5,7 +5,7 @@ import Box from '@mui/material/Box'
 import { styled } from '@mui/material'
 import { SectionContainer } from '@/components/global/styled'
 import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
+import Grid from '@mui/material/Grid2'
 
 export const Container = styled(Box)({
   position: 'relative'
