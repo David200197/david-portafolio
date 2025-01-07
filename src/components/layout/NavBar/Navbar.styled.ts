@@ -9,7 +9,7 @@ export const StyledAppBar = styled(MuiAppBar, { shouldForwardProp: isPropValid }
 }>(({ theme, isInitialPosition }) => ({
   backgroundColor: isInitialPosition ? 'transparent' : 'white',
   color: theme.palette.primary.main,
-  padding: `${isInitialPosition ? theme.spacing(2) : 0} 14px`,
+  padding: `${isInitialPosition ? theme.spacing(1) : 0} 14px`,
   [theme.breakpoints.only('lg')]: {
     padding: `${isInitialPosition ? theme.spacing(2) : 0} 10%`
   },

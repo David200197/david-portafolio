@@ -1,9 +1,14 @@
 {
+  "en": "Ingles",
+  "es": "Español",
   "lng": "es",
   "about_me": "Sobre Mí",
-  "blogs": "Blogs",
-  "home": "Home",
+  "blogs": "Artículos",
+  "home": "Inicio",
   "jobs": "Trabajos",
   "skills": "Habilidades",
-  "profile_description": "¡Hola! Soy David Alfonso Pereira, Un Fullstack Developer Con Más De 4 Años De Experiencia, Domino Diversas Tecnologías Y Con Mentalidad De Trabajo En Equipo"
+  "language": "Lenguaje",
+  "big_title": "Hola, Yo soy David",
+  "small_title": "Soy Fullstack Develop",
+  "profile_description": "¡Hola! soy David Alfonso Pereira, un fullstack developer con más de 4 años de experiencia, domino diversas tecnologías con mentalidad de trabajo en equipo"
 }

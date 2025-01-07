@@ -1,9 +1,13 @@
 {
-  "lng": "en",
+  "en": "English",
+  "es": "Spanish",
   "about_me": "About Me",
   "blogs": "Blogs",
   "home": "Home",
   "jobs": "Jobs",
   "skills": "Skills",
-  "profile_description": "Hi! i am david alfonso pereira, a fullstack developer with more than 4 years of experience, master various technologies and with a teamwork mentality"
+  "language": "Language",
+  "big_title": "Hi, I am David",
+  "small_title": "I am Fullstack Develop",
+  "profile_description": "Hi! i am David Alfonso Pereira, a fullstack developer with more than 4 years of experience, master various technologies and with a teamwork mentality"
 }

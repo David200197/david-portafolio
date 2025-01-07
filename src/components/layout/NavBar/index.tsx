@@ -12,9 +12,12 @@ import MenuIcon from '@mui/icons-material/Menu'
 import { IconButton, SwipeableDrawer } from '@mui/material'
 import NavigateButton from './components/NavigateButton'
 import db from '@/db'
+import { ChangeLocales } from './components/ChangeLocales'
+import { useTranslation } from '@/lib/I18n.lib'
 
 const NavBar = () => {
   const { isInitialPosition, drawer, toggle } = useContainer()
+  const { t } = useTranslation()
   return (
     <Box flexGrow={1}>
       <StyledAppBar position='fixed' isInitialPosition={isInitialPosition}>
@@ -43,7 +46,7 @@ const NavBar = () => {
                         key={navigator.mark}
                         disabled={navigator.disabled}
                       >
-                        {navigator.label}
+                        {t(navigator.label)}
                       </NavigateButton>
                     )
                   return (
@@ -53,14 +56,15 @@ const NavBar = () => {
                       onClick={toggle}
                       disabled={navigator.disabled}
                     >
-                      {navigator.label}
+                      {t(navigator.label)}
                     </ScrollNavigateButton>
                   )
                 })}
+                <ChangeLocales />
               </DrawerContainer>
             </SwipeableDrawer>
           </MobileMedia>
-          <DesktopMedia>
+          <DesktopMedia style={{ display: 'flex' }}>
             {db.navigations.map(navigator => {
               if (navigator.to)
                 return (
@@ -70,15 +74,16 @@ const NavBar = () => {
                     key={navigator.mark}
                     disabled={navigator.disabled}
                   >
-                    {navigator.label}
+                    {t(navigator.label)}
                   </NavigateButton>
                 )
               return (
                 <ScrollNavigateButton mark={navigator.mark} key={navigator.mark} disabled={navigator.disabled}>
-                  {navigator.label}
+                  {t(navigator.label)}
                 </ScrollNavigateButton>
               )
             })}
+            <ChangeLocales margin='10px 10px' />
           </DesktopMedia>
         </ToolbarStyled>
       </StyledAppBar>
