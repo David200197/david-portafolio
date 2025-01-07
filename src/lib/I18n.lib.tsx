@@ -6,10 +6,12 @@ interface Translation {
   [key: string]: string | number | boolean | Translation
 }
 
+type Translator = (key: string, variables?: Record<string, string | number | boolean>) => string
+
 interface I18n {
   language: string
   changeLanguage: (lang: string) => void
-  t: (key: string) => string
+  t: Translator
 }
 
 export const I18nContext = createContext<I18n | null>(null)
@@ -42,8 +44,8 @@ export const I18nProvider: FC<Props> = ({ defaultLanguage, translations, childre
     [translations]
   )
 
-  const t = useCallback(
-    (key: string) => {
+  const t: Translator = useCallback(
+    (key, variables) => {
       const keys = key.toString().split('.')
       let value = translations[language]
       for (const currentKey of keys) {
@@ -53,7 +55,11 @@ export const I18nProvider: FC<Props> = ({ defaultLanguage, translations, childre
       if (typeof value === 'number') return value.toString()
       if (typeof value === 'boolean') return String(value)
       if (typeof value !== 'string') throw new Error('The value of a key cannot be an object or array')
-      return value
+      if (!variables) return value
+      for (const key in variables) {
+        const currentVariable = variables[key]
+        return value.replace(`{${key}}`, currentVariable.toString())
+      }
     },
     [language, translations]
   )

@@ -12,9 +12,11 @@ import Skills from './Skills'
 import Social from './Social'
 import db from '@/db'
 import Grid from '@mui/material/Grid2'
+import { useRef } from 'react'
 
 const PersonalInfo = () => {
   const { t } = useTranslation()
+  const years = useRef(new Date().getFullYear() - 2021).current
 
   return (
     <Container id='personal_info'>
@@ -26,7 +28,7 @@ const PersonalInfo = () => {
         <Grid container spacing={2} mt={3} alignItems='center'>
           <StyledGrid size={{ xs: 12, md: 6 }} textAlign='center'>
             <AstronautDeveloper src={'astronaut_developer.svg'} alt='avatar' />
-            <PersonalInfoDescription variant='body1'>{t(db.profile.description)}</PersonalInfoDescription>
+            <PersonalInfoDescription variant='body1'>{t(db.profile.description, { years })}</PersonalInfoDescription>
             <Social socials={db.socials} />
           </StyledGrid>
           <StyledGrid size={{ xs: 12, md: 6 }} display='flex' flexDirection='column' alignItems='center'>

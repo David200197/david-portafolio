@@ -10,5 +10,5 @@
   "language": "Lenguaje",
   "big_title": "Hola, Yo soy David",
   "small_title": "Soy Fullstack Develop",
-  "profile_description": "¡Hola! soy David Alfonso Pereira, un fullstack developer con más de 4 años de experiencia, domino diversas tecnologías con mentalidad de trabajo en equipo"
+  "profile_description": "¡Hola! soy David Alfonso Pereira, un fullstack developer con más de {years} años de experiencia, domino diversas tecnologías con mentalidad de trabajo en equipo"
 }
