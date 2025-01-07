@@ -38,5 +38,6 @@ export const DrawerContainer = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   padding: '10px',
-  alignItems: 'start'
+  alignItems: 'start',
+  textAlign: 'start'
 })

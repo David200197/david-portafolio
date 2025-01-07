@@ -26,7 +26,7 @@ const NavBar = () => {
             <Logo width={'35px'} height={'35px'} fill={primaryMain} />
             <DesktopMedia>
               <Typography marginLeft={1.5} color={'black'} variant='h1' fontSize={26}>
-                David's Portfolio
+                {t('portfolio')}
               </Typography>
             </DesktopMedia>
           </LinkStyled>
@@ -64,7 +64,7 @@ const NavBar = () => {
               </DrawerContainer>
             </SwipeableDrawer>
           </MobileMedia>
-          <DesktopMedia style={{ display: 'flex' }}>
+          <DesktopMedia>
             {db.navigations.map(navigator => {
               if (navigator.to)
                 return (
