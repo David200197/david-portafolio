@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import { useState } from 'react'
 import { WrapperTitle } from './TitleBanner.styled'
 import { primaryMain } from '@/providers/Theme'
-import { useTranslation } from '@/lib/I18n.lib'
+import { useTranslation } from 'react-i18n-thin'
 
 const TitleBanner = () => {
   const { t } = useTranslation()

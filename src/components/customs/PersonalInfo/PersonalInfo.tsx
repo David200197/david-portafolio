@@ -1,4 +1,4 @@
-import { useTranslation } from '@/lib/I18n.lib'
+import { useTranslation } from 'react-i18n-thin'
 import { AstronautDeveloper, StyledGrid } from './PersonalInfo.styled'
 import {
   Container,

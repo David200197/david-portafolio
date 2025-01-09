@@ -13,7 +13,7 @@ import { IconButton, SwipeableDrawer } from '@mui/material'
 import NavigateButton from './components/NavigateButton'
 import db from '@/db'
 import { ChangeLocales } from './components/ChangeLocales'
-import { useTranslation } from '@/lib/I18n.lib'
+import { useTranslation } from 'react-i18n-thin'
 
 const NavBar = () => {
   const { isInitialPosition, drawer, toggle } = useContainer()

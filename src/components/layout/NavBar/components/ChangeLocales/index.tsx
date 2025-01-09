@@ -1,4 +1,4 @@
-import { useTranslation } from '@/lib/I18n.lib'
+import { useTranslation } from 'react-i18n-thin'
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 
 type Props = { margin?: string }

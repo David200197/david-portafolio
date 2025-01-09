@@ -3,7 +3,7 @@ import { ThemeProvider } from '@/providers/Theme'
 import App from './App'
 import { composeProviders, createProvider } from './utils/providers'
 import { createRoot } from 'react-dom/client'
-import { I18nProvider } from './lib/I18n.lib'
+import { I18nProvider } from 'react-i18n-thin'
 import en from './locales/en.json'
 import es from './locales/es.json'
 
