@@ -14,8 +14,8 @@
     "deploy": "gh-pages -d dist",
     "only-deploy": "gh-pages -d dist",
     "package-only-install": "npm install --package-lock-only",
-    "update-cv": "ts-node scripts/update-cv/script.ts",
-    "translate-locales": "ts-node scripts/translate-locales/script.ts"
+    "update-cv": "tsm scripts/update-cv/script.ts",
+    "translate-locales": "tsm scripts/translate-locales/script.ts"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.2",
@@ -37,7 +37,6 @@
     "react-scroll": "^1.8.9",
     "react-ui-scrollspy": "^2.3.0",
     "react-useanimations": "^2.10.0",
-    "ts-node": "^10.9.2",
     "tsparticles": "^3.7.1",
     "typed.js": "^2.0.12",
     "zod": "^3.21.4",
@@ -59,6 +58,7 @@
     "rc": "^1.2.8",
     "react-scripts": "^4.0.3",
     "rollup-plugin-visualizer": "^5.5.2",
+    "tsm": "^2.3.0",
     "typescript": "^5.7.2",
     "vite": "^2.0.1",
     "vite-plugin-checker": "^0.3.4",

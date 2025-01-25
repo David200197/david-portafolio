@@ -6,6 +6,7 @@ import express from 'express'
 import path from 'path'
 import fs from 'fs/promises'
 import Handlebars from 'handlebars'
+import { __dirname } from '../utils/dirname'
 dotenv.config()
 
 type Skill = {
@@ -131,7 +132,7 @@ const bootstrap = async () => {
   await webScrapingPage.waitForSelector('div')
   const data = await webScrapingPage.evaluate(getData, { email: EMAIL, portfolio: PORTFOLIO } as GetDataArgument)
 
-  const htmlContent = await fs.readFile(path.join(__dirname, 'template.html'), {
+  const htmlContent = await fs.readFile(path.join(__dirname, 'scripts', 'update-cv', 'template.html'), {
     encoding: 'utf-8'
   })
   const fileCompiled = Handlebars.compile(htmlContent)
