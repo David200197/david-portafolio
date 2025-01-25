@@ -18,7 +18,12 @@ export const ChangeLocales = ({ margin }: Props) => {
 
   return (
     <FormControl style={{ margin }} sx={{ m: 1, minWidth: 120 }} size='small'>
-      <LanguageSwitch onClick={onClick} value={language === 'en'} defaultChecked={defaultLangue === 'en'} />
+      <LanguageSwitch
+        id='language_switch'
+        onClick={onClick}
+        value={language === 'en'}
+        defaultChecked={defaultLangue === 'en'}
+      />
     </FormControl>
   )
 }

@@ -1,7 +1,7 @@
 //https://stackoverflow.com/questions/24107288/creating-an-svg-dom-element-from-a-string
 
 import dotenv from 'dotenv'
-import puppeteer from 'puppeteer-core'
+import puppeteer, { Browser, Page } from 'puppeteer-core'
 import express from 'express'
 import path from 'path'
 import fs from 'fs/promises'
@@ -112,24 +112,9 @@ const convertToSvg = (data: Data) => {
   return document.documentElement.innerHTML
 }
 
-const bootstrap = async () => {
-  const PUPPETEER_EXECUTABLE_PATH = process.env.BROWSER_EXECUTABLE_PATH
+const createPdf = async (webScrapingPage: Page, browser: Browser, pdfUrl: string) => {
   const EMAIL = process.env.EMAIL
   const PORTFOLIO = process.env.PORTFOLIO
-
-  const browser = await puppeteer.launch({
-    channel: 'chrome',
-    executablePath: PUPPETEER_EXECUTABLE_PATH,
-    waitForInitialPage: true,
-    headless: true,
-    defaultViewport: {
-      width: 760,
-      height: 570
-    }
-  })
-  const webScrapingPage = await browser.newPage()
-  await webScrapingPage.goto('http://localhost:1997/david-portafolio')
-  await webScrapingPage.waitForSelector('div')
   const data = await webScrapingPage.evaluate(getData, { email: EMAIL, portfolio: PORTFOLIO } as GetDataArgument)
 
   const htmlContent = await fs.readFile(path.join(__dirname, 'scripts', 'update-cv', 'template.html'), {
@@ -147,7 +132,31 @@ const bootstrap = async () => {
     preferCSSPageSize: false,
     printBackground: true
   })
-  await fs.writeFile(path.join(process.cwd(), 'public', 'cv.pdf'), cvPdf)
+  await fs.writeFile(pdfUrl, cvPdf)
+  await templatePage.close()
+}
+
+const bootstrap = async () => {
+  const PUPPETEER_EXECUTABLE_PATH = process.env.BROWSER_EXECUTABLE_PATH
+
+  const browser = await puppeteer.launch({
+    channel: 'chrome',
+    executablePath: PUPPETEER_EXECUTABLE_PATH,
+    waitForInitialPage: true,
+    headless: true,
+    defaultViewport: {
+      width: 760,
+      height: 570
+    }
+  })
+  const webScrapingPage = await browser.newPage()
+  await webScrapingPage.goto('http://localhost:1997/david-portafolio')
+  await webScrapingPage.waitForSelector('div')
+
+  await createPdf(webScrapingPage, browser, path.join(process.cwd(), 'public', 'cv', 'en.pdf'))
+  await webScrapingPage.evaluate(() => document.getElementById('language_switch')?.click())
+  await createPdf(webScrapingPage, browser, path.join(process.cwd(), 'public', 'cv', 'es.pdf'))
+
   await browser.close()
   process.exit()
 }

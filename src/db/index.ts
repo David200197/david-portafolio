@@ -67,7 +67,7 @@ const db: Db = {
     {
       title: 'Download CV',
       icon: FileDownloadIcon,
-      to: '/david-portafolio/cv.pdf'
+      to: 'cv_path'
     }
   ],
   skills: [
