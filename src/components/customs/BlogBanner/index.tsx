@@ -3,16 +3,18 @@ import { BlogBannerContainerStyled, BlogButton, Container, InitialCurveStyled } 
 import { useNavigate } from 'react-router-dom'
 import { BLOG_PATH } from '@/constant'
 import { NavigationProps } from '@/interface/db'
+import { useTranslation } from 'react-i18n-thin'
 
 const BlogBanner = ({ navigation }: NavigationProps) => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   return (
     <Container>
       <InitialCurveStyled />
       <BlogBannerContainerStyled>
         <Typography color='#fff' textAlign='center' variant='h5' component={'h1'}>
-          Blogs
+          {t('blogs')}
         </Typography>
         <img
           src='astronaut_blog.svg'
@@ -21,10 +23,10 @@ const BlogBanner = ({ navigation }: NavigationProps) => {
           style={{ margin: '30px 0 10px 0' }}
         />
         <Typography marginY={3} color='#fff' textAlign='center' variant='body1' component={'p'}>
-          You can see some of my personal blogs in this section
+          {t('description_blog_section')}
         </Typography>
         <BlogButton disabled={navigation.disabled} style={{ marginBottom: '50px' }} onClick={() => navigate(BLOG_PATH)}>
-          See My Blogs (COMING SOON)
+          {t('button_description_blog_section')}
         </BlogButton>
       </BlogBannerContainerStyled>
     </Container>

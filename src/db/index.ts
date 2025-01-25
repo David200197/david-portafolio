@@ -97,11 +97,10 @@ const db: Db = {
     {
       alt: 'teigee',
       logoSrc: 'teigee.webp',
-      description:
-        'Teigee is a platform to search, compare and review products, activities and characteristics from local businesses around you. We collaborate closely with our partners to keep our information trustworthy and up to date.',
+      description: 'teigee_description',
+      time: 'teigee_time',
       image: 'work-001.png',
       title: 'Teigee',
-      time: 'January 2021 - January 2024',
       skills: [
         { icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false },
         { icon: MaterialUISvg, title: 'Material-ui', to: 'https://mui.com/', showMobileText: false },
@@ -113,11 +112,10 @@ const db: Db = {
     {
       alt: 'leiizy',
       logoSrc: 'leiizy.webp',
-      description:
-        'Leiizy is an AI-powered content generation platform that utilizes ChatGPT technology to help users create custom content for various tasks, such as writing emails, crafting social media posts, or composing video descriptions.',
+      description: 'leiizy_description',
+      time: 'leiizy_time',
       image: 'work-002.png',
       title: 'Leiizy',
-      time: 'Febrary 2023 - January 2024',
       skills: [
         { icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false },
         { icon: MaterialUISvg, title: 'Material-ui', to: 'https://mui.com/', showMobileText: false }
@@ -128,33 +126,30 @@ const db: Db = {
     {
       alt: 'eneldo laboral',
       logoSrc: 'eneldo_laboral.svg',
-      description:
-        'Eneldo Laborar is a complete job board management system designed to connect companies and job seekers efficiently. It offers a comprehensive platform to manage the entire hiring process, from posting job offers to selecting and hiring candidates.',
+      description: 'eneldo_description',
+      time: 'eneldo_time',
       image: 'work-004.png',
       title: 'Eneldo Laboral',
-      time: 'November 2023 - Present',
       skills: [{ icon: NestSvg, title: 'Nest', to: 'https://nestjs.com/' }],
       type: 'Backend Developer'
     },
     {
       alt: 'construccions precises',
       logoSrc: 'construccions_precises.svg',
-      description:
-        'Construccions Precises is designed specifically to meet the unique budget management needs of architecture firms. With powerful features and an easy-to-use interface, the app allows architects and project managers to control and optimize their budgets efficiently.',
+      description: 'construccions_precises_description',
+      time: 'construccions_precises_time',
       image: 'work-005.png',
       title: 'Construccions Precises',
-      time: 'January 2024 - Present',
       skills: [{ icon: NestSvg, title: 'Nest', to: 'https://nestjs.com/' }],
       type: 'Backend Developer'
     },
     {
       alt: 'ibx',
       logoSrc: 'ibx.svg',
-      description:
-        'IBX is a trading platform that offers investors access to multiple global markets, as well as a wide range of assets, such as: stocks, advanced technical and chart analysis tools, sophisticated order types and ultra-fast operations execution',
+      description: 'ibx_description',
+      time: 'ibx_time',
       image: 'work-003.png',
       title: 'Ibx',
-      time: 'March 2024 - Present',
       skills: [{ icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false }],
       link: 'https://app.ibx.exchange/',
       type: 'Frontend Developer'
@@ -162,11 +157,10 @@ const db: Db = {
     {
       alt: 'Shell Condo',
       logoSrc: 'shell-condo.png',
-      description:
-        'CondoShell is a comprehensive platform designed to streamline the management of condominium communities. It offers a range of features to facilitate communication, financial oversight, and maintenance scheduling.',
+      description: 'shell_condo_description',
+      time: 'shell_condo_time',
       image: 'work-006.png',
       title: 'Shell Condo',
-      time: 'November 2024 - Present',
       skills: [
         { icon: NextSvg, title: 'Next', to: 'https://nextjs.org/', showMobileText: false },
         { icon: CapacitorJsSvg, title: 'Capacitor', to: 'https://capacitorjs.com/', showMobileText: false }

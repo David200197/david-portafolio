@@ -11,5 +11,19 @@
   "big_title": "Hola, Yo soy David",
   "small_title": "Soy Fullstack Developer",
   "profile_description": "¡Hola! soy David Alfonso Pereira, un fullstack developer con más de {years} años de experiencia, domino diversas tecnologías con mentalidad de trabajo en equipo",
-  "portfolio": "Portafolio"
+  "portfolio": "Portafolio",
+  "description_blog_section": "Puedes ver algunos de mis blogs personales en esta sección.",
+  "button_description_blog_section": "Ver mis blogs (PRÓXIMAMENTE)",
+  "teigee_time": "Febrero 2023 - Enero 2024",
+  "teigee_description": "Teigee es una plataforma para buscar, comparar y reseñar productos, actividades y características de negocios locales a tu alrededor. Colaboramos estrechamente con nuestros socios para mantener nuestra información confiable y actualizada.",
+  "leiizy_time": "Febrero 2023 - Enero 2024",
+  "leiizy_description": "Leiizy es una plataforma de generación de contenido impulsada por IA que utiliza la tecnología ChatGPT para ayudar a los usuarios a crear contenido personalizado para diversas tareas, como escribir correos electrónicos, crear publicaciones en redes sociales o redactar descripciones de videos.",
+  "eneldo_time": "Noviembre 2023 - Presente",
+  "eneldo_description": "Eneldo Laborar es un sistema completo de gestión de bolsas de trabajo diseñado para conectar empresas y solicitantes de empleo de manera eficiente. Ofrece una plataforma integral para administrar todo el proceso de contratación, desde la publicación de ofertas de trabajo hasta la selección y contratación de candidatos.",
+  "construccions_precises_time": "Enero de 2024 - Presente",
+  "construccions_precises_description": "Construccions Precises está diseñada específicamente para satisfacer las necesidades únicas de gestión de presupuestos de las firmas de arquitectura. Con potentes funciones y una interfaz fácil de usar, la aplicación permite a los arquitectos y gerentes de proyectos controlar y optimizar sus presupuestos de manera eficiente.",
+  "ibx_time": "Marzo de 2024 - Presente",
+  "ibx_description": "IBX es una plataforma de negociación que ofrece a los inversores acceso a múltiples mercados globales, así como a una amplia gama de activos, como: acciones, herramientas avanzadas de análisis técnico y de gráficos, tipos de órdenes sofisticados y ejecución de operaciones ultrarrápida",
+  "shell_condo_time": "Noviembre de 2024 - Presente",
+  "shell_condo_description": "CondoShell es una plataforma integral diseñada para agilizar la gestión de comunidades de condominios. Ofrece una variedad de funciones para facilitar la comunicación, la supervisión financiera y la programación de mantenimiento."
 }
