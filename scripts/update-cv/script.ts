@@ -45,6 +45,20 @@ type GetDataArgument = {
   portfolio: string
 }
 
+const getSectionData = (lang: 'en' | 'es') => {
+  return {
+    skillTitle: lang === 'en' ? 'SKILLS' : 'HABILIDADES',
+    technologiesTitle: lang === 'en' ? 'TECHNOLOGIES ' : 'TECNOLOGÍAS',
+    personalInformationTitle: lang === 'en' ? 'PERSONAL INFORMATION' : 'INFORMACIÓN PERSONAL',
+    studiesTitle: lang === 'en' ? 'STUDIES' : 'ESTUDIOS',
+    studies:
+      lang === 'en'
+        ? 'Computer Engineer (2016 - 2021) Camilo Cienfuegos University of Matanzas - Cuba'
+        : 'Ingeniero Informático (2016 - 2021) Universidad Camilo Cienfuegos de Matanzas  - Cuba',
+    workExperienceTitle: lang === 'en' ? 'WORK EXPERIENCE' : 'EXPERIENCIA LABORAL'
+  }
+}
+
 const getData = ({ email, portfolio }: GetDataArgument): Data => {
   const mapElement = <T>(
     elements: NodeListOf<Element>,
@@ -112,16 +126,24 @@ const convertToSvg = (data: Data) => {
   return document.documentElement.innerHTML
 }
 
-const createPdf = async (webScrapingPage: Page, browser: Browser, pdfUrl: string) => {
+type CreatePdfOptions = {
+  webScrapingPage: Page
+  browser: Browser
+  lang: 'es' | 'en'
+}
+const createPdf = async ({ webScrapingPage, browser, lang }: CreatePdfOptions) => {
   const EMAIL = process.env.EMAIL
   const PORTFOLIO = process.env.PORTFOLIO
-  const data = await webScrapingPage.evaluate(getData, { email: EMAIL, portfolio: PORTFOLIO } as GetDataArgument)
-
+  const pdfUrl = path.join(process.cwd(), 'public', 'cv', `${lang}.pdf`)
   const htmlContent = await fs.readFile(path.join(__dirname, 'scripts', 'update-cv', 'template.html'), {
     encoding: 'utf-8'
   })
+
+  const data = await webScrapingPage.evaluate(getData, { email: EMAIL, portfolio: PORTFOLIO } as GetDataArgument)
+  const sectionData = getSectionData(lang)
+
   const fileCompiled = Handlebars.compile(htmlContent)
-  const template = fileCompiled(data)
+  const template = fileCompiled({ ...data, ...sectionData })
 
   const templatePage = await browser.newPage()
   await templatePage.setContent(template)
@@ -153,9 +175,9 @@ const bootstrap = async () => {
   await webScrapingPage.goto('http://localhost:1997/david-portafolio')
   await webScrapingPage.waitForSelector('div')
 
-  await createPdf(webScrapingPage, browser, path.join(process.cwd(), 'public', 'cv', 'en.pdf'))
+  await createPdf({ webScrapingPage, browser, lang: 'en' })
   await webScrapingPage.evaluate(() => document.getElementById('language_switch')?.click())
-  await createPdf(webScrapingPage, browser, path.join(process.cwd(), 'public', 'cv', 'es.pdf'))
+  await createPdf({ webScrapingPage, browser, lang: 'es' })
 
   await browser.close()
   process.exit()
