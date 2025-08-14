@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[906],{4906:o=>{o.exports=JSON.parse('{"email":"david.alfonso999999@gmail.com","portfolio":"https://david200197.github.io/david-portafolio"}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[887],{2887:e=>{e.exports=JSON.parse('{"big":"Hi, I am David","small":"I\'m a Fullstack Developer"}')}}]);

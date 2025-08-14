@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[372],{3372:e=>{e.exports=JSON.parse('{"sectionTitle":"Blogs","description":"Puedes ver algunos de mis blogs personales en esta secci\xf3n","link":"/en/blogs","linkText":"VER MIS BLOGS"}')}}]);
