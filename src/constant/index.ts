@@ -1,5 +1,0 @@
-export const BANNER_MARK = 'BANNER_MARK'
-export const PERSONAL_INFO_MARK = 'PERSONAL_INFO_MARK'
-export const MY_WORK_MARK = 'MY_WORK_MARK'
-export const BLOG_MARK = 'BLOCK_MARK'
-export const BLOG_PATH = '/blog'

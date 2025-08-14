@@ -1,48 +1,134 @@
-# Portfolio's David
+# Advance Next Template (BETA)
 
-This is my portfolio. You can check it on the website https://david200197.github.io/david-portafolio/#BANNER_MARK
+`ADVICE: this template is in maintenance mode.`
 
-## Scripts
+A Next.js template with advanced configuration and pre-set best practices for rapid project development. Ideal for scalable web applications with modern features.
 
-- **Format**: `npm run format`
+![Next.js](https://img.shields.io/badge/Next.js-13.5.4-black?style=flat&logo=next.js)
+![React](https://img.shields.io/badge/React-18.2.0-blue?style=flat&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.2.2-blue?style=flat&logo=typescript)
 
-  - Runs Prettier to format the code within the `src` directory.
+## Features
 
-- **Lint**: `npm run lint`
+- **Next.js 13+**: App Router and latest features.
+- **TypeScript**: Static typing for robust code.
+- **Tailwind CSS**: Utility-first CSS framework.
+- **ESLint & Prettier**: Code quality and formatting.
+- **Environment Variables**: Pre-configured setup.
+- **Hot Reload**: Fast development experience.
+- **Modular Structure**: Organized and scalable.
 
-  - Executes ESLint to analyze and ensure code quality in `.ts` and `.tsx` files within the `src` folder.
+## Prerequisites
 
-- **Develop**: `npm run dev`
+- Node.js ≥ 18.0
+- npm ≥ 9.0 (recommended) or yarn
 
-  - Starts the development server using Vite for an efficient development process.
+## Installation
 
-- **Build**: `npm run build`
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/David200197/advance-next-template.git
+   cd advance-next-template
+   ```
 
-  - Performs TypeScript checks without emitting files and builds the application using Vite.
 
-- **Analyze**: `npm run analyze`
+2. Install dependencies:
 
-  - Analyzes the build output by setting the `ANALYZE` environment variable to `true` and executing the build script.
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-- **Serve**: `npm run serve`
+3. Configure environment variables:
+   - Duplicate `.env.example` and rename to `.env.local`
+   - Update variables as needed:
+     ```env
+     NEXT_PUBLIC_API_URL=YOUR_API_URL
+     NEXT_PUBLIC_APP_NAME=YOUR_APP_NAME
+     ```
 
-  - Serves the built application using Vite's preview feature.
+## Available Scripts
 
-- **Pre-deploy**: `npm run predeploy`
+- **Development**:
 
-  - Runs the build and CV update process before deployment.
+  ```bash
+  npm run dev
+  # or
+  yarn dev
+  ```
 
-- **Deploy**: `npm run deploy`
+  Runs the app at `http://localhost:3000`.
 
-  - Deploys the `dist` directory to GitHub Pages using `gh-pages`.
+- **Production Build**:
 
-- **Only deploy**: `npm run only-deploy`
+  ```bash
+  npm run build
+  # or
+  yarn build
+  ```
 
-  - Directly deploys the `dist` directory to GitHub Pages without any pre-processing.
+- **Start Production Server**:
 
-- **Package Only Install**: `npm run package-only-install`
+  ```bash
+  npm start
+  # or
+  yarn start
+  ```
 
-  - Installs dependencies and generates a `package-lock.json` file without modifying `node_modules`.
+- **Linting**:
 
-- **Update CV**: `npm run update-cv`
-  - Updates the CV using a TypeScript script located in `scripts/update-cv/script.ts`.
+  ```bash
+  npm run lint
+  # or
+  yarn lint
+  ```
+
+- **Prettier Formatting**:
+  ```bash
+  npm run format
+  # or
+  yarn format
+  ```
+
+## Project Structure
+
+```
+advance-next-template/
+├── app/               # App Router directory
+├── public/            # Static assets
+├── src/
+│   ├── components/    # Reusable components
+│   ├── styles/        # Global CSS/Tailwind config
+│   └── types/         # TypeScript types
+├── .eslintrc.json     # ESLint config
+├── .prettierrc        # Prettier config
+├── next.config.js     # Next.js config
+└── tsconfig.json      # TypeScript config
+```
+
+## Technologies
+
+- **Next.js**: Framework foundation
+- **React**: UI library
+- **TypeScript**: Static typing
+- **Tailwind CSS**: Styling
+- **ESLint**: Code linting
+- **Prettier**: Code formatting
+
+---
+
+**Happy coding!** 🚀
+
+```
+
+This README includes:
+- Clear installation instructions
+- Environment setup guide
+- Script explanations
+- Project structure visualization
+- Technology badges
+- Concise feature list
+
+Let me know if you'd like to adjust any sections!
+```

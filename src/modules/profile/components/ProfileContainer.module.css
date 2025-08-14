@@ -1,0 +1,16 @@
+.profile_container_body {
+  background: rgb(32, 32, 51);
+  margin-top: -10px;
+  margin-bottom: -10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10%;
+  padding-right: 10%;
+  z-index: 1;
+  position: sticky;
+}
+
+.final_curve {
+  z-index: 1;
+  position: sticky;
+}

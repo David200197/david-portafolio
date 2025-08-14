@@ -1,0 +1,38 @@
+[
+  {
+    "href": "/es/#home",
+    "title": "INICIO"
+  },
+  {
+    "href": "/es/#about_me",
+    "title": "SOBRE MÍ"
+  },
+  {
+    "href": "/es/#jobs",
+    "title": "EMPLEOS"
+  },
+  {
+    "href": "/es/blogs",
+    "title": "BLOGS"
+  },
+  {
+    "title": "OTROS",
+    "submenu": [
+      {
+        "href": "/es/side-projects",
+        "title": "Proyectos Laterales",
+        "description": "Estos son mis proyectos laterales"
+      },
+      {
+        "href": "/es/demos",
+        "title": "Demostraciones",
+        "description": "Varias demostraciones"
+      },
+      {
+        "href": "/es/laboratory",
+        "title": "Laboratorio",
+        "description": "Características y proyectos experimentales con documentación"
+      }
+    ]
+  }
+]

@@ -1,0 +1,28 @@
+.button_container {
+  position: absolute;
+  top: 90vh;
+  left: 50%;
+  right: 50%;
+  animation: low-fly-row 2s ease-in-out infinite alternate;
+  cursor: pointer;
+  z-index: 3;
+  background: transparent;
+}
+
+.button_container:hover {
+  background: transparent;
+}
+
+@keyframes low-fly-row {
+  0% {
+    transform: translate(-33px,0);
+  }
+
+  50% {
+    transform: translate(-33px,-30px);
+  }
+
+  100% {
+    transform: translate(-33px,0);
+  }
+}

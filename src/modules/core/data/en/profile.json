@@ -1,0 +1,117 @@
+{
+  "sectionTitle": "About Me",
+  "technologiesTitle": "Technologies",
+  "skillTitle": "Skills",
+  "studiesTitle": "Studies",
+  "studies": "Computer Engineer (2016 - 2021) Camilo Cienfuegos University of Matanzas - Cuba",
+  "description": "Hi! i am David Alfonso Pereira, a fullstack developer with more than {years} years of experience, master various technologies and with a teamwork mentality",
+  "links": [
+    {
+      "tooltip": "GitHub",
+      "icon": "github",
+      "ref": "https://github.com/David200197"
+    },
+    {
+      "tooltip": "LinkedIn",
+      "icon": "linkedin",
+      "ref": "https://www.linkedin.com/in/david-alfonso-pereira-40b350253/"
+    },
+    {
+      "tooltip": "Telegram",
+      "icon": "telegram",
+      "ref": "https://t.me/Dafoneira"
+    },
+    {
+      "tooltip": "WhatsApp",
+      "icon": "whatsapp",
+      "ref": "https://wa.me/qr/ETYTO7EVAJT6F1"
+    },
+    {
+      "tooltip": "Download CV",
+      "icon": "cv",
+      "ref": "/cv/en.pdf"
+    }
+  ],
+  "skills": [
+    {
+      "tooltip": "Javascript",
+      "icon": "javascript",
+      "ref": "https://developer.mozilla.org/es/docs/Learn/JavaScript/First_steps/What_is_JavaScript"
+    },
+    {
+      "tooltip": "Html",
+      "icon": "html",
+      "ref": "https://www.w3.org/html/"
+    },
+    {
+      "tooltip": "Css",
+      "icon": "css",
+      "ref": "https://www.w3.org/Style/CSS/Overview.en.html"
+    },
+    {
+      "tooltip": "Typescript",
+      "icon": "typescript",
+      "ref": "https://www.typescriptlang.org/"
+    },
+    {
+      "tooltip": "Node",
+      "icon": "node",
+      "ref": "https://nodejs.org/en/"
+    },
+    {
+      "tooltip": "React",
+      "icon": "react",
+      "ref": "https://reactjs.org/"
+    },
+    {
+      "tooltip": "https://nextjs.org/",
+      "icon": "next",
+      "ref": "Next"
+    },
+    {
+      "tooltip": "Material-ui",
+      "icon": "materialui",
+      "ref": "https://mui.com/"
+    },
+    {
+      "tooltip": "Express",
+      "icon": "express",
+      "ref": "https://expressjs.com/"
+    },
+    {
+      "tooltip": "Tailwind",
+      "icon": "tailwind",
+      "ref": "https://tailwindcss.com/"
+    },
+    {
+      "tooltip": "Nest",
+      "icon": "nest",
+      "ref": "https://nestjs.com/"
+    },
+    {
+      "tooltip": "Apollo",
+      "icon": "apollo",
+      "ref": "https://www.apollographql.com/"
+    },
+    {
+      "tooltip": "Graphql",
+      "icon": "graphql",
+      "ref": "https://graphql.org/"
+    },
+    {
+      "tooltip": "Adonis",
+      "icon": "adonis",
+      "ref": "https://adonisjs.com/"
+    },
+    {
+      "tooltip": "Plasmo",
+      "icon": "plasmo",
+      "ref": "https://docs.plasmo.com/"
+    },
+    {
+      "tooltip": "Capacitor",
+      "icon": "capacitorjs",
+      "ref": "https://capacitorjs.com/"
+    }
+  ]
+}

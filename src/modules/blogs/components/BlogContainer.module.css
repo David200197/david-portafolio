@@ -1,0 +1,15 @@
+.blog_container_body {
+  background: rgb(32, 32, 51);
+  min-height: 400px;
+  margin-top: -5px;
+  padding: 180px 20px 180px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.final_curve {
+  margin-top: -160px;
+  transform: rotate(180deg);
+}
