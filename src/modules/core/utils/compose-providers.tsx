@@ -12,8 +12,13 @@ const reduceProvider = (Prev: Provider, Current: Provider) => {
   return ProviderComponent;
 };
 
-export const composeProviders = (providers: Provider[]) =>
-  providers.reduce(reduceProvider, Fragment);
+export function composeProviders(providers: Provider[]) {
+  return ({ children }: { children: ReactNode }) =>
+    providers.reduceRight(
+      (acc, Provider) => <Provider>{acc}</Provider>,
+      children
+    );
+}
 
 export const createProvider = <T extends object = {}>(
   ProviderComponent: (props: T) => ReactNode,
