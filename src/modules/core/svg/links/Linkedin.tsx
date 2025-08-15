@@ -1,4 +1,4 @@
-import * as React from "react";
+
 import type { SVGProps } from "react";
 const Linkedin = (props: SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048" {...props}>
