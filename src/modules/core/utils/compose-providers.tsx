@@ -1,16 +1,7 @@
-import { FC, Fragment, PropsWithChildren, ReactNode } from "react";
+import { FC, PropsWithChildren, ReactNode } from "react";
 
 type Provider = FC<any>;
 type PropsWithoutChildren<P> = Omit<P, "children">;
-
-const reduceProvider = (Prev: Provider, Current: Provider) => {
-  const ProviderComponent = ({ children }: PropsWithChildren) => (
-    <Prev>
-      <Current>{children}</Current>
-    </Prev>
-  );
-  return ProviderComponent;
-};
 
 export function composeProviders(providers: Provider[]) {
   return ({ children }: { children: ReactNode }) =>
