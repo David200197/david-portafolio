@@ -22,7 +22,6 @@ import Menu from "@/modules/core/assets/menu.svg";
 import { ItemMenues } from "@/modules/portfolio/entities/ItemMenues";
 import { NavbarContainer } from "./NavbarContainer";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import Image from "next/image";
 
 type Icon = {
   src: string;
@@ -40,7 +39,7 @@ export function Navbar({ items, icon }: Props) {
     <NavbarContainer>
       {icon && (
         <div className="flex items-center">
-          <Image src={icon.src} alt="navbar-icon" width={9} height={9} />
+          <img src={icon.src} alt="navbar-icon" className="w-9 h-9" />
           {icon.title && <p className="text-2xl ml-2">{icon.title}</p>}
         </div>
       )}
