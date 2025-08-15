@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import {
   Select,
   SelectContent,
@@ -9,6 +7,7 @@ import {
   SelectValue,
 } from "./select";
 import { ItemSelectors } from "../components/forms/types/form-type";
+import { useRef } from "react";
 
 type Props = {
   onChange: (...event: any[]) => void;
@@ -27,7 +26,7 @@ export const Dropdown = ({
   disabled,
   options,
 }: Props) => {
-  const key = React.useRef("dropdown__" + new Date().getTime() + "__").current;
+  const key = useRef("dropdown__" + new Date().getTime() + "__").current;
 
   return (
     <Select

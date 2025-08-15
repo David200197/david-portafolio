@@ -1,11 +1,10 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { DayPicker } from "react-day-picker"
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { DayPicker } from "react-day-picker";
 
-import { cn } from "@/modules/core/lib/utils"
-import { buttonVariants } from "@/modules/core/ui/button"
+import { cn } from "@/modules/core/lib/utils";
+import { buttonVariants } from "@/modules/core/ui/button";
 
 function Calendar({
   className,
@@ -69,7 +68,7 @@ function Calendar({
       }}
       {...props}
     />
-  )
+  );
 }
 
-export { Calendar }
+export { Calendar };
