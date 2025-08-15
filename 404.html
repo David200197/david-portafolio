@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<script>
+  const pathSegments = window.location.pathname.split("/");
+  const basePath = "/david-portafolio";
+
+  // Redirigir a la versión correcta
+  if (!pathSegments.includes("david-portafolio")) {
+    window.location.href = basePath + window.location.pathname;
+  } else {
+    // Manejar rutas de la aplicación
+    const lang = pathSegments[2] || "en";
+    const appPath = window.location.pathname.replace(`/${lang}`, "");
+    window.location.href = `${basePath}/${lang}${appPath}.html`;
+  }
+</script>
+<p>Redirecting...</p>
