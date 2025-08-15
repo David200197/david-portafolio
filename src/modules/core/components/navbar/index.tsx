@@ -17,7 +17,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "../../ui/drawer";
-import Menu from "@/modules/core/assets/menu.svg";
+//import Menu from "@/modules/core/assets/menu.svg";
 import { ItemMenues } from "@/modules/portfolio/entities/ItemMenues";
 import { NavbarContainer } from "./NavbarContainer";
 import { LanguageSwitcher } from "./LanguageSwitcher";
@@ -46,12 +46,12 @@ export function Navbar({ items, icon }: Props) {
         <div className="lg:hidden flex">
           <Drawer direction="right">
             <DrawerTrigger>
-              <Menu fill="#000" width="24px" />
+              {/* <Menu fill="#000" width="24px" /> */}
             </DrawerTrigger>
             <DrawerContent>
               <DrawerHeader>
                 <DrawerTitle className="flex items-center">
-                  <Menu fill="#000" width="24px" />
+                  {/* <Menu fill="#000" width="24px" /> */}
                   <p className="ml-1">Menu</p>
                 </DrawerTitle>
               </DrawerHeader>
