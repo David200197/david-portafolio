@@ -15,7 +15,7 @@
     "build-storybook": "storybook build",
     "tool:auto-translate-data": "node ./tools/auto-translate-data.mjs",
     "tool:create-cv": "node ./tools/create-cv/index.mjs",
-    "predeploy": "npm run build && npm run update-cv",
+    "predeploy": "npm run build && npm run tool:create-cv",
     "deploy": "gh-pages -d dist",
     "only-deploy": "gh-pages -d dist"
   },
