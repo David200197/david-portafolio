@@ -1,4 +1,4 @@
-/* import { BlogService } from "@/modules/blogs/services/blog-service";
+import { BlogService } from "@/modules/blogs/services/blog-service";
 import { BlogRedirect } from "@/modules/blogs/view/BlogRedirect";
 import { getService } from "@/modules/core/utils/di-utils";
 import { JobsService } from "@/modules/jobs/services/jobs-service";
@@ -9,23 +9,19 @@ import { CoverPage } from "@/modules/portfolio/view/CoverPage";
 import { ProfileService } from "@/modules/profile/services/profile-service";
 import { PersonalInfo } from "@/modules/profile/view/PersonalInfo";
 
-const portfolioService = getService(PortfolioService);
-const profileService = getService(ProfileService);
-const jobsService = getService(JobsService);
-const blogService = getService(BlogService); */
-
 type Props = { params: Promise<{ lang: string }> };
 
-export default async function Home({ }: Props) {
-  /* const { lang } = await params;
+export default async function Home({ params }: Props) {
+  const { lang } = await params;
+  const portfolioService = getService(PortfolioService);
+  const profileService = getService(ProfileService);
+  const jobsService = getService(JobsService);
+  const blogService = getService(BlogService);
   const title = await portfolioService.getHomePageTitles(lang);
   const profile = await profileService.getProfile(lang);
   const jobs = await jobsService.getJobs(lang);
-  const blogSection = await blogService.getBlogSection(lang); */
+  const blogSection = await blogService.getBlogSection(lang);
 
-  return <></>;
-
-  /*
   return (
     <PortfolioProvider value={{ title }}>
       <CoverPage />
@@ -34,5 +30,4 @@ export default async function Home({ }: Props) {
       <BlogRedirect blogSection={blogSection} />
     </PortfolioProvider>
   );
-  */
 }
