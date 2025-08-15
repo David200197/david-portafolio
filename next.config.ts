@@ -11,6 +11,8 @@ const nextConfig: NextConfig = {
       rule.test?.test?.(".svg")
     );
 
+    config.resolve.extensions.push(".json");
+
     config.module.rules.push(
       // Reapply the existing rule, but only for svg imports ending in ?url
       {
