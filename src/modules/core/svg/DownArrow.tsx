@@ -1,4 +1,4 @@
-import * as React from "react";
+
 import type { SVGProps } from "react";
 const DownArrow = (props: SVGProps<SVGSVGElement>) => (
   <svg
