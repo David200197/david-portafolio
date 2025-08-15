@@ -29,7 +29,7 @@ import {
   TooltipTrigger,
 } from "@/modules/core/ui/tooltip";
 
-const icons: Record<string, FC<SVGProps<{}>>> = {
+const icons: Record<string, FC<SVGProps<SVGElement>>> = {
   apollo: ApolloSvg,
   typescript: TypescriptSvg,
   adonis: AdonisSvg,
@@ -54,7 +54,7 @@ const icons: Record<string, FC<SVGProps<{}>>> = {
   whatsapp: WhatsappSvg,
 };
 
-interface Props extends SVGProps<{}> {
+interface Props extends SVGProps<SVGElement> {
   personalDetail: PersonalDetail;
 }
 
