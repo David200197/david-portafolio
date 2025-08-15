@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   title: "Portfolio",
   description: "The Portfolio of a Fullstack Engineer",
   icons: {
-    icon: "/favicon.svg",
+    icon: "/david-portafolio/favicon.svg",
   },
 };
 
