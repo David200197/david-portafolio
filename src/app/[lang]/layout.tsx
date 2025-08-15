@@ -1,4 +1,4 @@
-//import { Navbar } from "@/modules/core/components/navbar";
+import { Navbar } from "@/modules/core/components/navbar";
 import { getService } from "@/modules/core/utils/di-utils";
 import { PortfolioService } from "@/modules/portfolio/services/portfolio-service";
 
@@ -16,17 +16,15 @@ export default async function RootLayout({
 }: Readonly<Props>) {
   const { lang } = await params;
 
-  console.log(await portfolioService.getItemMenus(lang), lang);
-
   return (
     <>
-      {/* <Navbar
+      <Navbar
         items={await portfolioService.getItemMenus(lang)}
         icon={{
           src: "/favicon.svg",
           title: "Portfolio",
         }}
-      /> */}
+      />
       {children}
     </>
   );
