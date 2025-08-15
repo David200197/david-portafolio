@@ -16,7 +16,7 @@ const blogService = getService(BlogService); */
 
 type Props = { params: Promise<{ lang: string }> };
 
-export default async function Home({ params }: Props) {
+export default async function Home({ }: Props) {
   /* const { lang } = await params;
   const title = await portfolioService.getHomePageTitles(lang);
   const profile = await profileService.getProfile(lang);
