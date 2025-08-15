@@ -11,14 +11,15 @@ import {
 } from "@/modules/core/ui/card";
 import { Button } from "@/modules/core/ui/button";
 import { Badge } from "@/modules/core/ui/badge";
+import { getImagePath } from "@/modules/core/utils/get-img-path";
 
 type Props = { job: Job };
 export const JobCard = ({ job }: Props) => (
-  <Card className="hover:shadow-xl transition duration-600 ease-in-out" >
+  <Card className="hover:shadow-xl transition duration-600 ease-in-out">
     <CardHeader>
       <div className="flex">
         <img
-          src={job.logoSrc}
+          src={getImagePath(`${job.logoSrc}`)}
           alt={job.title}
           width={30}
           className="mr-3 object-contain"
@@ -34,7 +35,11 @@ export const JobCard = ({ job }: Props) => (
         )}
       </div>
     </CardHeader>
-    <img src={job.image} alt={job.alt} className="object-cover h-[200px]" />
+    <img
+      src={getImagePath(job.image)}
+      alt={job.alt}
+      className="object-cover h-[200px]"
+    />
     <CardContent>
       <p>{job.description}</p>
     </CardContent>

@@ -21,6 +21,7 @@ import {
 } from "../../ui/drawer";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import Menu from "../../svg/Menu";
+import { getImagePath } from "../../utils/get-img-path";
 
 type Icon = {
   src: string;
@@ -38,7 +39,11 @@ export function Navbar({ icon, items }: Props) {
     <NavbarContainer>
       {icon && (
         <div className="flex items-center">
-          <img src={icon.src} alt="navbar-icon" className="w-9 h-9" />
+          <img
+            src={getImagePath(icon.src)}
+            alt="navbar-icon"
+            className="w-9 h-9"
+          />
           {icon.title && <p className="text-2xl ml-2">{icon.title}</p>}
         </div>
       )}

@@ -2,6 +2,7 @@ import { Button } from "@/modules/core/ui/button";
 import { BlogContainer } from "../components/BlogContainer";
 import Link from "next/link";
 import { BlogSection } from "../model/BlogSection";
+import { getImagePath } from "@/modules/core/utils/get-img-path";
 
 type Props = {
   blogSection: BlogSection;
@@ -14,7 +15,7 @@ export const BlogRedirect = ({ blogSection }: Props) => {
         {blogSection.sectionTitle}
       </h1>
       <img
-        src="/astronaut_blog.svg"
+        src={getImagePath("/astronaut_blog.svg")}
         alt="astronaut_blog"
         className="w-[150px] md:w-[200px]"
       />
