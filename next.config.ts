@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "export",
-  distDir: "dist",
+  basePath: "/david-portafolio",
   images: {
     unoptimized: true,
   },
