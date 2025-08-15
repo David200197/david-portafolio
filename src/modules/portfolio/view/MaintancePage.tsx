@@ -1,15 +1,15 @@
-import { Button } from "@/modules/core/ui/button";
-import { BackgroundParticles } from "../components/BackgroundParticles";
-import { BlurScreen } from "../components/BlurScreen";
-import Link from "next/link";
-import { getImagePath } from "@/modules/core/utils/get-img-path";
+import { Button } from '@/modules/core/ui/button'
+import { BackgroundParticles } from '../components/BackgroundParticles'
+import { BlurScreen } from '../components/BlurScreen'
+import Link from 'next/link'
+import { getImagePath } from '@/modules/core/utils/get-img-path'
 
 export const MaintancePage = () => (
   <div className="h-[100vh]">
     <div className="w-full h-full flex">
       <div className="m-auto flex flex-col items-center">
         <img
-          src={getImagePath("maintenance.svg")}
+          src={getImagePath('maintenance.svg')}
           alt="maintenance"
           width={200}
           height={200}
@@ -23,4 +23,4 @@ export const MaintancePage = () => (
     <BackgroundParticles />
     <BlurScreen />
   </div>
-);
+)

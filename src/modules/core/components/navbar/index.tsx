@@ -1,6 +1,6 @@
-import { ItemMenues } from "@/modules/portfolio/entities/ItemMenues";
-import { NavbarContainer } from "./NavbarContainer";
-import Link from "next/link";
+import { ItemMenues } from '@/modules/portfolio/entities/ItemMenues'
+import { NavbarContainer } from './NavbarContainer'
+import Link from 'next/link'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -9,8 +9,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "../../ui/navigation-menu";
-import { cn } from "../../lib/utils";
+} from '../../ui/navigation-menu'
+import { cn } from '../../lib/utils'
 import {
   Drawer,
   DrawerClose,
@@ -18,21 +18,21 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "../../ui/drawer";
-import { LanguageSwitcher } from "./LanguageSwitcher";
-import Menu from "../../svg/Menu";
-import { getImagePath } from "../../utils/get-img-path";
+} from '../../ui/drawer'
+import { LanguageSwitcher } from './LanguageSwitcher'
+import Menu from '../../svg/Menu'
+import { getImagePath } from '../../utils/get-img-path'
 
 type Icon = {
-  src: string;
-  title?: string;
-};
+  src: string
+  title?: string
+}
 
 type Props = {
-  icon?: Icon;
-  items: ItemMenues;
-  languages?: ItemMenues;
-};
+  icon?: Icon
+  items: ItemMenues
+  languages?: ItemMenues
+}
 
 export function Navbar({ icon, items }: Props) {
   return (
@@ -74,7 +74,7 @@ export function Navbar({ icon, items }: Props) {
                           <NavigationMenuLink
                             className={cn(
                               navigationMenuTriggerStyle(),
-                              "text-md bg-transparent"
+                              'text-md bg-transparent'
                             )}
                           >
                             <DrawerClose>
@@ -103,7 +103,7 @@ export function Navbar({ icon, items }: Props) {
                   <NavigationMenuLink
                     className={cn(
                       navigationMenuTriggerStyle(),
-                      "text-md bg-transparent"
+                      'text-md bg-transparent'
                     )}
                   >
                     {item.title}
@@ -144,5 +144,5 @@ export function Navbar({ icon, items }: Props) {
         <LanguageSwitcher />
       </div>
     </NavbarContainer>
-  );
+  )
 }

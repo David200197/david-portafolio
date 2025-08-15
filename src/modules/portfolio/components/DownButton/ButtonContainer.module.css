@@ -15,14 +15,14 @@
 
 @keyframes low-fly-row {
   0% {
-    transform: translate(-33px,0);
+    transform: translate(-33px, 0);
   }
 
   50% {
-    transform: translate(-33px,-30px);
+    transform: translate(-33px, -30px);
   }
 
   100% {
-    transform: translate(-33px,0);
+    transform: translate(-33px, 0);
   }
 }

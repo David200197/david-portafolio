@@ -1,5 +1,4 @@
-
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react'
 const Node = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -18,5 +17,5 @@ const Node = (props: SVGProps<SVGSVGElement>) => (
       />
     </g>
   </svg>
-);
-export default Node;
+)
+export default Node

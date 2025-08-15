@@ -1,5 +1,4 @@
-
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react'
 const Tailwind = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -14,5 +13,5 @@ const Tailwind = (props: SVGProps<SVGSVGElement>) => (
       />
     </g>
   </svg>
-);
-export default Tailwind;
+)
+export default Tailwind

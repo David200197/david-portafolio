@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronsUpDown } from 'lucide-react'
 
 import {
   Command,
@@ -9,15 +9,15 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "./command";
-import { Popover, PopoverContent, PopoverTrigger } from "./popover";
-import { cn } from "../lib/utils";
-import { useState } from "react";
+} from './command'
+import { Popover, PopoverContent, PopoverTrigger } from './popover'
+import { cn } from '../lib/utils'
+import { useState } from 'react'
 
-type Props = Readonly<{ options: { label: string; value: any }[] }>;
+type Props = Readonly<{ options: { label: string; value: any }[] }>
 export function Combobox({ options }: Props) {
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState('')
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -50,15 +50,15 @@ export function Combobox({ options }: Props) {
                   key={option.value}
                   value={option.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
-                    setOpen(false);
+                    setValue(currentValue === value ? '' : currentValue)
+                    setOpen(false)
                   }}
                 >
                   {option.label}
                   <Check
                     className={cn(
-                      "ml-auto",
-                      value === option.value ? "opacity-100" : "opacity-0"
+                      'ml-auto',
+                      value === option.value ? 'opacity-100' : 'opacity-0'
                     )}
                   />
                 </CommandItem>
@@ -68,5 +68,5 @@ export function Combobox({ options }: Props) {
         </Command>
       </PopoverContent>
     </Popover>
-  );
+  )
 }

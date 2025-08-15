@@ -1,3 +1,3 @@
-import { inject } from "inversify";
+import { inject } from 'inversify'
 
-export const Inject = inject;
+export const Inject = inject

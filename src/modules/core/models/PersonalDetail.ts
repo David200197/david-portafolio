@@ -1,5 +1,5 @@
 export interface PersonalDetail {
-  icon: string;
-  ref: string;
-  tooltip: string;
+  icon: string
+  ref: string
+  tooltip: string
 }

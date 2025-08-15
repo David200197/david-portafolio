@@ -1,9 +1,9 @@
-import { ProfileContainer } from "../components/ProfileContainer";
-import { AstronautAvatar } from "../components/AstronautAvatar";
-import { PersonalDetailIcon } from "../../core/components/PersonalDetailIcon";
-import { Profile } from "../entities/profile";
+import { ProfileContainer } from '../components/ProfileContainer'
+import { AstronautAvatar } from '../components/AstronautAvatar'
+import { PersonalDetailIcon } from '../../core/components/PersonalDetailIcon'
+import { Profile } from '../entities/profile'
 
-type Props = { profile: Profile };
+type Props = { profile: Profile }
 
 export const PersonalInfo = ({ profile }: Props) => (
   <ProfileContainer id="about_me">
@@ -21,7 +21,7 @@ export const PersonalInfo = ({ profile }: Props) => (
               personalDetail={link}
               color="#fff"
               fill="#fff"
-              style={{ margin: "0 10px" }}
+              style={{ margin: '0 10px' }}
               className="w-[30px] lg:w-[30px]"
             />
           ))}
@@ -45,4 +45,4 @@ export const PersonalInfo = ({ profile }: Props) => (
       </div>
     </div>
   </ProfileContainer>
-);
+)

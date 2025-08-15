@@ -1,5 +1,5 @@
-import { PersonalDetailIcon } from "@/modules/core/components/PersonalDetailIcon";
-import { Job } from "../entities/job";
+import { PersonalDetailIcon } from '@/modules/core/components/PersonalDetailIcon'
+import { Job } from '../entities/job'
 import {
   Card,
   CardAction,
@@ -8,12 +8,12 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/modules/core/ui/card";
-import { Button } from "@/modules/core/ui/button";
-import { Badge } from "@/modules/core/ui/badge";
-import { getImagePath } from "@/modules/core/utils/get-img-path";
+} from '@/modules/core/ui/card'
+import { Button } from '@/modules/core/ui/button'
+import { Badge } from '@/modules/core/ui/badge'
+import { getImagePath } from '@/modules/core/utils/get-img-path'
 
-type Props = { job: Job };
+type Props = { job: Job }
 export const JobCard = ({ job }: Props) => (
   <Card className="hover:shadow-xl transition duration-600 ease-in-out">
     <CardHeader>
@@ -49,7 +49,7 @@ export const JobCard = ({ job }: Props) => (
           {job.skills.map((skill) => (
             <PersonalDetailIcon
               personalDetail={skill}
-              key={"job_card_" + skill.icon}
+              key={'job_card_' + skill.icon}
               width={22}
               height={22}
               color="#000"
@@ -70,4 +70,4 @@ export const JobCard = ({ job }: Props) => (
       </div>
     </CardFooter>
   </Card>
-);
+)

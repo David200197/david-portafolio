@@ -1,13 +1,13 @@
-import DownArrow from "@/modules/core/svg/DownArrow";
-import { ButtonContainer } from "./ButtonContainer";
-import Link from "next/link";
+import DownArrow from '@/modules/core/svg/DownArrow'
+import { ButtonContainer } from './ButtonContainer'
+import Link from 'next/link'
 
 const DownButton = () => (
   <ButtonContainer>
-    <Link href={""}>
-      <DownArrow width={35} height={35} fill={"#000000"} />
+    <Link href={''}>
+      <DownArrow width={35} height={35} fill={'#000000'} />
     </Link>
   </ButtonContainer>
-);
+)
 
-export default DownButton;
+export default DownButton

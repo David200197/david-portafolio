@@ -5,18 +5,18 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./select";
-import { ItemSelectors } from "../components/forms/types/form-type";
-import { useRef } from "react";
+} from './select'
+import { ItemSelectors } from '../components/forms/types/form-type'
+import { useRef } from 'react'
 
 type Props = {
-  onChange: (...event: any[]) => void;
-  options: ItemSelectors;
-  disabled?: boolean;
-  name: string;
-  placeholder?: string;
-  value?: any;
-};
+  onChange: (...event: any[]) => void
+  options: ItemSelectors
+  disabled?: boolean
+  name: string
+  placeholder?: string
+  value?: any
+}
 
 export const Dropdown = ({
   name,
@@ -26,7 +26,7 @@ export const Dropdown = ({
   disabled,
   options,
 }: Props) => {
-  const key = useRef("dropdown__" + new Date().getTime() + "__").current;
+  const key = useRef('dropdown__' + new Date().getTime() + '__').current
 
   return (
     <Select
@@ -48,5 +48,5 @@ export const Dropdown = ({
         </SelectGroup>
       </SelectContent>
     </Select>
-  );
-};
+  )
+}

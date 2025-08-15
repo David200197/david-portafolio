@@ -1,8 +1,8 @@
-import { JobContainer } from "../components/JobContainer";
-import { JobCard } from "../components/JobCard";
-import { Jobs } from "../entities/jobs";
+import { JobContainer } from '../components/JobContainer'
+import { JobCard } from '../components/JobCard'
+import { Jobs } from '../entities/jobs'
 
-type Props = { jobs: Jobs };
+type Props = { jobs: Jobs }
 
 export const JobSection = ({ jobs }: Props) => (
   <JobContainer id="jobs">
@@ -13,4 +13,4 @@ export const JobSection = ({ jobs }: Props) => (
       ))}
     </div>
   </JobContainer>
-);
+)

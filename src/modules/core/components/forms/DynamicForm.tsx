@@ -1,7 +1,7 @@
-import { useForm } from "react-hook-form";
-import { ZodObject, infer as zInfer } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useMemo, useState } from "react";
+import { useForm } from 'react-hook-form'
+import { ZodObject, infer as zInfer } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect, useMemo, useState } from 'react'
 import {
   Form,
   FormControl,
@@ -10,24 +10,24 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../ui/form";
-import { Button } from "../../ui/button";
-import { dynamicField } from "./DynamicField";
-import { Fields, OnSubmit, UpdatedValues } from "./types/form-type";
-import { Loader } from "lucide-react";
-import { getLoadingByUpdatedValues } from "./utils/get-loading-by-updated-values";
-import { getDefaultValuesByFields } from "./utils/get-default-values-by-fields";
-import { getLoadingByFields } from "./utils/get-loading-by-fields";
-import { cn } from "../../lib/utils";
-import { isLabel } from "./utils/is-label";
+} from '../../ui/form'
+import { Button } from '../../ui/button'
+import { dynamicField } from './DynamicField'
+import { Fields, OnSubmit, UpdatedValues } from './types/form-type'
+import { Loader } from 'lucide-react'
+import { getLoadingByUpdatedValues } from './utils/get-loading-by-updated-values'
+import { getDefaultValuesByFields } from './utils/get-default-values-by-fields'
+import { getLoadingByFields } from './utils/get-loading-by-fields'
+import { cn } from '../../lib/utils'
+import { isLabel } from './utils/is-label'
 
 export type DynamicFormProps<T extends ZodObject<any>> = {
-  schema: T;
-  onSubmit: OnSubmit<T>;
-  updatedValues?: UpdatedValues<T>;
-  fields?: Fields<T>;
-  onBack?: () => void;
-};
+  schema: T
+  onSubmit: OnSubmit<T>
+  updatedValues?: UpdatedValues<T>
+  fields?: Fields<T>
+  onBack?: () => void
+}
 
 export const DynamicForm = <T extends ZodObject<any>>({
   schema,
@@ -36,31 +36,31 @@ export const DynamicForm = <T extends ZodObject<any>>({
   onBack,
   fields,
 }: DynamicFormProps<T>) => {
-  const updateValuesLoading = getLoadingByUpdatedValues(updatedValues);
-  const fieldsLoading = getLoadingByFields(fields);
-  const [formLoading, setFormLoading] = useState(false);
-  const loading = updateValuesLoading || fieldsLoading || formLoading;
+  const updateValuesLoading = getLoadingByUpdatedValues(updatedValues)
+  const fieldsLoading = getLoadingByFields(fields)
+  const [formLoading, setFormLoading] = useState(false)
+  const loading = updateValuesLoading || fieldsLoading || formLoading
 
   const handleSubmit = async (values: zInfer<T>) => {
-    setFormLoading(true);
-    await onSubmit(values);
-    setFormLoading(false);
-  };
+    setFormLoading(true)
+    await onSubmit(values)
+    setFormLoading(false)
+  }
 
-  const defaultValues = getDefaultValuesByFields(fields);
+  const defaultValues = getDefaultValuesByFields(fields)
 
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues,
-  });
+  })
 
   useEffect(() => {
-    if (!updatedValues) return;
+    if (!updatedValues) return
     for (const key in updatedValues) {
-      if (!updatedValues[key]) continue;
-      form.setValue(key, updatedValues[key].value);
+      if (!updatedValues[key]) continue
+      form.setValue(key, updatedValues[key].value)
     }
-  }, [updatedValues, form]);
+  }, [updatedValues, form])
 
   const keys = useMemo(() => Object.keys(schema.shape), [schema])
 
@@ -74,15 +74,15 @@ export const DynamicForm = <T extends ZodObject<any>>({
               control={form.control}
               name={key}
               render={({ field: fieldControl }) => {
-                const field = fields?.[key];
-                const updateLoading = updatedValues?.[key]?.loading;
+                const field = fields?.[key]
+                const updateLoading = updatedValues?.[key]?.loading
 
                 return (
                   <FormItem
                     className={cn(
-                      "mb-4",
-                      field?.className ?? "col-span-12 md:col-span-4",
-                      field?.type === "textarea" ? "md:col-span-12" : ""
+                      'mb-4',
+                      field?.className ?? 'col-span-12 md:col-span-4',
+                      field?.type === 'textarea' ? 'md:col-span-12' : ''
                     )}
                   >
                     {isLabel(field) && (
@@ -108,21 +108,21 @@ export const DynamicForm = <T extends ZodObject<any>>({
                       </div>
                     </div>
                   </FormItem>
-                );
+                )
               }}
             />
           ))}
         </div>
 
         <div className="flex justify-between">
-          <Button type="button" variant={"secondary"} onClick={onBack}>
+          <Button type="button" variant={'secondary'} onClick={onBack}>
             Cancel
           </Button>
-          <Button type="submit" variant={"default"} disabled={loading}>
+          <Button type="submit" variant={'default'} disabled={loading}>
             {loading && <Loader className="animate-spin" />}Send
           </Button>
         </div>
       </form>
     </Form>
-  );
-};
+  )
+}

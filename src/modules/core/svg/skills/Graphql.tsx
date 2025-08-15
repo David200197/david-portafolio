@@ -1,5 +1,4 @@
-
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react'
 const Graphql = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -13,5 +12,5 @@ const Graphql = (props: SVGProps<SVGSVGElement>) => (
       data-name="Capa 1"
     />
   </svg>
-);
-export default Graphql;
+)
+export default Graphql

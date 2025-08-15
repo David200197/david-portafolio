@@ -1,23 +1,23 @@
-import { ISourceOptions } from "@tsparticles/engine";
+import { ISourceOptions } from '@tsparticles/engine'
 
 export const particlesOptions: ISourceOptions = {
   autoPlay: true,
   background: {
     color: {
-      value: "#ffffff",
+      value: '#ffffff',
     },
-    image: "",
-    position: "",
-    repeat: "",
-    size: "",
+    image: '',
+    position: '',
+    repeat: '',
+    size: '',
     opacity: 1,
   },
   backgroundMask: {
-    composite: "destination-out",
+    composite: 'destination-out',
     cover: {
       opacity: 1,
       color: {
-        value: "",
+        value: '',
       },
     },
     enable: false,
@@ -33,19 +33,19 @@ export const particlesOptions: ISourceOptions = {
   duration: 0,
   fpsLimit: 300,
   interactivity: {
-    detectsOn: "window",
+    detectsOn: 'window',
     events: {
       onClick: {
         enable: false,
-        mode: "push",
+        mode: 'push',
       },
       onDiv: {
         enable: false,
-        type: "circle",
+        type: 'circle',
       },
       onHover: {
         enable: false,
-        mode: "repulse",
+        mode: 'repulse',
         parallax: {
           enable: false,
           force: 2,
@@ -66,7 +66,7 @@ export const particlesOptions: ISourceOptions = {
       attract: {
         distance: 200,
         duration: 0.4,
-        easing: "ease-out-quad",
+        easing: 'ease-out-quad',
         factor: 1,
         maxSpeed: 50,
         speed: 1,
@@ -114,14 +114,14 @@ export const particlesOptions: ISourceOptions = {
         factor: 100,
         speed: 1,
         maxSpeed: 50,
-        easing: "ease-out-quad",
+        easing: 'ease-out-quad',
         divs: {
           distance: 200,
           duration: 0.4,
           factor: 100,
           speed: 1,
           maxSpeed: 50,
-          easing: "ease-out-quad",
+          easing: 'ease-out-quad',
           selectors: {},
         },
       },
@@ -138,17 +138,17 @@ export const particlesOptions: ISourceOptions = {
         area: {
           gradient: {
             start: {
-              value: "#ffffff",
+              value: '#ffffff',
             },
             stop: {
-              value: "#000000",
+              value: '#000000',
             },
           },
           radius: 1000,
         },
         shadow: {
           color: {
-            value: "#000000",
+            value: '#000000',
           },
           length: 2000,
         },
@@ -179,14 +179,14 @@ export const particlesOptions: ISourceOptions = {
       },
       enable: false,
       maxSpeed: 50,
-      mode: "bounce",
+      mode: 'bounce',
       overlap: {
         enable: true,
         retries: 0,
       },
     },
     color: {
-      value: "#000000",
+      value: '#000000',
       animation: {
         h: {
           count: 0,
@@ -238,12 +238,12 @@ export const particlesOptions: ISourceOptions = {
       center: {
         x: 50,
         y: 50,
-        mode: "percent",
+        mode: 'percent',
         radius: 0,
       },
       decay: 0,
       distance: {},
-      direction: "none",
+      direction: 'none',
       drift: 0,
       enable: true,
       gravity: {
@@ -261,11 +261,11 @@ export const particlesOptions: ISourceOptions = {
         options: {},
       },
       outModes: {
-        default: "out",
-        bottom: "out",
-        left: "out",
-        right: "out",
-        top: "out",
+        default: 'out',
+        bottom: 'out',
+        left: 'out',
+        right: 'out',
+        top: 'out',
       },
       random: false,
       size: false,
@@ -290,7 +290,7 @@ export const particlesOptions: ISourceOptions = {
         height: 1080,
       },
       limit: {
-        mode: "delete",
+        mode: 'delete',
         value: 0,
       },
       value: 200,
@@ -304,16 +304,16 @@ export const particlesOptions: ISourceOptions = {
         decay: 0,
         delay: 0,
         sync: false,
-        mode: "auto",
-        startValue: "random",
-        destroy: "none",
+        mode: 'auto',
+        startValue: 'random',
+        destroy: 'none',
       },
     },
     reduceDuplicates: false,
     shadow: {
       blur: 0,
       color: {
-        value: "#000",
+        value: '#000',
       },
       enable: false,
       offset: {
@@ -325,7 +325,7 @@ export const particlesOptions: ISourceOptions = {
       close: true,
       fill: true,
       options: {},
-      type: "circle",
+      type: 'circle',
     },
     size: {
       value: {
@@ -339,9 +339,9 @@ export const particlesOptions: ISourceOptions = {
         decay: 0,
         delay: 0,
         sync: false,
-        mode: "auto",
-        startValue: "random",
-        destroy: "none",
+        mode: 'auto',
+        startValue: 'random',
+        destroy: 'none',
       },
     },
     stroke: {
@@ -355,7 +355,7 @@ export const particlesOptions: ISourceOptions = {
     },
     destroy: {
       bounds: {},
-      mode: "none",
+      mode: 'none',
       split: {
         count: 1,
         factor: {
@@ -381,7 +381,7 @@ export const particlesOptions: ISourceOptions = {
         enable: false,
         value: 0,
       },
-      mode: "vertical",
+      mode: 'vertical',
       speed: 25,
     },
     tilt: {
@@ -392,7 +392,7 @@ export const particlesOptions: ISourceOptions = {
         decay: 0,
         sync: false,
       },
-      direction: "clockwise",
+      direction: 'clockwise',
       enable: false,
     },
     twinkle: {
@@ -434,7 +434,7 @@ export const particlesOptions: ISourceOptions = {
         decay: 0,
         sync: false,
       },
-      direction: "clockwise",
+      direction: 'clockwise',
       path: false,
     },
     orbit: {
@@ -456,7 +456,7 @@ export const particlesOptions: ISourceOptions = {
     links: {
       blink: false,
       color: {
-        value: "#000000",
+        value: '#000000',
       },
       consent: false,
       distance: 150,
@@ -466,7 +466,7 @@ export const particlesOptions: ISourceOptions = {
       shadow: {
         blur: 5,
         color: {
-          value: "#000",
+          value: '#000',
         },
         enable: false,
       },
@@ -493,8 +493,8 @@ export const particlesOptions: ISourceOptions = {
   style: {},
   themes: [],
   zLayers: 100,
-  key: "basic",
-  name: "Basic",
+  key: 'basic',
+  name: 'Basic',
   motion: {
     disable: false,
     reduce: {
@@ -502,4 +502,4 @@ export const particlesOptions: ISourceOptions = {
       value: true,
     },
   },
-};
+}

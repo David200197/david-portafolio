@@ -10,9 +10,9 @@
  * ```
  */
 export class UrlBuilder {
-  private baseUrl: string;
-  private urls: (string | number)[];
-  private queries: string[] = [];
+  private baseUrl: string
+  private urls: (string | number)[]
+  private queries: string[] = []
 
   /**
    * Creates an instance of UrlBuilder.
@@ -20,8 +20,8 @@ export class UrlBuilder {
    * @param urls - Additional path segments to append to the base URL.
    */
   constructor(baseUrl: string, ...urls: (string | number)[]) {
-    this.baseUrl = baseUrl;
-    this.urls = urls;
+    this.baseUrl = baseUrl
+    this.urls = urls
   }
 
   /**
@@ -30,7 +30,7 @@ export class UrlBuilder {
    * @param value - The query parameter value (string, number, or boolean).
    */
   addQuery(key: string, value: string | number | boolean) {
-    this.queries.push(`${key}=${value}`);
+    this.queries.push(`${key}=${value}`)
   }
 
   /**
@@ -38,9 +38,9 @@ export class UrlBuilder {
    * @returns The constructed URL.
    */
   build() {
-    const fullUrl = [this.baseUrl, ...this.urls].join("/");
-    if (!this.queries.length) return fullUrl;
-    const queryJoined = this.queries.join("&");
-    return [fullUrl, queryJoined].join("?");
+    const fullUrl = [this.baseUrl, ...this.urls].join('/')
+    if (!this.queries.length) return fullUrl
+    const queryJoined = this.queries.join('&')
+    return [fullUrl, queryJoined].join('?')
   }
 }
