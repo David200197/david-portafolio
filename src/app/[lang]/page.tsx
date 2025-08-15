@@ -25,7 +25,7 @@ export default async function Home({ params }: Props) {
 
   return (
     <PortfolioProvider value={{ title }}>
-      <CoverPage />
+     {/*  <CoverPage /> */}
       <PersonalInfo profile={profile} />
       <JobSection jobs={jobs} />
       <BlogRedirect blogSection={blogSection} />
