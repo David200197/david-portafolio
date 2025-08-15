@@ -21,19 +21,19 @@ import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 
 import { cn } from "@/modules/core/lib/utils";
 
-function Select({ ...props }: React.ComponentProps<typeof Root>) {
+export function Select({ ...props }: React.ComponentProps<typeof Root>) {
   return <Root data-slot="select" {...props} />;
 }
 
-function SelectGroup({ ...props }: React.ComponentProps<typeof Group>) {
+export function SelectGroup({ ...props }: React.ComponentProps<typeof Group>) {
   return <Group data-slot="select-group" {...props} />;
 }
 
-function SelectValue({ ...props }: React.ComponentProps<typeof Value>) {
+export function SelectValue({ ...props }: React.ComponentProps<typeof Value>) {
   return <Value data-slot="select-value" {...props} />;
 }
 
-function SelectTrigger({
+export function SelectTrigger({
   className,
   size = "default",
   children,
@@ -59,7 +59,7 @@ function SelectTrigger({
   );
 }
 
-function SelectContent({
+export function SelectContent({
   className,
   children,
   position = "popper",
@@ -94,7 +94,7 @@ function SelectContent({
   );
 }
 
-function SelectLabel({
+export function SelectLabel({
   className,
   ...props
 }: React.ComponentProps<typeof Label>) {
@@ -107,7 +107,7 @@ function SelectLabel({
   );
 }
 
-function SelectItem({
+export function SelectItem({
   className,
   children,
   ...props
@@ -131,7 +131,7 @@ function SelectItem({
   );
 }
 
-function SelectSeparator({
+export function SelectSeparator({
   className,
   ...props
 }: React.ComponentProps<typeof Separator>) {
@@ -144,7 +144,7 @@ function SelectSeparator({
   );
 }
 
-function SelectScrollUpButton({
+export function SelectScrollUpButton({
   className,
   ...props
 }: React.ComponentProps<typeof ScrollUpButton>) {
@@ -162,7 +162,7 @@ function SelectScrollUpButton({
   );
 }
 
-function SelectScrollDownButton({
+export function SelectScrollDownButton({
   className,
   ...props
 }: React.ComponentProps<typeof ScrollDownButton>) {
@@ -179,16 +179,3 @@ function SelectScrollDownButton({
     </ScrollDownButton>
   );
 }
-
-export {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectScrollDownButton,
-  SelectScrollUpButton,
-  SelectSeparator,
-  SelectTrigger,
-  SelectValue,
-};

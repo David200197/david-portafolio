@@ -14,23 +14,27 @@ import { XIcon } from "lucide-react";
 
 import { cn } from "@/modules/core/lib/utils";
 
-function Dialog({ ...props }: React.ComponentProps<typeof Root>) {
+export function Dialog({ ...props }: React.ComponentProps<typeof Root>) {
   return <Root data-slot="dialog" {...props} />;
 }
 
-function DialogTrigger({ ...props }: React.ComponentProps<typeof Trigger>) {
+export function DialogTrigger({
+  ...props
+}: React.ComponentProps<typeof Trigger>) {
   return <Trigger data-slot="dialog-trigger" {...props} />;
 }
 
-function DialogPortal({ ...props }: React.ComponentProps<typeof Portal>) {
+export function DialogPortal({
+  ...props
+}: React.ComponentProps<typeof Portal>) {
   return <Portal data-slot="dialog-portal" {...props} />;
 }
 
-function DialogClose({ ...props }: React.ComponentProps<typeof Close>) {
+export function DialogClose({ ...props }: React.ComponentProps<typeof Close>) {
   return <Close data-slot="dialog-close" {...props} />;
 }
 
-function DialogOverlay({
+export function DialogOverlay({
   className,
   ...props
 }: React.ComponentProps<typeof Overlay>) {
@@ -46,7 +50,7 @@ function DialogOverlay({
   );
 }
 
-function DialogContent({
+export function DialogContent({
   className,
   children,
   ...props
@@ -72,7 +76,10 @@ function DialogContent({
   );
 }
 
-function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
+export function DialogHeader({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-header"
@@ -82,7 +89,10 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
+export function DialogFooter({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-footer"
@@ -95,7 +105,7 @@ function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function DialogTitle({
+export function DialogTitle({
   className,
   ...props
 }: React.ComponentProps<typeof Title>) {
@@ -108,7 +118,7 @@ function DialogTitle({
   );
 }
 
-function DialogDescription({
+export function DialogDescription({
   className,
   ...props
 }: React.ComponentProps<typeof Description>) {
@@ -120,16 +130,3 @@ function DialogDescription({
     />
   );
 }
-
-export {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogOverlay,
-  DialogPortal,
-  DialogTitle,
-  DialogTrigger,
-};

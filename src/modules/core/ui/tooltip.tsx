@@ -11,7 +11,7 @@ import {
 
 import { cn } from "@/modules/core/lib/utils";
 
-function TooltipProvider({
+export function TooltipProvider({
   delayDuration = 0,
   ...props
 }: React.ComponentProps<typeof Provider>) {
@@ -24,7 +24,7 @@ function TooltipProvider({
   );
 }
 
-function Tooltip({ ...props }: React.ComponentProps<typeof Root>) {
+export function Tooltip({ ...props }: React.ComponentProps<typeof Root>) {
   return (
     <TooltipProvider>
       <Root data-slot="tooltip" {...props} />
@@ -32,11 +32,13 @@ function Tooltip({ ...props }: React.ComponentProps<typeof Root>) {
   );
 }
 
-function TooltipTrigger({ ...props }: React.ComponentProps<typeof Trigger>) {
+export function TooltipTrigger({
+  ...props
+}: React.ComponentProps<typeof Trigger>) {
   return <Trigger data-slot="tooltip-trigger" {...props} />;
 }
 
-function TooltipContent({
+export function TooltipContent({
   className,
   sideOffset = 0,
   children,
@@ -59,5 +61,3 @@ function TooltipContent({
     </Portal>
   );
 }
-
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };

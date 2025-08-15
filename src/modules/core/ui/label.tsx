@@ -1,10 +1,9 @@
 "use client";
 
-
 import { Root } from "@radix-ui/react-label";
 import { cn } from "../lib/utils";
 
-function Label({
+export function Label({
   className,
   ...props
 }: React.ComponentProps<typeof Root>) {
@@ -19,5 +18,3 @@ function Label({
     />
   );
 }
-
-export { Label };

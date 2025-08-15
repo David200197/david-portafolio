@@ -16,7 +16,7 @@ import { Label } from "@/modules/core/ui/label";
 import { cn } from "../lib/utils";
 import { createContext, useContext, useId } from "react";
 
-const Form = FormProvider;
+export const Form = FormProvider;
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -29,7 +29,7 @@ const FormFieldContext = createContext<FormFieldContextValue>(
   {} as FormFieldContextValue
 );
 
-const FormField = <
+export const FormField = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >({
@@ -42,7 +42,7 @@ const FormField = <
   );
 };
 
-const useFormField = () => {
+export const useFormField = () => {
   const fieldContext = useContext(FormFieldContext);
   const itemContext = useContext(FormItemContext);
   const { getFieldState } = useFormContext();
@@ -73,7 +73,7 @@ const FormItemContext = createContext<FormItemContextValue>(
   {} as FormItemContextValue
 );
 
-function FormItem({ className, ...props }: React.ComponentProps<"div">) {
+export function FormItem({ className, ...props }: React.ComponentProps<"div">) {
   const id = useId();
 
   return (
@@ -87,7 +87,7 @@ function FormItem({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function FormLabel({
+export function FormLabel({
   className,
   ...props
 }: React.ComponentProps<typeof Root>) {
@@ -104,7 +104,7 @@ function FormLabel({
   );
 }
 
-function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
+export function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
   const { error, formItemId, formDescriptionId, formMessageId } =
     useFormField();
 
@@ -123,7 +123,10 @@ function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
   );
 }
 
-function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
+export function FormDescription({
+  className,
+  ...props
+}: React.ComponentProps<"p">) {
   const { formDescriptionId } = useFormField();
 
   return (
@@ -136,7 +139,10 @@ function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
   );
 }
 
-function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
+export function FormMessage({
+  className,
+  ...props
+}: React.ComponentProps<"p">) {
   const { error, formMessageId } = useFormField();
   const body = error ? String(error?.message ?? "") : props.children;
 
@@ -155,14 +161,3 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
     </p>
   );
 }
-
-export {
-  useFormField,
-  Form,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormDescription,
-  FormMessage,
-  FormField,
-};

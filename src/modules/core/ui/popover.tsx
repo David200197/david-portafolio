@@ -1,18 +1,26 @@
 "use client";
 
-import { Root, Trigger, Content, Portal, Anchor } from "@radix-ui/react-popover";
+import {
+  Root,
+  Trigger,
+  Content,
+  Portal,
+  Anchor,
+} from "@radix-ui/react-popover";
 
 import { cn } from "@/modules/core/lib/utils";
 
-function Popover({ ...props }: React.ComponentProps<typeof Root>) {
+export function Popover({ ...props }: React.ComponentProps<typeof Root>) {
   return <Root data-slot="popover" {...props} />;
 }
 
-function PopoverTrigger({ ...props }: React.ComponentProps<typeof Trigger>) {
+export function PopoverTrigger({
+  ...props
+}: React.ComponentProps<typeof Trigger>) {
   return <Trigger data-slot="popover-trigger" {...props} />;
 }
 
-function PopoverContent({
+export function PopoverContent({
   className,
   align = "center",
   sideOffset = 4,
@@ -34,8 +42,8 @@ function PopoverContent({
   );
 }
 
-function PopoverAnchor({ ...props }: React.ComponentProps<typeof Anchor>) {
+export function PopoverAnchor({
+  ...props
+}: React.ComponentProps<typeof Anchor>) {
   return <Anchor data-slot="popover-anchor" {...props} />;
 }
-
-export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor };
