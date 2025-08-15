@@ -81,6 +81,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.2.0",
     "eslint-plugin-storybook": "^0.11.3",
+    "file-loader": "^6.2.0",
     "gh-pages": "^6.3.0",
     "handlebars": "^4.7.8",
     "jsdom": "^26.0.0",
