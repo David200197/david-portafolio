@@ -1,5 +1,5 @@
 "use client";
-import {
+/* import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
@@ -8,15 +8,19 @@ import {
   NavigationMenuTrigger,
 } from "@/modules/core/ui/navigation-menu";
 import Link from "next/link";
+import LanguageSvg from "@/modules/core/assets/language.svg"; */
 import { useParams, usePathname } from "next/navigation";
-import LanguageSvg from "@/modules/core/assets/language.svg";
 
 export const LanguageSwitcher = () => {
   const { lang } = useParams<{ lang: string }>();
   const pathname = usePathname();
   const currentPath = pathname?.replace(`/${lang}`, "/") || "/";
 
-  return (
+  console.log({ currentPath });
+
+  return <></>;
+
+  /* return (
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
@@ -38,5 +42,5 @@ export const LanguageSwitcher = () => {
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-  );
+  ); */
 };
