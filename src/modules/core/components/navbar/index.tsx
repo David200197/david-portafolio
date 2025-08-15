@@ -19,7 +19,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "../../ui/drawer";
-import Menu from "@/modules/core/assets/menu.svg"; */
+import Menu from "@/modules/core/svg/Menu.tsx"; */
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
 type Icon = {

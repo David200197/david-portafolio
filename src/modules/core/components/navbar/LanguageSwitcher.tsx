@@ -9,7 +9,7 @@ import {
 } from "@/modules/core/ui/navigation-menu";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
-import LanguageSvg from "@/modules/core/assets/language.svg";
+import LanguageSvg from "../../svg/Language";
 
 export const LanguageSwitcher = () => {
   const { lang } = useParams<{ lang: string }>();

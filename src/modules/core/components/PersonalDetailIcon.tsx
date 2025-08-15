@@ -1,42 +1,43 @@
-import { FC, SVGProps, useMemo } from "react";
+import { SVGProps, useMemo } from "react";
+import { ReactNode } from "react";
 
-import ApolloSvg from "@/modules/core/assets/skills/apollo.svg";
-import CssSvg from "@/modules/core/assets/skills/css.svg";
-import ExpressSvg from "@/modules/core/assets/skills/express.svg";
-import GraphqlSvg from "@/modules/core/assets/skills/graphql.svg";
-import HtmlSvg from "@/modules/core/assets/skills/html.svg";
-import JavascriptSvg from "@/modules/core/assets/skills/javascript.svg";
-import MaterialUISvg from "@/modules/core/assets/skills/materialUI.svg";
-import NestSvg from "@/modules/core/assets/skills/nest.svg";
-import NextSvg from "@/modules/core/assets/skills/next.svg";
-import NodeSvg from "@/modules/core/assets/skills/node.svg";
-import ReactSvg from "@/modules/core/assets/skills/react.svg";
-import SassSvg from "@/modules/core/assets/skills/sass.svg";
-import TailwindSvg from "@/modules/core/assets/skills/tailwind.svg";
-import TypescriptSvg from "@/modules/core/assets/skills/typescript.svg";
-import AdonisSvg from "@/modules/core/assets/skills/adonis.svg";
-import PlasmoSvg from "@/modules/core/assets/skills/plasmo.svg";
-import CapacitorJsSvg from "@/modules/core/assets/skills/capacitorjs.svg";
-import CvSvg from "@/modules/core/assets/links/cv.svg";
-import GithubSvg from "@/modules/core/assets/links/github.svg";
-import LinkedInSvg from "@/modules/core/assets/links/linkedin.svg";
-import TelegramSvg from "@/modules/core/assets/links/telegram.svg";
-import WhatsappSvg from "@/modules/core/assets/links/whatsapp.svg";
 import { PersonalDetail } from "../models/PersonalDetail";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/modules/core/ui/tooltip";
+import ApolloSvg from "../svg/skills/Apollo";
+import TypescriptSvg from "../svg/skills/Typescript";
+import AdonisSvg from "../svg/skills/Adonis";
+import SassSvg from "../svg/skills/Sass";
+import CssSvg from "../svg/skills/Css";
+import PlasmoSvg from "../svg/skills/Plasmo";
+import CapacitorjsSvg from "../svg/skills/Capacitorjs";
+import CvSvg from "../svg/links/Cv";
+import ExpressSvg from "../svg/skills/Express";
+import ReactSvg from "../svg/skills/React";
+import GraphqlSvg from "../svg/skills/Graphql";
+import HtmlSvg from "../svg/skills/Html";
+import JavascriptSvg from "../svg/skills/Javascript";
+import NodeSvg from "../svg/skills/Node";
+import MaterialUISvg from "../svg/skills/MaterialUI";
+import NestSvg from "../svg/skills/Nest";
+import NextSvg from "../svg/skills/Next";
+import TailwindSvg from "../svg/skills/Tailwind";
+import GithubSvg from "../svg/links/Github";
+import LinkedinSvg from "../svg/links/Linkedin";
+import TelegramSvg from "../svg/links/Telegram";
+import WhatsappSvg from "../svg/links/Whatsapp";
 
-const icons: Record<string, FC<SVGProps<SVGElement>>> = {
+const icons: Record<string, (props: SVGProps<SVGSVGElement>) => ReactNode> = {
   apollo: ApolloSvg,
   typescript: TypescriptSvg,
   adonis: AdonisSvg,
   sass: SassSvg,
   css: CssSvg,
   plasmo: PlasmoSvg,
-  capacitorjs: CapacitorJsSvg,
+  capacitorjs: CapacitorjsSvg,
   cv: CvSvg,
   express: ExpressSvg,
   react: ReactSvg,
@@ -49,12 +50,12 @@ const icons: Record<string, FC<SVGProps<SVGElement>>> = {
   next: NextSvg,
   tailwind: TailwindSvg,
   github: GithubSvg,
-  linkedin: LinkedInSvg,
+  linkedin: LinkedinSvg,
   telegram: TelegramSvg,
   whatsapp: WhatsappSvg,
 };
 
-interface Props extends SVGProps<SVGElement> {
+interface Props extends SVGProps<SVGSVGElement> {
   personalDetail: PersonalDetail;
 }
 

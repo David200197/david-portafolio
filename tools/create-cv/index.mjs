@@ -11,7 +11,7 @@ const baseDataFolder = path.join(
   "data"
 );
 const cvPath = path.join(process.cwd(), "public", "cv");
-const svgPath = path.join(process.cwd(), "src", "modules", "core", "assets");
+const svgPath = path.join(process.cwd(), "tools", "common", "assets");
 
 const langs = ["en", "es"];
 

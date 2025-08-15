@@ -14,10 +14,11 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "tool:auto-translate-data": "node ./tools/auto-translate-data.mjs",
-    "tool:create-cv": "node ./tools/create-cv/index.mjs",
     "predeploy": "npm run build && npm run tool:create-cv",
     "deploy": "gh-pages -d dist",
-    "only-deploy": "gh-pages -d dist"
+    "only-deploy": "gh-pages -d dist",
+    "tool:create-cv": "node ./tools/create-cv/index.mjs",
+    "tool:generate-svg": "node ./tools/generate-svg.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",
@@ -69,7 +70,10 @@
     "@suites/di.inversify": "^3.0.1",
     "@suites/doubles.vitest": "^3.0.1",
     "@suites/unit": "^3.0.1",
-    "@svgr/webpack": "^8.1.0",
+    "@svgr/core": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0",
+    "@svgr/plugin-prettier": "^8.1.0",
+    "@svgr/plugin-svgo": "^8.1.0",
     "@swc/core": "^1.11.13",
     "@tailwindcss/postcss": "^4",
     "@testing-library/dom": "^10.4.0",

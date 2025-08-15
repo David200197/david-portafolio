@@ -1,7 +1,7 @@
-import InitialCurve from "@/modules/core/assets/banners/initialCurve.svg";
-import FinalCurve from "@/modules/core/assets/banners/finalCurve.svg";
 import { ReactNode } from "react";
 import className from "./ProfileContainer.module.css";
+import InitialCurve from "@/modules/core/svg/banners/InitialCurve";
+import FinalCurve from "@/modules/core/svg/banners/FinalCurve";
 
 type Props = { children: ReactNode; id?: string };
 
