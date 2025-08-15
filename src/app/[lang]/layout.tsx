@@ -10,8 +10,11 @@ export function generateStaticParams() {
 
 type Props = { children: React.ReactNode; params: Promise<{ lang: string }> };
 
-export default async function RootLayout({ children }: Readonly<Props>) {
-  const lang = "en"; // Replace with dynamic language detection if needed
+export default async function RootLayout({
+  children,
+  params,
+}: Readonly<Props>) {
+  const { lang } = await params;
 
   return (
     <>

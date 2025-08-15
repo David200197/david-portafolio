@@ -14,7 +14,10 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "tool:auto-translate-data": "node ./tools/auto-translate-data.mjs",
-    "tool:create-cv": "node ./tools/create-cv/index.mjs"
+    "tool:create-cv": "node ./tools/create-cv/index.mjs",
+    "predeploy": "npm run build && npm run update-cv",
+    "deploy": "gh-pages -d dist",
+    "only-deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",

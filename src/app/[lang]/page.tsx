@@ -14,8 +14,10 @@ const profileService = getService(ProfileService);
 const jobsService = getService(JobsService);
 const blogService = getService(BlogService);
 
-export default async function Home() {
-  const lang = "en"; // Replace with dynamic language detection if needed
+type Props = { params: Promise<{ lang: string }> };
+
+export default async function Home({ params }: Props) {
+  const { lang } = await params;
   const title = await portfolioService.getHomePageTitles(lang);
   const profile = await profileService.getProfile(lang);
   const jobs = await jobsService.getJobs(lang);
