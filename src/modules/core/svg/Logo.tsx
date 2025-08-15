@@ -1,11 +1,11 @@
-
+import * as React from "react";
 import type { SVGProps } from "react";
 const Logo = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
-    width="1em"
-    height="1em"
+    width={446.933}
+    height={570.083}
     viewBox="0 0 118.251 150.835"
     {...props}
   >

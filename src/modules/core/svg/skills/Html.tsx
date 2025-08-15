@@ -1,12 +1,10 @@
-
+import * as React from "react";
 import type { SVGProps } from "react";
 const Html = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     data-name="Layer 2"
     viewBox="0 0 13.2 15.47"
-    width="1em"
-    height="1em"
     {...props}
   >
     <path

@@ -1,12 +1,10 @@
-
+import * as React from "react";
 import type { SVGProps } from "react";
 const Apollo = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
     viewBox="0 0 646.5 646.1"
-    width="1em"
-    height="1em"
     {...props}
   >
     <path

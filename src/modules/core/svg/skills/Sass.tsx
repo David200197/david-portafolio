@@ -1,12 +1,10 @@
-
+import * as React from "react";
 import type { SVGProps } from "react";
 const Sass = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     data-name="Layer 2"
     viewBox="0 0 20.5 15.6"
-    width="1em"
-    height="1em"
     {...props}
   >
     <path

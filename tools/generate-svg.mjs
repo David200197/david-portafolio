@@ -20,7 +20,6 @@ async function convertSvgToTsx(svgPath) {
   const tsxCode = await transform(
     svgCode,
     {
-      icon: true,
       typescript: true,
       ext: "tsx",
       prettier: true,

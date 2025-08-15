@@ -23,7 +23,6 @@ export const PersonalInfo = ({ profile }: Props) => (
               fill="#fff"
               style={{ margin: "0 10px" }}
               className="w-[30px] lg:w-[30px]"
-              width="30px"
             />
           ))}
         </div>

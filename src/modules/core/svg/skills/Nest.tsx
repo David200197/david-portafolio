@@ -1,12 +1,10 @@
-
+import * as React from "react";
 import type { SVGProps } from "react";
 const Nest = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     data-name="Layer 2"
     viewBox="0 0 15.6 15.5"
-    width="1em"
-    height="1em"
     {...props}
   >
     <g data-name="Capa 1">
