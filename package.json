@@ -13,9 +13,6 @@
     "test:coverage": "vitest coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "predeploy": "npm run build && npm run tool:create-cv",
-    "deploy": "gh-pages -d dist",
-    "only-deploy": "gh-pages -d dist",
     "tool:auto-translate-data": "node ./tools/auto-translate-data.mjs",
     "tool:create-cv": "node ./tools/create-cv/index.mjs"
   },
