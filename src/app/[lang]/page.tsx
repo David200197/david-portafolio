@@ -5,7 +5,7 @@ import { JobsService } from "@/modules/jobs/services/jobs-service";
 import { JobSection } from "@/modules/jobs/view/JobSection";
 import { PortfolioProvider } from "@/modules/portfolio/context/PortfolioContext";
 import { PortfolioService } from "@/modules/portfolio/services/portfolio-service";
-import { CoverPage } from "@/modules/portfolio/view/CoverPage";
+/* import { CoverPage } from "@/modules/portfolio/view/CoverPage"; */
 import { ProfileService } from "@/modules/profile/services/profile-service";
 import { PersonalInfo } from "@/modules/profile/view/PersonalInfo";
 
