@@ -1,15 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": [
-      "ES6",
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "types": [
-      "reflect-metadata"
-    ],
+    "lib": ["ES6", "dom", "dom.iterable", "esnext"],
+    "types": ["reflect-metadata"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -29,12 +22,11 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
   "include": [
+    "svgr.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
@@ -42,7 +34,5 @@
     "next-env.d.ts",
     "dist/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
