@@ -5,7 +5,7 @@ import { PortfolioService } from "@/modules/portfolio/services/portfolio-service
 const portfolioService = getService(PortfolioService);
 
 export function generateStaticParams() {
-  return [{ lang: "en" }, { lang: "es" }];
+  return Promise.resolve([{ lang: "en" }, { lang: "es" }]);
 }
 
 type Props = { children: React.ReactNode; params: Promise<{ lang: string }> };
