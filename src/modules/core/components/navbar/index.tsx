@@ -19,8 +19,8 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "../../ui/drawer";
-import Menu from "@/modules/core/assets/menu.svg";
-import { LanguageSwitcher } from "./LanguageSwitcher"; */
+import Menu from "@/modules/core/assets/menu.svg"; */
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 type Icon = {
   src: string;
@@ -42,8 +42,8 @@ export function Navbar({ icon }: Props) {
           {icon.title && <p className="text-2xl ml-2">{icon.title}</p>}
         </div>
       )}
-      {/* <div className="flex items-center">
-        <div className="lg:hidden flex">
+      <div className="flex items-center">
+        {/* <div className="lg:hidden flex">
           <Drawer direction="right">
             <DrawerTrigger>
               <Menu fill="#000" width="24px" />
@@ -134,9 +134,9 @@ export function Navbar({ icon }: Props) {
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
-        </NavigationMenu>
+        </NavigationMenu> */}
         <LanguageSwitcher />
-      </div> */}
+      </div>
     </NavbarContainer>
   );
 }
