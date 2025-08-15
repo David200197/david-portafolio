@@ -1,4 +1,5 @@
 import { ItemMenues } from "@/modules/portfolio/entities/ItemMenues";
+import { NavbarContainer } from "./NavbarContainer";
 /* import Link from "next/link";
 import {
   NavigationMenu,
@@ -19,7 +20,6 @@ import {
   DrawerTrigger,
 } from "../../ui/drawer";
 import Menu from "@/modules/core/assets/menu.svg";
-import { NavbarContainer } from "./NavbarContainer";
 import { LanguageSwitcher } from "./LanguageSwitcher"; */
 
 type Icon = {
@@ -33,13 +33,8 @@ type Props = {
   languages?: ItemMenues;
 };
 
-export function Navbar({ items, icon }: Props) {
-
-  console.log({ items, icon })
-
-  return <></>
-
-  /* return (
+export function Navbar({ icon }: Props) {
+  return (
     <NavbarContainer>
       {icon && (
         <div className="flex items-center">
@@ -47,7 +42,7 @@ export function Navbar({ items, icon }: Props) {
           {icon.title && <p className="text-2xl ml-2">{icon.title}</p>}
         </div>
       )}
-      <div className="flex items-center">
+      {/* <div className="flex items-center">
         <div className="lg:hidden flex">
           <Drawer direction="right">
             <DrawerTrigger>
@@ -141,7 +136,7 @@ export function Navbar({ items, icon }: Props) {
           </NavigationMenuList>
         </NavigationMenu>
         <LanguageSwitcher />
-      </div>
+      </div> */}
     </NavbarContainer>
-  ); */
+  );
 }
