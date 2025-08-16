@@ -7,7 +7,7 @@ type Props = {
   children: React.ReactNode
 }
 export const NavbarContainer = ({ children }: Props) => {
-  const [scrolled, setScrolled] = useState(false)
+  const [scrolled, setScrolled] = useState(true)
 
   useEffect(() => {
     setScrolled(window.scrollY > 0)
