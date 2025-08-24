@@ -1,7 +1,10 @@
 ---
 title: 'Explorando los Misterios de JavaScript'
-date: '2024-01-15'
-author: 'Dev JS'
+createAt: '2024-01-15'
+updateAt: '2024-01-15'
+author: 'David Alfonso Pereira'
+authorPhoto: 'https://avatars.githubusercontent.com/u/80176604?s=96&v=4'
+authorPhotoAlt: 'DV'
 tags: ['javascript', 'programación', 'web development']
 description: 'Un blog dedicado a descubrir las maravillas y peculiaridades de JavaScript, el lenguaje de la web.'
 image: '/images/javascript-banner.jpg'

@@ -5,6 +5,11 @@ import fs from 'fs/promises'
 import path from 'path'
 import { InjectMdRender } from '@/modules/core/decorators/InjectMdRender'
 import type { MdRender } from '@/modules/core/models/MdRender'
+import { Blog } from '../entities/Blog'
+import { BlogDataDTO } from '../dto/GetBlogDTO'
+import { InjectBlogValidator } from '../decorator/InjectBlogValidator'
+import type { BlogValidator } from '../model/BlogValidator'
+import { Blogs } from '../entities/Blogs'
 
 @Injectable()
 export class BlogService {
@@ -12,7 +17,8 @@ export class BlogService {
 
   constructor(
     private readonly localRepository: LocalRepository,
-    @InjectMdRender() private readonly mdRender: MdRender
+    @InjectMdRender() private readonly mdRender: MdRender,
+    @InjectBlogValidator() private readonly blogValidator: BlogValidator
   ) {
     this.BLOGS_CONTENT_PATH = path.join(
       process.cwd(),
@@ -40,12 +46,27 @@ export class BlogService {
     const filePath = path.join(this.BLOGS_CONTENT_PATH, `${slug}.${lang}.md`)
     const fileContents = await fs.readFile(filePath, 'utf8')
     const { content, contentHtml, data } =
-      await this.mdRender.tranformToHTML(fileContents)
+      await this.mdRender.tranformToHTML<BlogDataDTO>(fileContents)
 
-    return { content, contentHtml, ...data }
+    const dataValidated = this.blogValidator.validateDataBlogDto(data)
+
+    return new Blog(
+      this.blogValidator.validateGetBlogDTO({
+        ...dataValidated,
+        content,
+        contentHtml,
+        slug,
+      })
+    )
   }
 
-  async getAllBlog() {
-    return []
+  async getBlogs(lang: string) {
+    const slugs = await this.getAllSlugs()
+
+    const blogs = await Promise.all(
+      slugs.map((slug) => this.getBlog(lang, slug))
+    )
+
+    return new Blogs(blogs)
   }
 }
