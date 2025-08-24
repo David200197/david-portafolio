@@ -1,5 +1,6 @@
 import { composeProviders } from '@/modules/core/utils/compose-providers'
 import './globals.css'
+
 import { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { ErrorBoundaryProvider } from '@/modules/core/providers/ErrorBoundaryProvider'
