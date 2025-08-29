@@ -1,8 +1,6 @@
 import { BlogService } from '@/modules/blogs/services/blog-service'
 import { Article } from '@/modules/core/components/Article'
-import { Avatar } from '@/modules/core/ui/avatar'
 import { getService } from '@/modules/core/utils/di-utils'
-import { AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
 import { Metadata } from 'next'
 
 const blogService = getService(BlogService)

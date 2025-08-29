@@ -30,7 +30,7 @@ JavaScript has evolved from being a simple language for creating browser animati
 One of the most interesting concepts in JavaScript is closures. Let's look at an example:
 
 ```js
-// exaple.js
+// example.js
 
 function createCounter() {
   let count = 0

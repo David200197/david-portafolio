@@ -54,4 +54,24 @@ export class Blog {
   isUpdateAt() {
     return this.createAt !== this.updateAt
   }
+
+  getDTO(): GetBlogDTO {
+    return {
+      author: this.author,
+      authorPhoto: this.authorPhoto,
+      authorPhotoAlt: this.authorPhotoAlt,
+      content: this.content,
+      contentHtml: this.contentHtml,
+      createAt: this.createAt,
+      description: this.description,
+      image: this.image,
+      slug: this.slug,
+      title: this.title,
+      group: this.group,
+      nextSlug: this.nextSlug,
+      prevSlug: this.prevSlug,
+      tags: this.tags,
+      updateAt: this.updateAt,
+    }
+  }
 }

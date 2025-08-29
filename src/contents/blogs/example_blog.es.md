@@ -30,6 +30,7 @@ JavaScript ha evolucionado desde ser un simple lenguaje para hacer animaciones e
 Uno de los conceptos más interesantes de JavaScript son los closures. Veamos un ejemplo:
 
 ```javascript
+// example.js
 function crearContador() {
   let count = 0
   return function () {

@@ -1,4 +1,5 @@
 import { BlogService } from '@/modules/blogs/services/blog-service'
+import { SearchBlog } from '@/modules/blogs/view/SearchBlog'
 import { getService } from '@/modules/core/utils/di-utils'
 
 const blogService = getService(BlogService)
@@ -9,8 +10,6 @@ const Page = async ({ params }: Props) => {
   const { lang } = await params
   const blogs = await blogService.getBlogs(lang)
 
-  console.log(blogs)
-
-  return <></>
+  return <SearchBlog blogsDTO={blogs.getDTO()} />
 }
 export default Page
