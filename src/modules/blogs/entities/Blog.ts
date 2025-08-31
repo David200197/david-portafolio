@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { GetBlogDTO } from '../dto/GetBlogDTO'
 
 export class Blog {
@@ -14,8 +15,7 @@ export class Blog {
   readonly description: string
   readonly image: string
   readonly slug: string
-  readonly prevSlug?: string
-  readonly nextSlug?: string
+  readonly lang: string
 
   constructor(data: GetBlogDTO) {
     this.author = data.author
@@ -31,8 +31,7 @@ export class Blog {
     this._group = data.group?.length ? [...data.group] : []
     this.image = data.image
     this.slug = data.slug
-    this.nextSlug = data.nextSlug
-    this.prevSlug = data.prevSlug
+    this.lang = data.lang
   }
 
   get tags() {
@@ -41,14 +40,6 @@ export class Blog {
 
   get group() {
     return [...this._group]
-  }
-
-  isNextSlug() {
-    return Boolean(this.nextSlug)
-  }
-
-  isPrevSlug() {
-    return Boolean(this.prevSlug)
   }
 
   isUpdateAt() {
@@ -68,10 +59,21 @@ export class Blog {
       slug: this.slug,
       title: this.title,
       group: this.group,
-      nextSlug: this.nextSlug,
-      prevSlug: this.prevSlug,
       tags: this.tags,
       updateAt: this.updateAt,
+      lang: this.lang,
     }
+  }
+
+  get link() {
+    return `/${this.lang}/blogs/${this.slug}`
+  }
+
+  get createAtWithFormat() {
+    return dayjs(this.createAt).locale(this.lang).format('D MMMM, YYYY')
+  }
+
+  get updateAtWithFormat() {
+    return dayjs(this.updateAt).locale(this.lang).format('D MMMM, YYYY')
   }
 }

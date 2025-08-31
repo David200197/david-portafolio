@@ -9,12 +9,11 @@ export interface BlogDataDTO {
   group?: string[]
   description: string
   image: string
-  prevSlug?: string
-  nextSlug?: string
 }
 
 export interface GetBlogDTO extends BlogDataDTO {
   content: string
   contentHtml: string
   slug: string
+  lang: string
 }

@@ -5,7 +5,7 @@ import { SearchIcon } from 'lucide-react'
 type Props = { search: (query: string) => void; className?: string }
 
 export const SearchInput = ({ search, className }: Props) => (
-  <div className={cn('w-full h-fit max-w-[800px] relative', className)}>
+  <div className={cn('w-full max-w-[800px] relative', className)}>
     <SearchIcon className="absolute top-0 bottom-0 w-5 h-5 my-auto text-gray-500 left-3" />
     <Input
       type="search"

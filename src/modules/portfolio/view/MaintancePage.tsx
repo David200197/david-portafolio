@@ -5,7 +5,7 @@ import { PageContainer } from '../components/PageContainer'
 
 export const MaintancePage = () => (
   <PageContainer>
-    <div className="w-full flex">
+    <div className="w-full h-[660px] flex">
       <div className="m-auto flex flex-col items-center">
         <img
           src={getImagePath('maintenance.svg')}

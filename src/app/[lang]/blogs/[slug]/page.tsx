@@ -1,7 +1,8 @@
 import { BlogService } from '@/modules/blogs/services/blog-service'
-import { Article } from '@/modules/core/components/Article'
+import { Article } from '@/modules/blogs/components/Article'
 import { getService } from '@/modules/core/utils/di-utils'
 import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 
 const blogService = getService(BlogService)
 
@@ -13,6 +14,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang, slug } = await params
   const blog = await blogService.getBlog(lang, slug)
+  if (!blog) return redirect('/not_found')
 
   return {
     title: blog.title,
@@ -34,13 +36,13 @@ type Props = { params: Promise<{ lang: string; slug: string }> }
 const Page = async ({ params }: Props) => {
   const { lang, slug } = await params
   const blog = await blogService.getBlog(lang, slug)
-  return (
-    <Article
-      contentHtml={blog.contentHtml}
-      author={blog.author}
-      authorPhoto={blog.authorPhoto}
-      authorPhotoAlt={blog.authorPhotoAlt}
-    />
+  const { nextBlog, prevBlog } = await blogService.getPrevAndNextBlogs(
+    lang,
+    slug
   )
+
+  if (!blog) return redirect('/not_found')
+
+  return <Article blog={blog} nextBlog={nextBlog} prevBlog={prevBlog} />
 }
 export default Page

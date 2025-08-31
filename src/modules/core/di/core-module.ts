@@ -8,6 +8,7 @@ import { HttpErrorInterceptor } from '../interceptors/http-error.interceptor'
 import { LocalRepository } from '../services/local-respository'
 import { UnifiedMdRender } from '../services/unified-md-render'
 import { MdRender } from '../models/MdRender'
+import { CacheManager } from '../services/cache-manager'
 
 export const CoreModule = new ContainerModule((bind) => {
   bind(CORE_DI.CONFIG_SERVICE).to(ConfigService).inSingletonScope()
@@ -17,4 +18,5 @@ export const CoreModule = new ContainerModule((bind) => {
   bind(HttpResponseInterceptor).toSelf()
   bind(HttpErrorInterceptor).toSelf()
   bind(LocalRepository).toSelf()
+  bind(CacheManager).toSelf().inSingletonScope()
 })

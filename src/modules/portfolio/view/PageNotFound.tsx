@@ -5,7 +5,7 @@ import { PageContainer } from '../components/PageContainer'
 
 export const PageNotFound = () => (
   <PageContainer>
-    <div className="w-full flex">
+    <div className="w-full h-[660px] flex">
       <div className="m-auto flex flex-col items-center">
         <img src={getImagePath('404.svg')} alt="404" width={200} height={200} />
         <p className="text-3xl">Page not Found</p>

@@ -14,9 +14,7 @@ const BlogDataSchema = z.object({
   tags: z.array(z.string()).optional(),
   group: z.array(z.string()).optional(),
   description: z.string(),
-  image: z.string().url().or(z.string()), // Puede ser URL o path relativo
-  prevSlug: z.string().optional(),
-  nextSlug: z.string().optional(),
+  image: z.string().url().or(z.string()),
 })
 
 // Esquema para GetBlogDTO que extiende BlogDataDTO
@@ -24,6 +22,7 @@ const GetBlogSchema = BlogDataSchema.extend({
   content: z.string(),
   contentHtml: z.string(),
   slug: z.string(),
+  lang: z.string(),
 })
 
 const GetBlogsSchema = z.array(GetBlogSchema)

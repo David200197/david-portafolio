@@ -1,5 +1,5 @@
 ---
-title: 'Explorando los Misterios de JavaScript 33333333333'
+title: 'Explorando los Misterios de JavaScript 22222222'
 createAt: '2024-01-15'
 updateAt: '2024-01-15'
 author: 'David Alfonso Pereira'

@@ -2,25 +2,21 @@
 
 import { PageContainer } from '@/modules/portfolio/components/PageContainer'
 import { SearchInput } from '../components/SearchInput'
-import { Blogs } from '../entities/Blogs'
-import { useRef, useState } from 'react'
-import { GetBlogDTO } from '../dto/GetBlogDTO'
+import { BlogCard } from '../components/BlogCard'
+import { useSeachBlog } from '../context/blogs-context'
 
-type Props = { blogsDTO: GetBlogDTO[] }
-
-export const SearchBlog = ({ blogsDTO }: Props) => {
-  const blogs = useRef(new Blogs(blogsDTO)).current
-  const [currentBlogs, setCurrentBlogs] = useState(blogs)
-  const search = (query: string) => {
-    setCurrentBlogs(blogs.search(query))
-  }
-
-  console.log({ length: currentBlogs.getDTO().length })
+export const SearchBlog = () => {
+  const { blogs, search } = useSeachBlog()
 
   return (
     <PageContainer>
-      <div className="pt-[150px] px-5 w-full flex flex-column">
+      <div className="px-5 md:px-30 pt-[150px] pb-[100px]">
         <SearchInput search={search} className="mx-auto" />
+        <div className="grid h-auto grid-cols-1 md:grid-cols-3 gap-4 mt-20">
+          {blogs.getDatas().map((blog) => (
+            <BlogCard blog={blog} key={blog.slug} />
+          ))}
+        </div>
       </div>
     </PageContainer>
   )
