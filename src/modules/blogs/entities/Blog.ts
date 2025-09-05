@@ -70,10 +70,10 @@ export class Blog {
   }
 
   get createAtWithFormat() {
-    return dayjs(this.createAt).locale(this.lang).format('D MMMM, YYYY')
+    return dayjs(this.createAt).format('DD/MM/YYYY')
   }
 
   get updateAtWithFormat() {
-    return dayjs(this.updateAt).locale(this.lang).format('D MMMM, YYYY')
+    return dayjs(this.updateAt).format('DD/MM/YYYY')
   }
 }
