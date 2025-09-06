@@ -7,8 +7,6 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   webpack: (config, { isServer }) => {
-    console.log({ isServer })
-
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
