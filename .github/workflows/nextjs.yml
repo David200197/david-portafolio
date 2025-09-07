@@ -13,7 +13,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'pages'
+  group: 'pages-${{ github.ref }}'
   cancel-in-progress: false
 
 jobs:
@@ -64,7 +64,7 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
-      - name: Build with Next.js (Webpack)
+      - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
 
       - name: Upload artifact
@@ -72,10 +72,24 @@ jobs:
         with:
           path: ./out
 
-  deploy:
-    if: github.event_name == 'push'
+  # Deploy para pushes a master (producción)
+  deploy-production:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # Deploy para PRs (preview)
+  deploy-preview:
+    if: github.event_name == 'pull_request'
+    environment:
+      name: github-pages-preview
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
