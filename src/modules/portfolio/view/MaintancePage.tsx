@@ -1,12 +1,11 @@
 import { Button } from '@/modules/core/ui/button'
-import { BackgroundParticles } from '../components/BackgroundParticles'
-import { BlurScreen } from '../components/BlurScreen'
 import Link from 'next/link'
 import { getImagePath } from '@/modules/core/utils/get-img-path'
+import { PageContainer } from '../components/PageContainer'
 
 export const MaintancePage = () => (
-  <div className="h-[100vh]">
-    <div className="w-full h-full flex">
+  <PageContainer>
+    <div className="w-full h-[660px] flex">
       <div className="m-auto flex flex-col items-center">
         <img
           src={getImagePath('maintenance.svg')}
@@ -20,7 +19,5 @@ export const MaintancePage = () => (
         </Button>
       </div>
     </div>
-    <BackgroundParticles />
-    <BlurScreen />
-  </div>
+  </PageContainer>
 )

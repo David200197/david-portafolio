@@ -1,12 +1,11 @@
 import { Button } from '@/modules/core/ui/button'
-import { BackgroundParticles } from '../components/BackgroundParticles'
-import { BlurScreen } from '../components/BlurScreen'
 import Link from 'next/link'
 import { getImagePath } from '@/modules/core/utils/get-img-path'
+import { PageContainer } from '../components/PageContainer'
 
 export const PageNotFound = () => (
-  <div className="h-[100vh]">
-    <div className="w-full h-full flex">
+  <PageContainer>
+    <div className="w-full h-[660px] flex">
       <div className="m-auto flex flex-col items-center">
         <img src={getImagePath('404.svg')} alt="404" width={200} height={200} />
         <p className="text-3xl">Page not Found</p>
@@ -15,7 +14,5 @@ export const PageNotFound = () => (
         </Button>
       </div>
     </div>
-    <BackgroundParticles />
-    <BlurScreen />
-  </div>
+  </PageContainer>
 )

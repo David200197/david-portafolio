@@ -1,31 +1,56 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { loadFull } from 'tsparticles'
-import Particles, { initParticlesEngine } from '@tsparticles/react'
-import { useGetService } from '@/modules/core/contexts/DiContext'
 import { PortfolioService } from '../services/portfolio-service'
+import { getService } from '@/modules/core/utils/di-utils'
+import { tsParticles } from '@tsparticles/engine'
+
+const particleOptions = getService(PortfolioService).getParticlesOptions()
 
 export const BackgroundParticles = () => {
-  const [init, setInit] = useState(false)
-  const portfolioService = useGetService(PortfolioService)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const initialized = useRef(false)
 
   useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadFull(engine)
-    }).then(() => {
-      setInit(true)
-    })
+    if (initialized.current || !containerRef.current) return
+
+    const initializeParticles = async () => {
+      await loadFull(tsParticles)
+
+      if (containerRef.current) {
+        await tsParticles.load({
+          id: 'tsparticles',
+          element: containerRef.current,
+          options: particleOptions,
+        })
+        initialized.current = true
+      }
+    }
+
+    initializeParticles()
+
+    return () => {
+      if (containerRef.current) {
+        tsParticles.dom().forEach((container) => {
+          container.destroy()
+        })
+      }
+    }
   }, [])
 
-  if (init) {
-    return (
-      <Particles
-        id="tsparticles"
-        options={portfolioService.getParticlesOptions()}
-      />
-    )
-  }
-
-  return <></>
+  return (
+    <div
+      ref={containerRef}
+      id="tsparticles"
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: -1,
+      }}
+    />
+  )
 }

@@ -14,7 +14,9 @@ const profileService = getService(ProfileService)
 const jobsService = getService(JobsService)
 const blogService = getService(BlogService)
 
-type Props = { params: Promise<{ lang: string }> }
+type Props = {
+  params: Promise<{ lang: string }>
+}
 
 export default async function Home({ params }: Props) {
   const { lang } = await params
