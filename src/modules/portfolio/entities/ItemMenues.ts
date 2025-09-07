@@ -27,4 +27,9 @@ export class ItemMenues {
       .flat()
     return [...this.linkItems, ...linkItemSubmenu]
   }
+
+  getAboutMeHref() {
+    const link = this.linkItems.find((item) => item.href.includes('#about_me'))
+    return link?.href || ''
+  }
 }

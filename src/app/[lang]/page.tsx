@@ -21,12 +21,15 @@ type Props = {
 export default async function Home({ params }: Props) {
   const { lang } = await params
   const title = await portfolioService.getHomePageTitles(lang)
+  const itemMenues = await portfolioService.getItemMenus(lang)
   const profile = await profileService.getProfile(lang)
   const jobs = await jobsService.getJobs(lang)
   const blogSection = await blogService.getBlogSection(lang)
 
   return (
-    <PortfolioProvider value={{ title }}>
+    <PortfolioProvider
+      value={{ title, aboutMeHref: itemMenues.getAboutMeHref() }}
+    >
       <CoverPage />
       <PersonalInfo profile={profile} />
       <JobSection jobs={jobs} />
