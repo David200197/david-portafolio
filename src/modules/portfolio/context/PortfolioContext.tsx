@@ -4,6 +4,7 @@ import { createContext, useContext } from 'react'
 
 type PortfolioContextProps = {
   title: { big: string; small: string }
+  aboutMeHref: string
 }
 
 export const PortfolioContext = createContext<PortfolioContextProps | null>(
@@ -15,7 +16,7 @@ export const PortfolioProvider = ({ children, value: data }: Props) => (
   <PortfolioContext.Provider value={data}>{children}</PortfolioContext.Provider>
 )
 
-export const usePorfolioContext = () => {
+export const usePorfolio = () => {
   const data = useContext(PortfolioContext)
   if (!data)
     throw new Error('usePorfolioContext must be used within a PorfolioProvider')

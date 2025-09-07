@@ -3,14 +3,14 @@
 import { useState } from 'react'
 import { WrapperTitle } from './WrapperTitle'
 import Typer from '../Typer'
-import { usePorfolioContext } from '../../context/PortfolioContext'
+import { usePorfolio } from '../../context/PortfolioContext'
 
 const TitleBanner = () => {
   const [isEndLine, setIsEndLine] = useState(false)
   const onComplete = () => {
     setIsEndLine(true)
   }
-  const { title } = usePorfolioContext()
+  const { title } = usePorfolio()
 
   return (
     <WrapperTitle>
