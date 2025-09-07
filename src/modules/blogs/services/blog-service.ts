@@ -1,8 +1,6 @@
 import { Injectable } from '@/modules/core/decorators/Injectable'
 import { BlogSection } from '../model/BlogSection'
 import { LocalRepository } from '@/modules/core/services/local-respository'
-import fs from 'fs/promises'
-import path from 'path'
 import { InjectMdRender } from '@/modules/core/decorators/InjectMdRender'
 import type { MdRender } from '@/modules/core/models/MdRender'
 import { Blog } from '../entities/Blog'
@@ -11,23 +9,21 @@ import { InjectBlogValidator } from '../decorator/InjectBlogValidator'
 import type { BlogValidator } from '../model/BlogValidator'
 import { Blogs } from '../entities/Blogs'
 import { CacheManager } from '@/modules/core/services/cache-manager'
+import { getPath } from '@/modules/core/utils/fallbacks/get-path'
+import { getFs } from '@/modules/core/utils/fallbacks/get-fs'
 
 @Injectable()
 export class BlogService {
-  private readonly BLOGS_CONTENT_PATH: string
-
   constructor(
     private readonly localRepository: LocalRepository,
     @InjectMdRender() private readonly mdRender: MdRender,
     @InjectBlogValidator() private readonly blogValidator: BlogValidator,
     private readonly cacheManager: CacheManager
-  ) {
-    this.BLOGS_CONTENT_PATH = path.join(
-      process.cwd(),
-      'src',
-      'contents',
-      'blogs'
-    )
+  ) {}
+
+  private getBlogContentPath = async () => {
+    const path = await getPath()
+    return path.join(process.cwd(), 'src', 'contents', 'blogs')
   }
 
   async getBlogSection(lang: string): Promise<BlogSection> {
@@ -35,7 +31,11 @@ export class BlogService {
   }
 
   async getAllSlugs() {
-    const blogFiles = await fs.readdir(this.BLOGS_CONTENT_PATH, {
+    const fs = await getFs()
+    const path = await getPath()
+
+    const blogContentPath = await this.getBlogContentPath()
+    const blogFiles = await fs.readdir(blogContentPath, {
       recursive: true,
     })
     const slugNames = blogFiles
@@ -45,7 +45,10 @@ export class BlogService {
   }
 
   private async createBlog(lang: string, slug: string) {
-    const filePath = path.join(this.BLOGS_CONTENT_PATH, `${slug}.${lang}.md`)
+    const fs = await getFs()
+    const path = await getPath()
+    const blogContentPath = await this.getBlogContentPath()
+    const filePath = path.join(blogContentPath, `${slug}.${lang}.md`)
     const fileContents = await fs.readFile(filePath, 'utf8')
     const { content, contentHtml, data } =
       await this.mdRender.tranformToHTML<BlogDataDTO>(fileContents)
