@@ -14,7 +14,7 @@ const BlogsContext = createContext<BlogsContextModel | null>(null)
 type Props = { blogsDTO: GetBlogDTO[]; children: ReactNode }
 
 export const BlogsProvider = ({ blogsDTO, children }: Props) => {
-  const blogs = useRef(new Blogs(blogsDTO)).current
+  const blogs = useRef(new Blogs(blogsDTO)).current.sortByUpdateAt('desc')
   const [currentBlogs, setCurrentBlogs] = useState(blogs)
   const search = (query: string) => {
     setCurrentBlogs(blogs.search(query))

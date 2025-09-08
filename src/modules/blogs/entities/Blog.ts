@@ -76,4 +76,12 @@ export class Blog {
   get updateAtWithFormat() {
     return dayjs(this.updateAt).format('DD/MM/YYYY')
   }
+
+  get createAtDate() {
+    return new Date(this.createAt)
+  }
+
+  get updateAtDate() {
+    return new Date(this.updateAt)
+  }
 }

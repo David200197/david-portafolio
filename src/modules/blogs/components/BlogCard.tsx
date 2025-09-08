@@ -19,7 +19,7 @@ export const BlogCard = ({ blog }: Props) => (
         <CardDescription>{blog.description}</CardDescription>
       </CardHeader>
       <CardContent className="mt-auto">
-        <img src={blog.image} alt={'blog image'} />
+        <img src={blog.image} alt={'blog image'} className="img-blog" />
       </CardContent>
       <CardFooter className="mt-auto">
         <div className="flex flex-col">
