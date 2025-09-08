@@ -84,7 +84,7 @@ export class BlogService {
   }
 
   async getPrevAndNextBlogs(lang: string, slug: string) {
-    const blogs = await this.getBlogs(lang)
+    const blogs = (await this.getBlogs(lang)).sortByUpdateAt('asc')
     const nextBlog = blogs.getNext(slug)
     const prevBlog = blogs.getPrev(slug)
 

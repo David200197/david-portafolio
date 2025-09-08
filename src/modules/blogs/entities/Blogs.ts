@@ -42,4 +42,14 @@ export class Blogs {
     if (index === -1 || index === 0) return null
     return this.datas[index - 1]
   }
+
+  sortByUpdateAt(mode: 'asc' | 'desc' = 'desc') {
+    const blogs = this.datas.toSorted((a, b) => {
+      if (mode === 'asc') {
+        return a.updateAtDate.getTime() - b.updateAtDate.getTime()
+      }
+      return b.updateAtDate.getTime() - a.updateAtDate.getTime()
+    })
+    return new Blogs(blogs)
+  }
 }

@@ -12,7 +12,7 @@ image: '/david-portafolio/blogs/welcome_to_my_blog.jpg'
 
 # ¡Bienvenido a Mi Blog de Programación!
 
-<img src="/david-portafolio/blogs/welcome_to_my_blog.jpg" alt="JavaScript Logo" class="w-full" />
+<img src="/david-portafolio/blogs/welcome_to_my_blog.jpg" alt="JavaScript Logo" class="img-blog" />
 
 Hola a todos, soy David. Esta es la primera de muchas publicaciones que planeo compartir en mi portafolio. Quiero contarte brevemente de qué tratarán estos blogs, por qué los escribo y qué puedes esperar en el futuro.
 
