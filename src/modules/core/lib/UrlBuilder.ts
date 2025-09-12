@@ -3,44 +3,48 @@
  *
  * @example
  * ```typescript
- * const builder = new UrlBuilder('https://api.example.com', 'users', '123');
- * builder.addQuery('active', true);
- * builder.addQuery('sort', 'name');
- * const url = builder.build(); // "https://api.example.com/users/123?active=true&sort=name"
+ * const url = new UrlBuilder('https://api.example.com', 'users', '123')
+ *   .addQuery('active', true)
+ *   .addQuery('sort', 'name')
+ *   .build();
+ *
+ * // Result: "https://api.example.com/users/123?active=true&sort=name"
  * ```
  */
 export class UrlBuilder {
   private baseUrl: string
-  private urls: (string | number)[]
+  private paths: (string | number)[]
   private queries: string[] = []
 
-  /**
-   * Creates an instance of UrlBuilder.
-   * @param baseUrl - The base URL (e.g., "https://api.example.com").
-   * @param urls - Additional path segments to append to the base URL.
-   */
-  constructor(baseUrl: string, ...urls: (string | number)[]) {
-    this.baseUrl = baseUrl
-    this.urls = urls
+  constructor(baseUrl: string, ...paths: (string | number)[]) {
+    this.baseUrl = baseUrl.replace(/\/+$/, '') // quita slashes al final
+    this.paths = paths
   }
 
   /**
    * Adds a query parameter to the URL.
-   * @param key - The query parameter key.
-   * @param value - The query parameter value (string, number, or boolean).
+   * Supports method chaining.
    */
-  addQuery(key: string, value: string | number | boolean) {
-    this.queries.push(`${key}=${value}`)
+  addQuery(key: string, value: string | number | boolean): this {
+    const encodedKey = encodeURIComponent(key)
+    const encodedValue = encodeURIComponent(String(value))
+    this.queries.push(`${encodedKey}=${encodedValue}`)
+    return this
   }
 
   /**
-   * Builds and returns the complete URL as a string, including path segments and query parameters.
-   * @returns The constructed URL.
+   * Builds the final URL.
    */
-  build() {
-    const fullUrl = [this.baseUrl, ...this.urls].join('/')
+  build(): string {
+    const path = this.paths
+      .map(String)
+      .map((p) => encodeURIComponent(p))
+      .join('/')
+
+    const fullUrl = [this.baseUrl, path].filter(Boolean).join('/')
+
     if (!this.queries.length) return fullUrl
-    const queryJoined = this.queries.join('&')
-    return [fullUrl, queryJoined].join('?')
+
+    return `${fullUrl}?${this.queries.join('&')}`
   }
 }
