@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation'
 const blogService = getService(BlogService)
 
 export async function generateStaticParams() {
-  const slugs = await blogService.getAllSlugs()
+  const slugs = await blogService.getAllSlugNames()
   return slugs.map((slug) => ({ slug }))
 }
 

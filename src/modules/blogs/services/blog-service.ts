@@ -26,14 +26,37 @@ export class BlogService {
     return path.join(process.cwd(), 'src', 'contents', 'blogs')
   }
 
+  private getExtendContentPath = async () => {
+    const path = await getPath()
+    return path.join(process.cwd(), 'src', 'contents', 'extends')
+  }
+
   async getBlogSection(lang: string): Promise<BlogSection> {
     return await this.localRepository.get<BlogSection>(lang, 'blog-section')
   }
 
-  async getAllSlugs() {
+  async getAllExtends(lang: string): Promise<Record<string, string>> {
     const fs = await getFs()
     const path = await getPath()
+    const extendContentPath = await this.getExtendContentPath()
+    const extendFiles = await fs.readdir(extendContentPath, {
+      recursive: true,
+    })
+    let extendNames = extendFiles
+      .filter((file) => file.endsWith('.md'))
+      .map((file) => path.basename(file).split('.')[0])
+    extendNames = Array.from(new Set(extendNames))
+    return extendNames.reduce(async (prev, ext) => {
+      const filePath = path.join(extendContentPath, `${ext}.${lang}.md`)
+      const content = await fs.readFile(filePath, 'utf8')
+      const [name] = ext.split('.')
+      return { ...prev, [name]: content }
+    }, {})
+  }
 
+  async getAllSlugNames() {
+    const fs = await getFs()
+    const path = await getPath()
     const blogContentPath = await this.getBlogContentPath()
     const blogFiles = await fs.readdir(blogContentPath, {
       recursive: true,
@@ -50,8 +73,14 @@ export class BlogService {
     const blogContentPath = await this.getBlogContentPath()
     const filePath = path.join(blogContentPath, `${slug}.${lang}.md`)
     const fileContents = await fs.readFile(filePath, 'utf8')
+
+    const extendContents = await this.getAllExtends(lang)
+
     const { content, contentHtml, data } =
-      await this.mdRender.tranformToHTML<BlogDataDTO>(fileContents)
+      await this.mdRender.tranformToHTML<BlogDataDTO>(
+        fileContents,
+        extendContents
+      )
 
     const dataValidated = this.blogValidator.validateDataBlogDto(data)
     const blogValidated = this.blogValidator.validateGetBlogDTO({
@@ -74,7 +103,7 @@ export class BlogService {
     const key = `blogs_${lang}`
     const storeBlogs = this.cacheManager.get<Blogs>(key)
     if (storeBlogs) return storeBlogs
-    const slugs = await this.getAllSlugs()
+    const slugs = await this.getAllSlugNames()
     const createdBlogs = await Promise.all(
       slugs.map((slug) => this.createBlog(lang, slug))
     )

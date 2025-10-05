@@ -11,7 +11,7 @@ describe('BlogService', () => {
   })
 
   it('should get a correct slugs', async () => {
-    const slugs = await blogService.getAllSlugs()
+    const slugs = await blogService.getAllSlugNames()
 
     // Verificar que todos los elementos son strings
     slugs.forEach((slug) => {
