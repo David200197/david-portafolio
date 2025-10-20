@@ -1,0 +1,2 @@
+- Glossary POO
+- Async React: https://www.youtube.com/watch?v=KI4gjUrOfOs
