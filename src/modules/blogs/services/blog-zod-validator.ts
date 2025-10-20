@@ -15,7 +15,23 @@ const BlogDataSchema = z.object({
   group: z.array(z.string()).optional(),
   description: z.string(),
   image: z.string().url().or(z.string()),
+  navigation: z.string().optional(),
 })
+
+export const SimpleItemSideMenuSchema = z.object({
+  title: z.string(),
+  url: z.string(),
+})
+
+export const SubmenuItemSideMenuSchema = z.object({
+  title: z.string(),
+  submenu: z.array(SimpleItemSideMenuSchema),
+})
+
+export const ItemSideMenuSchema = z.union([
+  SimpleItemSideMenuSchema,
+  SubmenuItemSideMenuSchema,
+])
 
 // Esquema para GetBlogDTO que extiende BlogDataDTO
 const GetBlogSchema = BlogDataSchema.extend({
@@ -23,6 +39,7 @@ const GetBlogSchema = BlogDataSchema.extend({
   contentHtml: z.string(),
   slug: z.string(),
   lang: z.string(),
+  navigationMenu: z.array(ItemSideMenuSchema).optional(),
 })
 
 const GetBlogsSchema = z.array(GetBlogSchema)

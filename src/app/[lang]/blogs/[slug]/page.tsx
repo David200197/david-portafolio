@@ -3,6 +3,9 @@ import { Article } from '@/modules/blogs/components/Article'
 import { getService } from '@/modules/core/utils/di-utils'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
+import { AppSidebar } from '@/modules/blogs/components/AppSidebar'
+import { SidebarProvider } from '@/modules/blogs/context/sidebar-context'
+import { TriggerSidebarButton } from '@/modules/blogs/components/TriggerSidebarButton'
 
 const blogService = getService(BlogService)
 
@@ -41,8 +44,19 @@ const Page = async ({ params }: Props) => {
     slug
   )
 
+  const blogSection = await blogService.getBlogSection(lang)
+
   if (!blog) return redirect('/not_found')
 
-  return <Article blog={blog} nextBlog={nextBlog} prevBlog={prevBlog} />
+  return (
+    <SidebarProvider>
+      <AppSidebar
+        items={blog.navigationMenu}
+        titleSideMenu={blogSection.titleSideMenu}
+      />
+      {blog.isNavigation && <TriggerSidebarButton />}
+      <Article blog={blog} nextBlog={nextBlog} prevBlog={prevBlog} />
+    </SidebarProvider>
+  )
 }
 export default Page

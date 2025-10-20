@@ -1,3 +1,5 @@
+import { ItemSideMenu } from '../model/ItemSideMenu'
+
 export interface BlogDataDTO {
   title: string
   createAt: string
@@ -9,6 +11,7 @@ export interface BlogDataDTO {
   group?: string[]
   description: string
   image: string
+  navigation?: string
 }
 
 export interface GetBlogDTO extends BlogDataDTO {
@@ -16,4 +19,5 @@ export interface GetBlogDTO extends BlogDataDTO {
   contentHtml: string
   slug: string
   lang: string
+  navigationMenu: ItemSideMenu[]
 }

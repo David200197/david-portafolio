@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 import { GetBlogDTO } from '../dto/GetBlogDTO'
+import { ItemSideMenu } from '../model/ItemSideMenu'
 
 export class Blog {
   readonly content: string
@@ -16,6 +17,8 @@ export class Blog {
   readonly image: string
   readonly slug: string
   readonly lang: string
+  readonly navigation?: string
+  readonly navigationMenu: ItemSideMenu[]
 
   constructor(data: GetBlogDTO) {
     this.author = data.author
@@ -32,6 +35,8 @@ export class Blog {
     this.image = data.image
     this.slug = data.slug
     this.lang = data.lang
+    this.navigation = data.navigation
+    this.navigationMenu = data.navigationMenu || []
   }
 
   get tags() {
@@ -62,6 +67,8 @@ export class Blog {
       tags: this.tags,
       updateAt: this.updateAt,
       lang: this.lang,
+      navigation: this.navigation,
+      navigationMenu: this.navigationMenu,
     }
   }
 
@@ -83,5 +90,9 @@ export class Blog {
 
   get updateAtDate() {
     return new Date(this.updateAt)
+  }
+
+  get isNavigation() {
+    return Boolean(this.navigationMenu.length)
   }
 }

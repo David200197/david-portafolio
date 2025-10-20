@@ -3,4 +3,5 @@ export interface BlogSection {
   description: string
   link: string
   linkText: string
+  titleSideMenu: string
 }

@@ -9,15 +9,8 @@ import { MdRender } from '../models/MdRender'
 import rehypeRaw from 'rehype-raw'
 
 export class UnifiedMdRender implements MdRender {
-  async tranformToHTML<Data = Record<string, string>>(
-    fileContents: string,
-    extendContents: Record<string, string>
-  ) {
+  async tranformToHTML<Data = Record<string, string>>(fileContents: string) {
     let mutateContent = fileContents
-
-    for (const key in extendContents) {
-      mutateContent = fileContents.replaceAll(`{{${key}}}`, extendContents[key])
-    }
 
     const { data, content } = matter(mutateContent)
     const processedContent = await unified()

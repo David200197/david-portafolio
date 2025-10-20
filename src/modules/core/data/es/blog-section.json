@@ -2,5 +2,6 @@
   "sectionTitle": "Blogs",
   "description": "Puedes ver algunos de mis blogs personales en esta sección",
   "link": "/es/blogs",
-  "linkText": "VER MIS BLOGS"
+  "linkText": "VER MIS BLOGS",
+  "titleSideMenu": "Navegación"
 }

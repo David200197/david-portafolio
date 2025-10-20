@@ -1,4 +1,5 @@
 import { composeProviders } from '@/modules/core/utils/compose-providers'
+
 import './globals.css'
 
 import { Metadata } from 'next'

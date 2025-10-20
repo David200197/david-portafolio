@@ -9,7 +9,7 @@ type Props = {
   nextBlog: Blog | null
 }
 export const Article = ({ blog, nextBlog, prevBlog }: Props) => (
-  <article className="pt-[120px] pb-[30px] px-5 md:px-0">
+  <article className="pt-[120px] pb-[30px] px-5 md:px-0 w-[inherit]">
     <div
       className="prose prose-lg mx-auto"
       dangerouslySetInnerHTML={{ __html: blog.contentHtml }}

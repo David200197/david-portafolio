@@ -2,5 +2,6 @@
   "sectionTitle": "Blogs",
   "description": "You can see some of my personal blogs in this section",
   "link": "/en/blogs",
-  "linkText": "SEE MY BLOGS"
+  "linkText": "SEE MY BLOGS",
+  "titleSideMenu": "Navigation"
 }

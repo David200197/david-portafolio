@@ -11,6 +11,7 @@ import { Blogs } from '../entities/Blogs'
 import { CacheManager } from '@/modules/core/services/cache-manager'
 import { getPath } from '@/modules/core/utils/fallbacks/get-path'
 import { getFs } from '@/modules/core/utils/fallbacks/get-fs'
+import { ItemSideMenu } from '../model/ItemSideMenu'
 
 @Injectable()
 export class BlogService {
@@ -26,32 +27,16 @@ export class BlogService {
     return path.join(process.cwd(), 'src', 'contents', 'blogs')
   }
 
-  private getExtendContentPath = async () => {
-    const path = await getPath()
-    return path.join(process.cwd(), 'src', 'contents', 'extends')
+  private getNavigationMenu = async (
+    name: string | undefined,
+    lang: string
+  ): Promise<ItemSideMenu[]> => {
+    if (!name) return []
+    return (await import(`@/contents/navigation/${name}.${lang}`)).default
   }
 
   async getBlogSection(lang: string): Promise<BlogSection> {
     return await this.localRepository.get<BlogSection>(lang, 'blog-section')
-  }
-
-  async getAllExtends(lang: string): Promise<Record<string, string>> {
-    const fs = await getFs()
-    const path = await getPath()
-    const extendContentPath = await this.getExtendContentPath()
-    const extendFiles = await fs.readdir(extendContentPath, {
-      recursive: true,
-    })
-    let extendNames = extendFiles
-      .filter((file) => file.endsWith('.md'))
-      .map((file) => path.basename(file).split('.')[0])
-    extendNames = Array.from(new Set(extendNames))
-    return extendNames.reduce(async (prev, ext) => {
-      const filePath = path.join(extendContentPath, `${ext}.${lang}.md`)
-      const content = await fs.readFile(filePath, 'utf8')
-      const [name] = ext.split('.')
-      return { ...prev, [name]: content }
-    }, {})
   }
 
   async getAllSlugNames() {
@@ -74,21 +59,23 @@ export class BlogService {
     const filePath = path.join(blogContentPath, `${slug}.${lang}.md`)
     const fileContents = await fs.readFile(filePath, 'utf8')
 
-    const extendContents = await this.getAllExtends(lang)
-
     const { content, contentHtml, data } =
-      await this.mdRender.tranformToHTML<BlogDataDTO>(
-        fileContents,
-        extendContents
-      )
+      await this.mdRender.tranformToHTML<BlogDataDTO>(fileContents)
 
     const dataValidated = this.blogValidator.validateDataBlogDto(data)
+
+    const navigationMenu = await this.getNavigationMenu(
+      dataValidated.navigation,
+      lang
+    )
+
     const blogValidated = this.blogValidator.validateGetBlogDTO({
       ...dataValidated,
       content,
       contentHtml,
       slug,
       lang,
+      navigationMenu,
     })
 
     return new Blog(blogValidated)
