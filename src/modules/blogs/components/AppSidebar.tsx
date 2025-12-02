@@ -57,7 +57,7 @@ export function AppSidebar({ items, titleSideMenu }: Props) {
                         <span>{item.title}</span>
                       </SidebarMenuButton>
                       {item.submenu.map((menu) => (
-                        <SidebarMenuSub>
+                        <SidebarMenuSub key={menu.url}>
                           <SidebarMenuSubItem key={item.title}>
                             <SidebarMenuButton asChild>
                               <Link href={menu.url}>

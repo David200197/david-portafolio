@@ -10,7 +10,7 @@ import rehypeRaw from 'rehype-raw'
 
 export class UnifiedMdRender implements MdRender {
   async tranformToHTML<Data = Record<string, string>>(fileContents: string) {
-    let mutateContent = fileContents
+    const mutateContent = fileContents
 
     const { data, content } = matter(mutateContent)
     const processedContent = await unified()
