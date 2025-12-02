@@ -283,7 +283,7 @@ export class CriteriaToMongoTransformer {
 
 ---
 
-## 4️⃣ Integrando con el Patrón Repository
+## 4. Integrando con el Patrón Repository
 
 El **Repository** nos permite encapsular la lógica de acceso a datos, manteniendo nuestras consultas independientes de la base de datos concreta:
 
@@ -331,7 +331,7 @@ console.log(repository.find(combined))
 
 ---
 
-## ✅ Conclusión
+## Conclusión
 
 Con esta implementación logramos:
 

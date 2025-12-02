@@ -283,7 +283,7 @@ export class CriteriaToMongoTransformer {
 
 ---
 
-## 4️⃣ Integrating with the Repository Pattern
+## 4. Integrating with the Repository Pattern
 
 The **Repository** allows us to encapsulate data access logic, keeping our queries independent of the specific database:
 
@@ -331,7 +331,7 @@ console.log(repository.find(combined))
 
 ---
 
-## ✅ Conclusion
+## Conclusion
 
 With this implementation, we achieve:
 
