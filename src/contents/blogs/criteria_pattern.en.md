@@ -344,4 +344,4 @@ With this implementation, we achieve:
 
 > Additionally, **we don’t need to create a new method for every type of search**. This makes our repositories cleaner and more scalable, allowing new queries to be implemented simply by creating or combining criteria, without touching the repository class.
 
-This approach makes your application **modular, testable, and flexible**, and is an excellent example of **design patterns in TypeScript** for your portfolio.
+This approach makes your application **modular, testable, and flexible**

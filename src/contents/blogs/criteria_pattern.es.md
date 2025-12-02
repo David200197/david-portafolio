@@ -344,4 +344,4 @@ Con esta implementación logramos:
 
 > Además, **no necesitamos crear un método nuevo por cada tipo de búsqueda**. Esto hace que nuestros repositorios sean más limpios y escalables, y permite que nuevas consultas se implementen simplemente creando o combinando criterios, sin tocar la clase del repositorio.
 
-Este enfoque hace que tu aplicación sea **modular, testable y flexible**, y es un excelente ejemplo de **patrones de diseño en TypeScript** para tu portafolio.
+Este enfoque hace que tu aplicación sea **modular, testable y flexible**
