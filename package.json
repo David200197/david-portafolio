@@ -21,6 +21,7 @@
     "only-deploy": "gh-pages -d dist",
     "tool:create-cv": "node ./tools/create-cv/index.mjs",
     "tool:generate-svg": "node ./tools/generate-svg.mjs",
+    "tool:optimize-images": "node ./tools/optimize-images.mjs",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -48,7 +49,7 @@
     "inversify": "^6.0.1",
     "lucide-react": "^0.477.0",
     "motion": "^12.23.12",
-    "next": "15.2.4",
+    "next": "15.2.8",
     "react": "^18.3.1",
     "react-day-picker": "8.10.1",
     "react-dom": "^18.3.1",
@@ -102,6 +103,7 @@
     "eslint-plugin-storybook": "^0.11.3",
     "file-loader": "^6.2.0",
     "gh-pages": "^6.3.0",
+    "glob": "^13.0.0",
     "handlebars": "^4.7.8",
     "husky": "^8.0.0",
     "jsdom": "^26.0.0",
@@ -109,6 +111,7 @@
     "playwright": "^1.54.2",
     "prettier": "^3.6.2",
     "serve": "^14.2.4",
+    "sharp": "^0.34.5",
     "storybook": "8.6.3",
     "tailwindcss": "^4",
     "typescript": "^5",

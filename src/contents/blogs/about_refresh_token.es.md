@@ -3,7 +3,7 @@ title: 'Refresh Token: qué es, cómo funciona y por qué es clave en la autenti
 createAt: '2025-09-10'
 updateAt: '2025-09-10'
 author: 'David Alfonso Pereira'
-authorPhoto: 'https://avatars.githubusercontent.com/u/80176604?s=96&v=4'
+authorPhoto: '/david-portafolio/profile.webp'
 authorPhotoAlt: 'David Alfonso'
 tags:
   [
@@ -14,12 +14,12 @@ tags:
     'segurity',
   ]
 description: 'En este artículo exploramos qué es un refresh token, cómo funciona y por qué es fundamental para mantener sesiones seguras y continuas en aplicaciones modernas.'
-image: '/david-portafolio/blogs/segurity.png'
+image: '/david-portafolio/blogs/segurity.webp'
 ---
 
 # Refresh Token: qué es, cómo funciona y por qué es clave en la autenticación segura
 
-<img src="/david-portafolio/blogs/segurity.png" alt="JavaScript Logo" class="img-blog" />
+<img src="/david-portafolio/blogs/segurity.webp" alt="JavaScript Logo" class="img-blog" />
 
 La autenticación es el corazón de cualquier aplicación moderna. Y en este ecosistema, **los tokens juegan un papel vital para garantizar sesiones seguras, fluidas y confiables**. Hoy quiero hablarte del **refresh token**, un concepto que quizás ya hayas escuchado, pero cuya correcta implementación puede marcar la diferencia entre una app robusta y una vulnerable.
 

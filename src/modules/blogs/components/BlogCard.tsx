@@ -8,6 +8,7 @@ import {
 } from '@/modules/core/ui/card'
 import { Blog } from '../entities/Blog'
 import Link from 'next/link'
+import WebPImage from '@/modules/core/components/WebPImage'
 
 type Props = { blog: Blog }
 
@@ -19,7 +20,13 @@ export const BlogCard = ({ blog }: Props) => (
         <CardDescription>{blog.description}</CardDescription>
       </CardHeader>
       <CardContent className="mt-auto">
-        <img src={blog.image} alt={'blog image'} className="img-blog" />
+        <WebPImage
+          src={blog.image}
+          width={250}
+          height={250}
+          alt={'blog image'}
+          className="img-blog"
+        />
       </CardContent>
       <CardFooter className="mt-auto">
         <div className="flex flex-col">

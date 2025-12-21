@@ -6,7 +6,7 @@
       "logoSrc": "teigee.webp",
       "description": "Teigee es una plataforma para buscar, comparar y revisar productos, actividades y características de negocios locales cercanos. Colaboramos estrechamente con nuestros socios para mantener nuestra información confiable y actualizada.",
       "time": "Febrero 2023 - Enero 2024",
-      "image": "work-001.png",
+      "image": "work-001.webp",
       "title": "Teigee",
       "skills": [
         {
@@ -32,7 +32,7 @@
       "logoSrc": "leiizy.webp",
       "description": "Leiizy es una plataforma de generación de contenido impulsada por IA que utiliza la tecnología ChatGPT para ayudar a los usuarios a crear contenido personalizado para diversas tareas, como escribir correos electrónicos, crear publicaciones en redes sociales o componer descripciones de videos.",
       "time": "Febrero 2023 - Enero 2024",
-      "image": "work-002.png",
+      "image": "work-002.webp",
       "title": "Leiizy",
       "skills": [
         {
@@ -54,7 +54,7 @@
       "logoSrc": "eneldo_laboral.svg",
       "description": "Eneldo Laborar es un sistema completo de gestión de bolsas de trabajo diseñado para conectar empresas y buscadores de empleo de manera eficiente. Ofrece una plataforma integral para gestionar todo el proceso de contratación, desde la publicación de ofertas de empleo hasta la selección y contratación de candidatos.",
       "time": "Noviembre 2023 - Febrero 2025",
-      "image": "work-004.png",
+      "image": "work-004.webp",
       "title": "Eneldo Laboral",
       "skills": [
         {
@@ -70,7 +70,7 @@
       "logoSrc": "construccions_precises.svg",
       "description": "Construccions Precises está diseñado específicamente para satisfacer las necesidades únicas de gestión de presupuesto de las firmas de arquitectura. Con funciones potentes y una interfaz fácil de usar, la aplicación permite a arquitectos y gerentes de proyecto controlar y optimizar sus presupuestos de manera eficiente.",
       "time": "Enero 2024 - Febrero 2025",
-      "image": "work-005.png",
+      "image": "work-005.webp",
       "title": "Construccions Precises",
       "skills": [
         {
@@ -86,7 +86,7 @@
       "logoSrc": "ibx.svg",
       "description": "IBX es una plataforma de trading que ofrece a los inversores acceso a múltiples mercados globales, así como a una amplia gama de activos, como: acciones, herramientas avanzadas de análisis técnico y de gráficos, tipos de órdenes sofisticados y ejecución de operaciones ultra-rápida.",
       "time": "Marzo 2024 - Presente",
-      "image": "work-003.png",
+      "image": "work-003.webp",
       "title": "Ibx",
       "skills": [
         {
@@ -99,10 +99,10 @@
     },
     {
       "alt": "Shell Condo",
-      "logoSrc": "shell-condo.png",
+      "logoSrc": "shell-condo.webp",
       "description": "CondoShell es una plataforma integral diseñada para optimizar la gestión de comunidades de condominios. Ofrece una gama de funciones para facilitar la comunicación, la supervisión financiera y la programación del mantenimiento.",
       "time": "Noviembre 2024 - Presente",
-      "image": "work-006.png",
+      "image": "work-006.webp",
       "title": "Shell Condo",
       "skills": [
         {
