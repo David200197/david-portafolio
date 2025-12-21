@@ -3,16 +3,16 @@ title: 'Patrón Criteria. Implementación en TypeScript con Repositorios y Trans
 createAt: '2025-12-02'
 updateAt: '2025-12-02'
 author: 'David Alfonso Pereira'
-authorPhoto: 'https://avatars.githubusercontent.com/u/80176604?s=96&v=4'
+authorPhoto: '/david-portafolio/profile.webp'
 authorPhotoAlt: 'David Alfonso'
 tags: ['programación', 'patrones', 'repositorio']
 description: 'En este artículo exploramos qué es el patrón criteria usando ejemplos en typescript'
-image: '/david-portafolio/blogs/criteria_pattern.png'
+image: '/david-portafolio/blogs/criteria_pattern.webp'
 ---
 
 # Patrón Criteria. Implementación en TypeScript con Repositorios y Transformadores
 
-<img src='/david-portafolio/blogs/criteria_pattern.png' alt="JavaScript Logo" class="img-blog" />
+<img src='/david-portafolio/blogs/criteria_pattern.webp' alt="JavaScript Logo" class="img-blog" />
 
 Si alguna vez te has encontrado construyendo consultas complejas en tu aplicación y deseaste tener una forma **limpia, reutilizable y flexible** de manejarlas, entonces el **patrón Criteria** es para ti.
 

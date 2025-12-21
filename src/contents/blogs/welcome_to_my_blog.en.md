@@ -3,16 +3,16 @@ title: 'Welcome to My Programming Blog'
 createAt: '2025-09-05'
 updateAt: '2025-09-05'
 author: 'David Alfonso Pereira'
-authorPhoto: 'https://avatars.githubusercontent.com/u/80176604?s=96&v=4'
+authorPhoto: '/david-portafolio/profile.webp'
 authorPhotoAlt: 'David Alfonso'
 tags: ['programming', 'web development', 'reflections']
 description: 'In this first post, I share what this section of my site will be about, my personal goals, and how I plan to contribute to the community.'
-image: '/david-portafolio/blogs/welcome_to_my_blog.jpg'
+image: '/david-portafolio/blogs/welcome_to_my_blog.webp'
 ---
 
 # Welcome to My Programming Blog!
 
-<img src="/david-portafolio/blogs/welcome_to_my_blog.jpg" alt="JavaScript Logo" class="img-blog" />
+<img src="/david-portafolio/blogs/welcome_to_my_blog.webp" alt="JavaScript Logo" class="img-blog" />
 
 Hi everyone, I'm David. This is the first of many posts I plan to share on my portfolio. I’d like to briefly tell you what these blogs will be about, why I’m writing them, and what you can expect going forward.
 

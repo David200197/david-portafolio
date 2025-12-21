@@ -3,16 +3,16 @@ title: 'Criteria Pattern. Implementation in TypeScript with Repositories and Tra
 createAt: '2025-12-02'
 updateAt: '2025-12-02'
 author: 'David Alfonso Pereira'
-authorPhoto: 'https://avatars.githubusercontent.com/u/80176604?s=96&v=4'
+authorPhoto: '/david-portafolio/profile.webp'
 authorPhotoAlt: 'David Alfonso'
 tags: ['programming', 'patterns', 'repository']
 description: 'In this article, we explore what the criteria pattern is using examples in TypeScript'
-image: '/david-portafolio/blogs/criteria_pattern.png'
+image: '/david-portafolio/blogs/criteria_pattern.webp'
 ---
 
 # Criteria Pattern. Implementation in TypeScript with Repositories and Transformers
 
-<img src='/david-portafolio/blogs/criteria_pattern.png' alt="JavaScript Logo" class="img-blog" />
+<img src='/david-portafolio/blogs/criteria_pattern.webp' alt="JavaScript Logo" class="img-blog" />
 
 If you've ever found yourself building complex queries in your application and wished for a **clean, reusable, and flexible** way to handle them, then the **Criteria Pattern** is for you.
 

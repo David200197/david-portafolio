@@ -3,16 +3,16 @@ title: 'Cómo desplegar Next.js con GitHub Actions'
 createAt: '2025-09-07'
 updateAt: '2025-09-07'
 author: 'David Alfonso Pereira'
-authorPhoto: 'https://avatars.githubusercontent.com/u/80176604?s=96&v=4'
+authorPhoto: '/david-portafolio/profile.webp'
 authorPhotoAlt: 'David Alfonso'
 tags: ['nextjs', 'github', 'github action', 'deployment', 'reflections']
 description: 'En este post aprenderás cómo desplegar una aplicación creada con Next.js utilizando GitHub Actions.'
-image: '/david-portafolio/blogs/deploy_next_with_github_action/home.png'
+image: '/david-portafolio/blogs/deploy_next_with_github_action/home.webp'
 ---
 
 # Cómo desplegar Next.js con GitHub Actions
 
-<img src="/david-portafolio/blogs/deploy_next_with_github_action/home.png" alt="Configuración de GitHub Pages" class="img-blog" />
+<img src="/david-portafolio/blogs/deploy_next_with_github_action/home.webp" alt="Configuración de GitHub Pages" class="img-blog" />
 
 ## Un poco de contexto
 
@@ -191,7 +191,7 @@ Haz clic en Pages.
 
 En Build and Deployment, selecciona GitHub Actions.
 
-<img src="/david-portafolio/blogs/deploy_next_with_github_action/001.png" alt="Configuración de GitHub Pages" class="w-full" />
+<img src="/david-portafolio/blogs/deploy_next_with_github_action/001.webp" alt="Configuración de GitHub Pages" class="w-full" />
 
 ### 5. Sube tus cambios a GitHub
 

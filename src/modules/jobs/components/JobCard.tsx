@@ -12,6 +12,7 @@ import {
 import { Button } from '@/modules/core/ui/button'
 import { Badge } from '@/modules/core/ui/badge'
 import { getImagePath } from '@/modules/core/utils/get-img-path'
+import WebPImage from '@/modules/core/components/WebPImage'
 
 type Props = { job: Job }
 export const JobCard = ({ job }: Props) => (
@@ -35,7 +36,7 @@ export const JobCard = ({ job }: Props) => (
         )}
       </div>
     </CardHeader>
-    <img
+    <WebPImage
       src={getImagePath(job.image)}
       alt={job.alt}
       className="object-cover h-[200px]"
