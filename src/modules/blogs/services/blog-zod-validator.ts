@@ -9,7 +9,7 @@ const BlogDataSchema = z.object({
   createAt: z.string().datetime().or(z.string()), // Puede ser ISO string o cualquier string
   updateAt: z.string().datetime().optional().or(z.string().optional()),
   author: z.string(),
-  authorPhoto: z.string().url(),
+  authorPhoto: z.string().url().or(z.string()),
   authorPhotoAlt: z.string(),
   tags: z.array(z.string()).optional(),
   group: z.array(z.string()).optional(),
