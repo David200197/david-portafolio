@@ -17,7 +17,7 @@ export const Article = ({ blog, nextBlog, prevBlog }: Props) => (
     <div className="flex flex-col items-center justify-center mt-8">
       <div className="flex">
         <Avatar>
-          <AvatarImage src={blog.authorPhoto} />
+          <AvatarImage src={blog.authorPhoto} className="object-cover" />
           <AvatarFallback>{blog.authorPhotoAlt}</AvatarFallback>
         </Avatar>
         <p className="text-md mt-1 ml-1">{blog.author}</p>
