@@ -1,55 +1,52 @@
 ---
-title: 'Bienvenido a Mi Blog de Programación'
+title: 'Por qué empecé este blog (y qué vas a encontrar aquí)'
 createAt: '2025-09-05'
 updateAt: '2025-09-05'
 author: 'David Alfonso Pereira'
 authorPhoto: '/david-portafolio/profile.webp'
 authorPhotoAlt: 'David Alfonso'
-tags: ['programación', 'desarrollo web', 'reflexiones']
-description: 'En esta primera entrada te cuento de qué tratará esta sección de mi sitio, mis objetivos personales y cómo planeo aportar a la comunidad.'
+tags: ['programación', 'desarrollo web']
+description: 'Primera entrada del blog: de qué va esto, por qué lo escribo y qué puedes esperar encontrar.'
 image: '/david-portafolio/blogs/welcome_to_my_blog.webp'
 ---
 
-# ¡Bienvenido a Mi Blog de Programación!
+# Por qué empecé este blog (y qué vas a encontrar aquí)
 
-<img src="/david-portafolio/blogs/welcome_to_my_blog.webp" alt="JavaScript Logo" class="img-blog" />
+<img src="/david-portafolio/blogs/welcome_to_my_blog.webp" alt="Bienvenida al blog" class="img-blog" />
 
-Hola a todos, soy David. Esta es la primera de muchas publicaciones que planeo compartir en mi portafolio. Quiero contarte brevemente de qué tratarán estos blogs, por qué los escribo y qué puedes esperar en el futuro.
+Hola, soy David.
 
----
+Llevo más de 4 años trabajando como desarrollador, y durante todo ese tiempo he perdido la cuenta de cuántas veces un artículo random de algún blog me salvó el día. Ese tipo que documentó cómo solucionó un bug oscuro de webpack a las 3 de la mañana, la persona que explicó un concepto complejo con ejemplos claros, el tutorial que me ahorró horas de frustración.
 
-## Temáticas que encontrarás aquí
+Nunca conoceré a esas personas, pero les debo bastante.
 
-En este espacio compartiré experiencias, aprendizajes y reflexiones que he recopilado a lo largo de mi camino como desarrollador. Algunos de los temas que abordaré incluyen:
-
-- Soluciones a problemas reales que he enfrentado.
-- Buenas prácticas de programación.
-- Opiniones personales sobre herramientas o metodologías.
-- Proyectos personales y pruebas de concepto.
-- Exploraciones sobre tecnologías que aún estoy aprendiendo.
-
-La idea es que este blog funcione como una bitácora personal, pero también como una fuente de apoyo para otros desarrolladores.
+Este blog es mi forma de devolver el favor.
 
 ---
 
-## ¿Por qué decidí comenzar un blog?
+## Qué vas a encontrar aquí
 
-Desde hace tiempo quería un espacio donde pudiera registrar mis ideas, resolver dudas comunes y compartir lo que voy aprendiendo. No solo como una forma de documentación personal, sino también como un gesto de agradecimiento a la comunidad.
+No voy a escribir tutoriales genéricos que ya existen en mil sitios. La idea es compartir cosas que me hubiera gustado encontrar cuando las necesité:
 
-Durante mis más de 4 años de experiencia como desarrollador, innumerables veces me he apoyado en artículos, tutoriales y foros escritos por otras personas. Gracias a ellos he podido resolver problemas puntuales en mi día a día. Ahora, me gustaría retribuir ese conocimiento.
+- **Problemas reales y cómo los resolví** — con contexto, no solo el código que funcionó
+- **Opiniones honestas sobre herramientas** — lo bueno, lo malo, y cuándo tiene sentido usarlas
+- **Cosas que estoy aprendiendo** — porque explicar algo es la mejor forma de entenderlo
+- **Proyectos personales** — el proceso, no solo el resultado final
 
----
-
-## ¿Qué planes tengo a futuro?
-
-Además del blog, estoy planeando agregar otras secciones a mi portafolio, como:
-
-- Un laboratorio de ideas donde pueda experimentar con nuevas tecnologías.
-- Un espacio para publicar _side projects_ y documentar su evolución.
-- Quizás también secciones dedicadas a libros, herramientas útiles o entrevistas.
-
-La idea es que este sitio crezca junto a mí, adaptándose a mis intereses y necesidades con el tiempo.
+Básicamente, una bitácora de desarrollo que espero le sirva a alguien más.
 
 ---
 
-Gracias por leerme. Espero que mis publicaciones te sean útiles, interesantes o, al menos, entretenidas. ¡Nos vemos en el próximo post!
+## Lo que viene
+
+Además del blog, tengo planes de agregar otras secciones al portafolio:
+
+- Un espacio para experimentar con tecnologías nuevas
+- Documentación de side projects conforme los vaya construyendo
+- Quizás recomendaciones de libros y herramientas que uso
+
+El sitio va a ir creciendo. Por ahora, esto es el punto de partida.
+
+---
+
+Si llegaste hasta aquí, gracias por leer. Nos vemos en el siguiente post.

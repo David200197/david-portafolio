@@ -1,168 +1,129 @@
 ---
-title: 'Patrón Criteria. Implementación en TypeScript con Repositorios y Transformadores'
+title: 'Patrón Criteria: Cómo dejé de crear métodos findByX para cada consulta'
 createAt: '2025-12-02'
 updateAt: '2025-12-02'
 author: 'David Alfonso Pereira'
 authorPhoto: '/david-portafolio/profile.webp'
 authorPhotoAlt: 'David Alfonso'
 tags: ['programación', 'patrones', 'repositorio']
-description: 'En este artículo exploramos qué es el patrón criteria usando ejemplos en typescript'
+description: 'En este artículo exploramos qué es el patrón Criteria y cómo implementarlo en TypeScript para construir consultas flexibles y reutilizables'
 image: '/david-portafolio/blogs/criteria_pattern.webp'
 ---
 
-# Patrón Criteria. Implementación en TypeScript con Repositorios y Transformadores
+# Patrón Criteria: Cómo dejé de crear métodos findByX para cada consulta
 
-<img src='/david-portafolio/blogs/criteria_pattern.webp' alt="JavaScript Logo" class="img-blog" />
+<img src='/david-portafolio/blogs/criteria_pattern.webp' alt="Patrón Criteria" class="img-blog" />
 
-Si alguna vez te has encontrado construyendo consultas complejas en tu aplicación y deseaste tener una forma **limpia, reutilizable y flexible** de manejarlas, entonces el **patrón Criteria** es para ti.
+¿Te ha pasado que empiezas un proyecto con un repositorio limpio y, tres meses después, tienes algo así?
 
-Este patrón nos permite separar la **lógica de negocio** de la **forma específica de la base de datos**, haciendo posible:
+```typescript
+class ProductRepository {
+  findById(id: string) {
+    /* ... */
+  }
+  findByCategory(category: string) {
+    /* ... */
+  }
+  findByPriceRange(min: number, max: number) {
+    /* ... */
+  }
+  findActiveProducts() {
+    /* ... */
+  }
+  findByCategoryAndPriceRange(category: string, min: number, max: number) {
+    /* ... */
+  }
+  findActiveByCategory(category: string) {
+    /* ... */
+  }
+  findTopSellingByCategory(category: string, limit: number) {
+    /* ... */
+  }
+  // ... y la lista sigue creciendo
+}
+```
 
-- Aplicar filtros dinámicos y combinables
-- Definir ordenamientos, límites y offsets de manera sencilla
-- Transformar criterios a distintas fuentes de datos (SQL, MongoDB, etc.)
-- Crear criterios reutilizables y parametrizables
+A mí me pasó. Y la verdad, era un desastre mantener eso.
 
-> Una de las grandes ventajas de usar el **patrón Criteria** dentro de un **Repository** es que **evitamos tener que crear un método nuevo para cada tipo de búsqueda**. Gracias a los criterios parametrizables y combinables, podemos construir consultas complejas de manera flexible, reutilizando la misma infraestructura de acceso a datos sin multiplicar métodos específicos.
+El **patrón Criteria** me salvó de ese infierno. La idea es simple: en lugar de crear un método para cada combinación posible de filtros, creamos un objeto que describe _qué_ queremos buscar, y dejamos que el repositorio se encargue del _cómo_.
 
-En este artículo, vamos a ver cómo implementar un sistema completo de Criteria en **TypeScript**, incluyendo:
+## ¿Qué vamos a construir?
 
-1. Un **Criteria base inmutable** con documentación completa
-2. **Métodos estáticos AND y OR** para combinación intuitiva
-3. **Criterios especializados reutilizables** (como `TopProductCriteria`)
-4. **Transformadores** para SQL y MongoDB
-5. Cómo integrarlo con un **Repository** con inyección de dependencias
-6. **Testing simplificado** gracias a la inmutabilidad
+En este artículo vamos a implementar un sistema completo de Criteria que incluye:
+
+1. Una clase `Criteria` base e inmutable
+2. Métodos para combinar criterios con AND y OR
+3. Criterios especializados reutilizables
+4. Transformadores para SQL y MongoDB
+5. Un filtro para colecciones en memoria (súper útil para testing)
+6. Integración con un Repository
 
 ---
 
-## 1. Definiendo los Tipos y el Criteria Base con Documentación Completa
+## 1. La clase Criteria: el corazón del patrón
 
-Primero, establecemos los tipos fundamentales con documentación exhaustiva y nuestra clase `Criteria`:
+Empecemos por definir los tipos básicos. Necesitamos representar filtros, operadores y ordenamientos:
 
 ```typescript
 // Criteria.ts
 
 /**
- * Available comparison operators for filters.
+ * Operadores de comparación disponibles
  */
 export type Operator = '=' | '!=' | '<' | '<=' | '>' | '>=' | 'IN' | 'LIKE'
 
 /**
- * Logical operators for combining filters.
+ * Operadores lógicos para combinar filtros
  */
 export type LogicalOperator = 'AND' | 'OR'
 
 /**
- * Represents a simple filter on a field.
+ * Un filtro simple sobre un campo
  */
 export interface Filter {
-  /**
-   * Name of the field to filter.
-   */
   field: string
-
-  /**
-   * Comparison operator to apply.
-   */
   operator: Operator
-
-  /**
-   * Value to compare the field against.
-   * For the 'IN' operator, this should be an array of values.
-   */
   value: any
 }
 
 /**
- * Represents a composite filter that combines multiple filters with a logical operator.
+ * Un filtro compuesto que combina varios filtros
  */
 export interface CompositeFilter {
-  /**
-   * Logical operator to combine the internal filters.
-   */
   operator: LogicalOperator
-
-  /**
-   * Array of filters that compose this composite filter.
-   * Can contain both simple filters and composite filters.
-   */
   filters: (Filter | CompositeFilter)[]
 }
 
-/**
- * Type representing any filter, simple or composite.
- */
 export type CriteriaFilter = Filter | CompositeFilter
 
 /**
- * Represents result ordering.
+ * Ordenamiento de resultados
  */
 export interface Order {
-  /**
-   * Name of the field to order by.
-   */
   field: string
-
-  /**
-   * Ordering direction (ascending or descending).
-   */
   direction: 'ASC' | 'DESC'
 }
 
 /**
- * Options for building a search criteria.
+ * Opciones para construir un Criteria
  */
 export interface CriteriaOptions {
-  /**
-   * Filters to apply in the search.
-   */
   filters?: CriteriaFilter[]
-
-  /**
-   * Orderings to apply to the results.
-   */
   orders?: Order[]
-
-  /**
-   * Maximum number of results to return.
-   */
   limit?: number
-
-  /**
-   * Number of results to skip (for pagination).
-   */
   offset?: number
 }
+```
 
-/**
- * Criteria class for building complex search queries with filters, ordering, pagination, and logical combinations.
- *
- * @example
- * // Create a simple criteria
- * const criteria = new Criteria({
- *   filters: [{ field: 'name', operator: '=', value: 'John' }],
- *   orders: [{ field: 'createdAt', direction: 'DESC' }],
- *   limit: 10
- * });
- *
- * @example
- * // Combine criteria with logical operators
- * const criteria1 = new Criteria({ filters: [{ field: 'age', operator: '>', value: 18 }] });
- * const criteria2 = new Criteria({ filters: [{ field: 'active', operator: '=', value: true }] });
- * const combined = Criteria.and(criteria1, criteria2);
- */
+Ahora la clase `Criteria` en sí. La hice **inmutable** a propósito: una vez que creas un criterio, no cambia. Esto evita bugs sutiles cuando pasas el mismo criterio a varios lugares.
+
+```typescript
 export class Criteria {
   private readonly filters: CriteriaFilter[]
   private readonly orders: Order[]
   private readonly limitValue?: number
   private readonly offsetValue?: number
 
-  /**
-   * Creates a new Criteria instance.
-   *
-   * @param options - Configuration options for the criteria
-   */
   constructor(options: CriteriaOptions = {}) {
     this.filters = options.filters ?? []
     this.orders = options.orders ?? []
@@ -170,62 +131,28 @@ export class Criteria {
     this.offsetValue = options.offset
   }
 
-  /**
-   * Returns all filters defined in this criteria.
-   *
-   * @returns Array of filters (simple or composite)
-   */
   getFilters(): CriteriaFilter[] {
     return this.filters
   }
 
-  /**
-   * Returns all orderings defined in this criteria.
-   *
-   * @returns Array of order specifications
-   */
   getOrders(): Order[] {
     return this.orders
   }
 
-  /**
-   * Returns the limit value for pagination.
-   *
-   * @returns The limit value or undefined if not set
-   */
   getLimit(): number | undefined {
     return this.limitValue
   }
 
-  /**
-   * Returns the offset value for pagination.
-   *
-   * @returns The offset value or undefined if not set
-   */
   getOffset(): number | undefined {
     return this.offsetValue
   }
+```
 
+Lo interesante viene con los métodos estáticos para combinar criterios. En lugar de crear lógica complicada dentro de cada criterio, simplemente los combinamos:
+
+```typescript
   /**
-   * Combines multiple criteria using the AND logical operator.
-   *
-   * @remarks
-   * The resulting criteria will have:
-   * - All filters combined with AND operator
-   * - All orders from all criteria (duplicates may be overridden)
-   * - The first non-undefined limit from the criteria (if any)
-   * - The first non-undefined offset from the criteria (if any)
-   *
-   * @note La inmutabilidad del Criteria garantiza thread safety y predictibilidad en aplicaciones concurrentes
-   *
-   * @param criteriaArray - One or more Criteria instances to combine
-   * @returns A new Criteria instance with combined filters using AND operator
-   *
-   * @example
-   * const criteria1 = new Criteria({ filters: [{ field: 'age', operator: '>', value: 18 }] });
-   * const criteria2 = new Criteria({ filters: [{ field: 'active', operator: '=', value: true }] });
-   * const combined = Criteria.and(criteria1, criteria2);
-   * // Equivalent to: age > 18 AND active = true
+   * Combina varios criterios con AND
    */
   static and(...criteriaArray: Criteria[]): Criteria {
     const combinedFilters: CriteriaFilter[] = criteriaArray
@@ -251,23 +178,7 @@ export class Criteria {
   }
 
   /**
-   * Combines multiple criteria using the OR logical operator.
-   *
-   * @remarks
-   * The resulting criteria will have:
-   * - All filters combined with OR operator
-   * - All orders from all criteria (duplicates may be overridden)
-   * - The first non-undefined limit from the criteria (if any)
-   * - The first non-undefined offset from the criteria (if any)
-   *
-   * @param criteriaArray - One or more Criteria instances to combine
-   * @returns A new Criteria instance with combined filters using OR operator
-   *
-   * @example
-   * const criteria1 = new Criteria({ filters: [{ field: 'role', operator: '=', value: 'admin' }] });
-   * const criteria2 = new Criteria({ filters: [{ field: 'role', operator: '=', value: 'moderator' }] });
-   * const combined = Criteria.or(criteria1, criteria2);
-   * // Equivalent to: role = 'admin' OR role = 'moderator'
+   * Combina varios criterios con OR
    */
   static or(...criteriaArray: Criteria[]): Criteria {
     const combinedFilters: CriteriaFilter[] = criteriaArray
@@ -294,37 +205,21 @@ export class Criteria {
 }
 ```
 
-> Nuestra clase `Criteria` es **inmutable**, lo que garantiza thread safety y predictibilidad en aplicaciones concurrentes. Los métodos estáticos `and()` y `or()` proporcionan una API más intuitiva y fluida para combinar criterios. Además, la documentación exhaustiva mejora la experiencia de desarrollo y el autocompletado en IDEs.
-
 ---
 
-## 2. Criterio Especializado: TopProductCriteria con Parámetros Opcionales
+## 2. Criterios especializados: encapsulando reglas de negocio
 
-Creamos criterios reutilizables según reglas de negocio específicas:
+Aquí es donde el patrón empieza a brillar. En lugar de tener la lógica de "productos más vendidos" dispersa por el código, la encapsulamos en una clase:
 
 ```typescript
 // TopProductCriteria.ts
 import { Criteria, Filter, Order } from './Criteria'
 
-/**
- * Criteria for retrieving top-selling products with optional filtering by category.
- *
- * @example
- * // Top 10 active products by sales
- * const topProducts = new TopProductCriteria();
- *
- * @example
- * // Top 5 active products in Electronics category
- * const topElectronics = new TopProductCriteria({
- *   limit: 5,
- *   category: 'Electronics'
- * });
- */
 export class TopProductCriteria extends Criteria {
   constructor(params: { limit?: number; category?: string } = {}) {
     const filters: Filter[] = [
       { field: 'status', operator: '=', value: 'active' },
-      { field: 'stock', operator: '>', value: 0 }, // Only products in stock
+      { field: 'stock', operator: '>', value: 0 },
     ]
 
     if (params.category) {
@@ -333,7 +228,7 @@ export class TopProductCriteria extends Criteria {
 
     const orders: Order[] = [
       { field: 'sales', direction: 'DESC' },
-      { field: 'rating', direction: 'DESC' }, // Secondary ordering by rating
+      { field: 'rating', direction: 'DESC' },
     ]
 
     super({
@@ -346,13 +241,25 @@ export class TopProductCriteria extends Criteria {
 }
 ```
 
-> Con `TopProductCriteria` podemos obtener productos más vendidos con filtros opcionales por categoría. La extensión de `Criteria` nos permite reutilizar toda la infraestructura existente.
+Ahora cuando alguien del equipo necesite los productos más vendidos, solo hace:
+
+```typescript
+const topProducts = new TopProductCriteria()
+const topElectronics = new TopProductCriteria({
+  limit: 5,
+  category: 'Electronics',
+})
+```
+
+Nada de revisar qué filtros aplicar, ni copiar código de otro lado.
 
 ---
 
-## 3. Transformadores a SQL y MongoDB Mejorados
+## 3. Transformadores: el puente hacia la base de datos
 
-### SQL Transformer con Manejo de Tipos Seguro
+El Criteria es agnóstico a la base de datos. Para ejecutarlo, necesitamos transformarlo al lenguaje que entienda nuestro motor de base de datos.
+
+### Transformador a SQL
 
 ```typescript
 // CriteriaToSqlTransformer.ts
@@ -360,7 +267,7 @@ import { Criteria, CriteriaFilter } from './Criteria'
 
 function filterToSql(f: CriteriaFilter): string {
   if ('field' in f) {
-    // Simple filter
+    // Filtro simple
     const value =
       typeof f.value === 'string' ? `'${f.value.replace(/'/g, "''")}'` : f.value
 
@@ -377,23 +284,13 @@ function filterToSql(f: CriteriaFilter): string {
 
     return `${f.field} ${f.operator} ${value}`
   } else {
-    // Composite filter
+    // Filtro compuesto
     const inner = f.filters.map(filterToSql).join(` ${f.operator} `)
     return `(${inner})`
   }
 }
 
-/**
- * Transforms Criteria objects into SQL queries with proper escaping and formatting.
- */
 export class CriteriaToSqlTransformer {
-  /**
-   * Transforms a Criteria into a SQL SELECT query.
-   *
-   * @param criteria - The criteria to transform
-   * @param tableName - Name of the table to query
-   * @returns A complete SQL SELECT statement
-   */
   transform(criteria: Criteria, tableName: string): string {
     let query = `SELECT * FROM ${tableName}`
 
@@ -424,7 +321,7 @@ export class CriteriaToSqlTransformer {
 }
 ```
 
-### MongoDB Transformer con Tipos Más Específicos
+### Transformador a MongoDB
 
 ```typescript
 // CriteriaToMongoTransformer.ts
@@ -434,7 +331,6 @@ type MongoFilter = Record<string, any>
 
 function filterToMongo(f: CriteriaFilter): MongoFilter {
   if ('field' in f) {
-    // Simple filter
     switch (f.operator) {
       case '=':
         return { [f.field]: f.value }
@@ -455,10 +351,9 @@ function filterToMongo(f: CriteriaFilter): MongoFilter {
       case 'LIKE':
         return { [f.field]: { $regex: f.value, $options: 'i' } }
       default:
-        throw new Error(`Unsupported operator: ${f.operator}`)
+        throw new Error(`Operador no soportado: ${f.operator}`)
     }
   } else {
-    // Composite filter
     const inner = f.filters.map(filterToMongo)
     return f.operator === 'AND' ? { $and: inner } : { $or: inner }
   }
@@ -470,16 +365,7 @@ export interface MongoQueryOptions {
   skip?: number
 }
 
-/**
- * Transforms Criteria objects into MongoDB query documents and options.
- */
 export class CriteriaToMongoTransformer {
-  /**
-   * Transforms a Criteria into MongoDB query format.
-   *
-   * @param criteria - The criteria to transform
-   * @returns Object containing filter and options for MongoDB queries
-   */
   transform(criteria: Criteria): {
     filter: MongoFilter
     options: MongoQueryOptions
@@ -519,104 +405,371 @@ export class CriteriaToMongoTransformer {
 
 ---
 
-## 4. Integración con Repository con Inyección de Dependencias
+## 4. CollectionFilter: Criteria para colecciones en memoria
 
-Creamos una interfaz para los transformadores y un repositorio genérico:
+Este es un bonus que me ha resultado increíblemente útil, especialmente para testing. ¿Por qué mockear una base de datos cuando puedes filtrar un array con la misma API?
+
+La idea es simple: implementamos la misma lógica de filtrado, ordenamiento y paginación, pero sobre arrays de JavaScript.
 
 ```typescript
-// interfaces/CriteriaTransformer.ts
-import { Criteria } from '../Criteria'
+// CollectionFilter.ts
+import {
+  Criteria,
+  CriteriaFilter,
+  Order,
+  Filter,
+  CompositeFilter,
+} from './Criteria'
 
-/**
- * Interface for criteria transformers to different query languages/databases.
- */
-export interface CriteriaTransformer<T> {
-  transform(criteria: Criteria): T
+export class CollectionFilter<T> {
+  private readonly collection: T[]
+
+  constructor(collection: T[]) {
+    this.collection = [...collection] // Copia para evitar mutaciones
+  }
+
+  /**
+   * Busca todos los elementos que coincidan con el criterio
+   */
+  findAll(criteria?: Criteria): T[] {
+    if (!criteria) {
+      return [...this.collection]
+    }
+
+    let filtered = this.applyFilters(this.collection, criteria.getFilters())
+    filtered = this.applyOrdering(filtered, criteria.getOrders())
+    filtered = this.applyPagination(
+      filtered,
+      criteria.getLimit(),
+      criteria.getOffset()
+    )
+
+    return filtered
+  }
+
+  /**
+   * Busca un solo elemento
+   */
+  findOne(criteria?: Criteria): T | undefined {
+    const results = this.findAll(
+      criteria ? new Criteria({ ...criteria, limit: 1 }) : undefined
+    )
+    return results[0]
+  }
+
+  /**
+   * Cuenta cuántos elementos coinciden
+   */
+  count(criteria?: Criteria): number {
+    if (!criteria) {
+      return this.collection.length
+    }
+    return this.applyFilters(this.collection, criteria.getFilters()).length
+  }
+
+  /**
+   * Verifica si existe al menos un elemento
+   */
+  exists(criteria?: Criteria): boolean {
+    return this.findOne(criteria) !== undefined
+  }
+
+  private applyFilters(collection: T[], filters: CriteriaFilter[]): T[] {
+    if (filters.length === 0) {
+      return [...collection]
+    }
+
+    return collection.filter((item) => {
+      return this.evaluateFilters(item, filters, 'AND')
+    })
+  }
+
+  private evaluateFilters(
+    item: T,
+    filters: CriteriaFilter[],
+    logicalOperator: 'AND' | 'OR' = 'AND'
+  ): boolean {
+    if (filters.length === 0) return true
+
+    const results = filters.map((filter) => this.evaluateFilter(item, filter))
+
+    return logicalOperator === 'AND'
+      ? results.every((r) => r)
+      : results.some((r) => r)
+  }
+
+  private evaluateFilter(item: T, filter: CriteriaFilter): boolean {
+    if (this.isCompositeFilter(filter)) {
+      return this.evaluateFilters(item, filter.filters, filter.operator)
+    }
+
+    const simpleFilter = filter as Filter
+    const fieldValue = this.getFieldValue(item, simpleFilter.field)
+
+    return this.compareValues(
+      fieldValue,
+      simpleFilter.operator,
+      simpleFilter.value
+    )
+  }
+
+  /**
+   * Obtiene el valor de un campo, soportando propiedades anidadas como 'profile.role'
+   */
+  private getFieldValue(item: T, fieldPath: string): any {
+    const parts = fieldPath.split('.')
+    let value: any = item
+
+    for (const part of parts) {
+      if (value === null || value === undefined) return undefined
+      value = value[part]
+    }
+
+    return value
+  }
+
+  private compareValues(
+    itemValue: any,
+    operator: string,
+    filterValue: any
+  ): boolean {
+    switch (operator) {
+      case '=':
+        return itemValue === filterValue
+      case '!=':
+        return itemValue !== filterValue
+      case '<':
+        return itemValue < filterValue
+      case '<=':
+        return itemValue <= filterValue
+      case '>':
+        return itemValue > filterValue
+      case '>=':
+        return itemValue >= filterValue
+      case 'IN':
+        if (!Array.isArray(filterValue)) {
+          throw new Error('El valor para IN debe ser un array')
+        }
+        return filterValue.includes(itemValue)
+      case 'LIKE':
+        if (typeof itemValue !== 'string' || typeof filterValue !== 'string') {
+          return false
+        }
+        const pattern = filterValue.replace(/%/g, '.*').replace(/_/g, '.')
+        return new RegExp(`^${pattern}$`, 'i').test(itemValue)
+      default:
+        throw new Error(`Operador no soportado: ${operator}`)
+    }
+  }
+
+  private applyOrdering(collection: T[], orders: Order[]): T[] {
+    if (orders.length === 0) return [...collection]
+
+    return [...collection].sort((a, b) => {
+      for (const order of orders) {
+        const aValue = this.getFieldValue(a, order.field)
+        const bValue = this.getFieldValue(b, order.field)
+
+        if (aValue === undefined || aValue === null) {
+          return order.direction === 'ASC' ? -1 : 1
+        }
+        if (bValue === undefined || bValue === null) {
+          return order.direction === 'ASC' ? 1 : -1
+        }
+
+        if (aValue < bValue) return order.direction === 'ASC' ? -1 : 1
+        if (aValue > bValue) return order.direction === 'ASC' ? 1 : -1
+      }
+      return 0
+    })
+  }
+
+  private applyPagination(
+    collection: T[],
+    limit?: number,
+    offset?: number
+  ): T[] {
+    let result = [...collection]
+
+    if (offset !== undefined && offset > 0) {
+      result = result.slice(offset)
+    }
+
+    if (limit !== undefined && limit > 0) {
+      result = result.slice(0, limit)
+    }
+
+    return result
+  }
+
+  private isCompositeFilter(filter: CriteriaFilter): filter is CompositeFilter {
+    return 'filters' in filter
+  }
 }
-
-/**
- * SQL transformer interface
- */
-export interface SqlTransformer extends CriteriaTransformer<string> {
-  transform(criteria: Criteria, tableName: string): string
-}
-
-/**
- * MongoDB transformer interface
- */
-export interface MongoTransformer
-  extends CriteriaTransformer<{
-    filter: Record<string, any>
-    options: Record<string, any>
-  }> {}
 ```
+
+### Ejemplo práctico del CollectionFilter
+
+Veamos cómo usarlo con datos reales:
+
+```typescript
+interface User {
+  id: number
+  name: string
+  age: number
+  active: boolean
+  email: string
+  profile?: {
+    role: string
+    department: string
+  }
+}
+
+const users: User[] = [
+  {
+    id: 1,
+    name: 'John Doe',
+    age: 25,
+    active: true,
+    email: 'john@example.com',
+    profile: { role: 'admin', department: 'IT' },
+  },
+  {
+    id: 2,
+    name: 'Jane Smith',
+    age: 30,
+    active: false,
+    email: 'jane@example.com',
+    profile: { role: 'user', department: 'HR' },
+  },
+  {
+    id: 3,
+    name: 'Bob Johnson',
+    age: 20,
+    active: true,
+    email: 'bob@example.com',
+    profile: { role: 'user', department: 'IT' },
+  },
+  {
+    id: 4,
+    name: 'Alice Brown',
+    age: 35,
+    active: true,
+    email: 'alice@example.com',
+    profile: { role: 'manager', department: 'Sales' },
+  },
+]
+
+const filter = new CollectionFilter(users)
+
+// Buscar usuarios activos mayores de 21 años
+const activeAdults = filter.findAll(
+  new Criteria({
+    filters: [
+      { field: 'active', operator: '=', value: true },
+      { field: 'age', operator: '>', value: 21 },
+    ],
+    orders: [{ field: 'age', direction: 'DESC' }],
+  })
+)
+// Resultado: [Alice (35), John (25)]
+
+// Buscar por departamento usando propiedades anidadas
+const itUsers = filter.findAll(
+  new Criteria({
+    filters: [{ field: 'profile.department', operator: '=', value: 'IT' }],
+  })
+)
+// Resultado: [John, Bob]
+
+// Buscar usuarios cuyo nombre contenga "Smith"
+const smiths = filter.findAll(
+  new Criteria({
+    filters: [{ field: 'name', operator: 'LIKE', value: '%Smith%' }],
+  })
+)
+// Resultado: [Jane Smith]
+
+// Buscar usuarios de 20 o 35 años usando IN
+const specificAges = filter.findAll(
+  new Criteria({
+    filters: [{ field: 'age', operator: 'IN', value: [20, 35] }],
+  })
+)
+// Resultado: [Bob (20), Alice (35)]
+
+// Filtro compuesto: menores de 25 O mayores de 30
+const youngOrOld = filter.findAll(
+  new Criteria({
+    filters: [
+      {
+        operator: 'OR',
+        filters: [
+          { field: 'age', operator: '<', value: 25 },
+          { field: 'age', operator: '>', value: 30 },
+        ],
+      },
+    ],
+  })
+)
+// Resultado: [Bob (20), Alice (35)]
+```
+
+Lo mejor de este approach es que **los tests se vuelven triviales**:
+
+```typescript
+describe('ProductService', () => {
+  it('should return top products correctly', () => {
+    const products = [
+      { id: 1, name: 'Product A', status: 'active', stock: 10, sales: 100 },
+      { id: 2, name: 'Product B', status: 'inactive', stock: 5, sales: 200 },
+      { id: 3, name: 'Product C', status: 'active', stock: 0, sales: 150 },
+      { id: 4, name: 'Product D', status: 'active', stock: 20, sales: 50 },
+    ]
+
+    const filter = new CollectionFilter(products)
+    const criteria = new TopProductCriteria({ limit: 2 })
+
+    const result = filter.findAll(criteria)
+
+    // Solo Product A y D (activos con stock), ordenados por ventas
+    expect(result).toHaveLength(2)
+    expect(result[0].id).toBe(1) // 100 ventas
+    expect(result[1].id).toBe(4) // 50 ventas
+  })
+})
+```
+
+Sin mocks de base de datos, sin setup complicado. Solo datos y lógica.
+
+---
+
+## 5. El Repository: uniendo todo
+
+Finalmente, el repositorio queda limpio y simple:
 
 ```typescript
 // ProductRepository.ts
 import { Criteria } from './Criteria'
-import { CriteriaTransformer } from './interfaces/CriteriaTransformer'
 import { Product } from './models/Product'
 
-/**
- * Generic repository for Product entities with criteria-based search.
- */
 export class ProductRepository {
-  /**
-   * Creates a new ProductRepository.
-   *
-   * @param transformer - Transformer for converting criteria to database queries
-   * @param tableName - Database table/collection name (default: 'products')
-   */
   constructor(
     private readonly transformer: CriteriaTransformer<any>,
     private readonly tableName: string = 'products'
   ) {}
 
-  /**
-   * Finds products matching the given criteria.
-   *
-   * @param criteria - Search criteria to apply
-   * @returns Promise resolving to array of matching products
-   *
-   * @example
-   * const repository = new ProductRepository(new CriteriaToSqlTransformer());
-   * const criteria = new TopProductCriteria({ limit: 5 });
-   * const products = await repository.find(criteria);
-   */
   async find(criteria: Criteria): Promise<Product[]> {
-    try {
-      // Transform criteria to database-specific query
-      const query = this.transformer.transform(criteria, this.tableName)
-
-      // In a real implementation, this would execute the query
-      // For example: await database.query(query);
-      console.log('Executing query:', query)
-
-      // Mock implementation - return empty array
-      return []
-    } catch (error) {
-      console.error('Error executing criteria query:', error)
-      throw new Error(`Failed to execute criteria query: ${error.message}`)
-    }
+    const query = this.transformer.transform(criteria, this.tableName)
+    // Ejecutar query...
+    return []
   }
 
-  /**
-   * Counts products matching the given criteria.
-   *
-   * @param criteria - Search criteria to apply
-   * @returns Promise resolving to count of matching products
-   */
   async count(criteria: Criteria): Promise<number> {
-    // Similar implementation for counting
+    // Similar pero con COUNT
     return 0
   }
 
-  /**
-   * Checks if any product matches the given criteria.
-   *
-   * @param criteria - Search criteria to apply
-   * @returns Promise resolving to boolean indicating existence
-   */
   async exists(criteria: Criteria): Promise<boolean> {
     const count = await this.count(criteria)
     return count > 0
@@ -624,192 +777,53 @@ export class ProductRepository {
 }
 ```
 
----
-
-## 5. Uso Completo con Ejemplos Prácticos
-
-```typescript
-// examples/ProductSearch.ts
-import { Criteria } from '../Criteria'
-import { TopProductCriteria } from '../TopProductCriteria'
-import { CriteriaToSqlTransformer } from '../CriteriaToSqlTransformer'
-import { CriteriaToMongoTransformer } from '../CriteriaToMongoTransformer'
-import { ProductRepository } from '../ProductRepository'
-
-async function demonstrateCriteriaUsage() {
-  // Example 1: Basic criteria usage
-  console.log('=== Example 1: Basic Criteria ===')
-  const basicCriteria = new Criteria({
-    filters: [
-      { field: 'price', operator: '<', value: 100 },
-      { field: 'category', operator: '=', value: 'Electronics' },
-    ],
-    orders: [{ field: 'price', direction: 'ASC' }],
-    limit: 20,
-    offset: 0,
-  })
-
-  // Example 2: Specialized criteria
-  console.log('\n=== Example 2: Top Products ===')
-  const topProducts = new TopProductCriteria()
-  const topElectronics = new TopProductCriteria({
-    limit: 5,
-    category: 'Electronics',
-  })
-
-  // Example 3: Combining criteria
-  console.log('\n=== Example 3: Combined Criteria ===')
-  const cheapCriteria = new Criteria({
-    filters: [{ field: 'price', operator: '<', value: 50 }],
-  })
-
-  const featuredCriteria = new Criteria({
-    filters: [{ field: 'featured', operator: '=', value: true }],
-  })
-
-  // Find products that are cheap OR featured
-  const cheapOrFeatured = Criteria.or(cheapCriteria, featuredCriteria)
-
-  // Find products that are cheap AND in Electronics
-  const cheapElectronics = Criteria.and(
-    cheapCriteria,
-    new Criteria({
-      filters: [{ field: 'category', operator: '=', value: 'Electronics' }],
-    })
-  )
-
-  // Example 4: Repository usage with different transformers
-  console.log('\n=== Example 4: Repository Examples ===')
-
-  // SQL Repository
-  const sqlRepository = new ProductRepository(new CriteriaToSqlTransformer())
-  console.log('SQL Query for top electronics:')
-  const sqlQuery = sqlRepository.find(topElectronics)
-
-  // MongoDB Repository
-  const mongoTransformer = new CriteriaToMongoTransformer()
-  const mongoRepository = new ProductRepository({
-    transform: (criteria: Criteria) => mongoTransformer.transform(criteria),
-  } as any)
-
-  console.log('\nMongoDB Query for cheap or featured:')
-  const mongoQuery = mongoRepository.find(cheapOrFeatured)
-
-  // Example 5: Complex nested filters
-  console.log('\n=== Example 5: Complex Nested Filters ===')
-  const complexCriteria = new Criteria({
-    filters: [
-      {
-        operator: 'OR',
-        filters: [
-          { field: 'status', operator: '=', value: 'active' },
-          { field: 'status', operator: '=', value: 'pending' },
-        ],
-      },
-      {
-        operator: 'AND',
-        filters: [
-          { field: 'stock', operator: '>', value: 0 },
-          {
-            operator: 'OR',
-            filters: [
-              { field: 'discount', operator: '>', value: 0 },
-              { field: 'featured', operator: '=', value: true },
-            ],
-          },
-        ],
-      },
-    ],
-  })
-
-  console.log('Complex criteria demonstrates nested AND/OR logic')
-}
-
-// Example 6: Testing made easy
-console.log('\n=== Example 6: Testing Benefits ===')
-// Criteria objects are simple, serializable data structures
-const testCriteria = new TopProductCriteria({ limit: 3 })
-console.log('Test criteria:', {
-  filters: testCriteria.getFilters(),
-  orders: testCriteria.getOrders(),
-  limit: testCriteria.getLimit(),
-})
-// Easy to mock and assert in unit tests
-
-demonstrateCriteriaUsage()
-```
+Un solo método `find()` que acepta cualquier `Criteria`. Adiós a los 20 métodos `findByX`.
 
 ---
 
-## 6. Beneficios de Testing con el Patrón Criteria
-
-El patrón Criteria simplifica enormemente las pruebas unitarias:
+## Poniendo todo junto
 
 ```typescript
-// tests/ProductService.test.ts
-import { ProductService } from '../ProductService'
-import { TopProductCriteria } from '../TopProductCriteria'
+// Crear criterios
+const cheapProducts = new Criteria({
+  filters: [{ field: 'price', operator: '<', value: 50 }]
+});
 
-describe('ProductService', () => {
-  let productService: ProductService
-  let mockRepository: any
+const featuredProducts = new Criteria({
+  filters: [{ field: 'featured', operator: '=', value: true }]
+});
 
-  beforeEach(() => {
-    mockRepository = {
-      find: jest.fn().mockResolvedValue([]),
-    }
-    productService = new ProductService(mockRepository)
-  })
+// Combinarlos
+const cheapOrFeatured = Criteria.or(cheapProducts, featuredProducts);
 
-  test('getTopProducts creates correct criteria', async () => {
-    const limit = 5
-    const category = 'Electronics'
+// Usar con SQL
+const sqlTransformer = new CriteriaToSqlTransformer();
+const sqlQuery = sqlTransformer.transform(cheapOrFeatured, 'products');
+// SELECT * FROM products WHERE (price < 50) OR (featured = true);
 
-    await productService.getTopProducts(limit, category)
+// Usar con MongoDB
+const mongoTransformer = new CriteriaToMongoTransformer();
+const { filter, options } = mongoTransformer.transform(cheapOrFeatured);
+// filter: { $or: [{ price: { $lt: 50 } }, { featured: true }] }
 
-    // Verify the repository was called with correct criteria
-    expect(mockRepository.find).toHaveBeenCalledWith(
-      expect.objectContaining({
-        getLimit: expect.any(Function),
-        getFilters: expect.any(Function),
-      })
-    )
-
-    // Or more specifically
-    const calledCriteria = mockRepository.find.mock.calls[0][0]
-    expect(calledCriteria.getLimit()).toBe(limit)
-    expect(calledCriteria.getFilters()).toContainEqual(
-      expect.objectContaining({
-        field: 'category',
-        operator: '=',
-        value: category,
-      })
-    )
-  })
-})
+// Usar en memoria para tests
+const products = [...]; // tus datos de prueba
+const collectionFilter = new CollectionFilter(products);
+const results = collectionFilter.findAll(cheapOrFeatured);
 ```
 
 ---
 
 ## Conclusión
 
-Con esta implementación mejorada logramos:
+El patrón Criteria transformó cómo estructuro el acceso a datos en mis proyectos. Las ventajas principales:
 
-1. **Criteria inmutable y bien documentado** con métodos estáticos `and()` y `or()` para una API más intuitiva
-2. **Separación clara de responsabilidades** entre construcción de criterios y ejecución de consultas
-3. **Transformadores específicos por base de datos** con manejo seguro de tipos y valores
-4. **Repository con inyección de dependencias** para máxima flexibilidad
-5. **Criterios especializados reutilizables** que encapsulan reglas de negocio
-6. **Testing simplificado** gracias a la serialización de criterios como objetos simples
+- **Un método en lugar de muchos**: `find(criteria)` reemplaza docenas de `findByX`
+- **Criterios reutilizables**: la lógica de negocio queda encapsulada en clases
+- **Agnóstico a la base de datos**: el mismo criterio funciona con SQL, MongoDB o arrays en memoria
+- **Testing simple**: el `CollectionFilter` elimina la necesidad de mockear bases de datos
+- **Composable**: combina criterios con AND/OR sin complicaciones
 
-> **Ventaja clave**: Eliminamos la necesidad de crear métodos de repositorio específicos para cada tipo de consulta. En lugar de `findByCategory()`, `findActiveProducts()`, `findTopSelling()`, etc., tenemos un único método `find()` que acepta cualquier `Criteria`. Esto hace que nuestro código sea más mantenible, extensible y testeable.
+La inmutabilidad del `Criteria` es clave: evita bugs donde un criterio se modifica sin querer en algún lugar del código.
 
-El patrón Criteria transforma consultas complejas en **objetos de primera clase** que pueden ser:
-
-- **Combinados** lógicamente
-- **Reutilizados** en diferentes contextos
-- **Serializados** para caching o logging
-- **Transformados** a diferentes backends
-- **Probados** de forma aislada
-
-Esta implementación en TypeScript proporciona **type safety** completo, **autocompletado inteligente** y **documentación en tiempo de desarrollo**, haciendo que trabajar con consultas complejas sea una experiencia de desarrollo agradable y productiva.
+Si estás cansado de mantener repositorios con métodos que se multiplican como conejos, dale una oportunidad a este patrón. Tu yo del futuro te lo agradecerá.

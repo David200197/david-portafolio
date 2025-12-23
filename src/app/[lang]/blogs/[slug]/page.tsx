@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation'
 import { AppSidebar } from '@/modules/blogs/components/AppSidebar'
 import { SidebarProvider } from '@/modules/blogs/context/sidebar-context'
 import { TriggerSidebarButton } from '@/modules/blogs/components/TriggerSidebarButton'
+import { getDomain } from '@/modules/core/utils/get-domain'
 
 const blogService = getService(BlogService)
 
@@ -19,19 +20,44 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const blog = await blogService.getBlog(lang, slug)
   if (!blog) return redirect('/not_found')
 
+  const baseUrl = getDomain()
+  const articleUrl = `${baseUrl}/${lang}/blog/${slug}`
+  const imageUrl = blog.image.startsWith('http')
+    ? blog.image
+    : `${baseUrl}${blog.image}`
+
   return {
     title: blog.title,
     description: blog.description,
     authors: [{ name: blog.author }],
+    keywords: blog.tags?.join(', '),
+
     openGraph: {
       title: blog.title,
       description: blog.description,
       type: 'article',
+      url: articleUrl,
+      siteName: 'David Alfonso - Blogs',
+      locale: lang === 'es' ? 'es_ES' : 'en_US',
       publishedTime: blog.createAt,
+      modifiedTime: blog.updateAt,
       authors: [blog.author],
-      images: [blog.image],
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: blog.title,
+        },
+      ],
     },
-    keywords: blog.tags?.join(', '),
+
+    twitter: {
+      card: 'summary_large_image',
+      title: blog.title,
+      description: blog.description,
+      images: [imageUrl],
+    },
   }
 }
 
