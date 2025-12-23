@@ -1,5 +1,5 @@
 ---
-title: 'Refresh Token: qué es, cómo funciona y por qué es clave en la autenticación segura'
+title: 'Refresh Tokens: la pieza que faltaba en tu sistema de autenticación'
 createAt: '2025-09-10'
 updateAt: '2025-09-10'
 author: 'David Alfonso Pereira'
@@ -11,211 +11,232 @@ tags:
     'desarrollo web',
     'refresh token',
     'access token',
-    'segurity',
+    'seguridad',
   ]
 description: 'En este artículo exploramos qué es un refresh token, cómo funciona y por qué es fundamental para mantener sesiones seguras y continuas en aplicaciones modernas.'
 image: '/david-portafolio/blogs/segurity.webp'
 ---
 
-# Refresh Token: qué es, cómo funciona y por qué es clave en la autenticación segura
+# Refresh Tokens: la pieza que faltaba en tu sistema de autenticación
 
-<img src="/david-portafolio/blogs/segurity.webp" alt="JavaScript Logo" class="img-blog" />
+<img src="/david-portafolio/blogs/segurity.webp" alt="Seguridad en autenticación" class="img-blog" />
 
-La autenticación es el corazón de cualquier aplicación moderna. Y en este ecosistema, **los tokens juegan un papel vital para garantizar sesiones seguras, fluidas y confiables**. Hoy quiero hablarte del **refresh token**, un concepto que quizás ya hayas escuchado, pero cuya correcta implementación puede marcar la diferencia entre una app robusta y una vulnerable.
+¿Alguna vez te has preguntado cómo hacen apps como Gmail o Spotify para mantenerte logueado durante semanas sin pedirte la contraseña cada rato? La respuesta está en los **refresh tokens**.
+
+Cuando empecé a implementar autenticación en mis proyectos, cometí el error clásico: tokens de acceso con expiración de 24 horas. "Así el usuario no tiene que loguearse tan seguido", pensé. Terrible idea. Si alguien roba ese token, tiene acceso durante un día entero.
+
+La solución correcta es usar **dos tipos de tokens**, cada uno con un propósito específico. Y eso es exactamente lo que vamos a ver.
 
 ---
 
 ## ¿Qué es un Refresh Token?
 
-Un **refresh token** es una credencial de seguridad que permite obtener nuevos **access tokens** sin necesidad de que el usuario vuelva a iniciar sesión. Este access token es una credencial temporal que permite a un usuario o aplicación acceder a recursos protegidos de un sistema o API sin tener que enviar su contraseña. Cuando el **access token expira**, el cliente utiliza el refresh token para pedir uno nuevo al servidor. Así, la sesión se mantiene activa sin molestar al usuario y con un alto nivel de seguridad.
+Vamos directo al grano. En un sistema de autenticación moderno tienes dos tokens:
+
+- **Access token**: de vida corta (minutos u horas), lo usas para acceder a recursos protegidos.
+- **Refresh token**: de vida larga (días o semanas), lo usas _únicamente_ para obtener nuevos access tokens.
+
+El refresh token es como una llave maestra que te permite renovar tu acceso sin volver a meter usuario y contraseña. El usuario no se entera de nada, la experiencia es fluida, y la seguridad se mantiene porque el access token expira rápido.
 
 ---
 
-## ¿Cómo funciona?
+## El flujo completo
 
-El flujo es simple, pero poderoso:
+Así funciona en la práctica:
 
-1. El usuario inicia sesión.
-2. El servidor entrega **dos tokens**: access (de vida corta) y refresh (de vida larga).
-3. El access token se usa para consumir recursos protegidos.
-4. Cuando caduca, la app envía el refresh token.
-5. Si es válido, el servidor genera un **nuevo access token** (y a veces también un nuevo refresh token).
+1. El usuario hace login con sus credenciales.
+2. El servidor devuelve un **access token** (corta duración) y un **refresh token** (larga duración).
+3. El frontend usa el access token para cada petición a la API.
+4. Cuando el access token expira (401 Unauthorized), el frontend envía el refresh token.
+5. Si el refresh token es válido, el servidor genera un nuevo access token.
+6. Si el refresh token también expiró, toca volver a hacer login.
+
+Simple, pero hay varios detalles donde la gente se equivoca. Vamos a verlos.
 
 ---
 
-## Ejemplo de flujo de autenticación
+## Ejemplo paso a paso
 
-### 1. Autenticación inicial
+### 1. Login inicial
 
 ```http
 POST /auth/login
+Content-Type: application/json
+
 {
   "username": "usuario123",
   "password": "contraseñaSegura"
 }
 ```
 
-#### _Respuesta del servidor_
+El servidor responde con ambos tokens:
 
 ```json
 {
-  "access_token": "...",
-  "refresh_token": "...",
-  "expires_in": 3600,
+  "access_token": "eyJhbGciOiJIUzI1NiIs...",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIs...",
+  "expires_in": 900,
   "token_type": "Bearer"
 }
 ```
 
-### 2. Uso del Access Token
+### 2. Usando el access token
 
 ```http
-GET /api/recursos-protegidos
-Authorization: Bearer eyJhbGciOiJIUzI1...
+GET /api/perfil
+Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
 ```
 
-### 3. Token expirado
+Todo bien mientras el token sea válido.
 
-```json
+### 3. El token expira
+
+```http
+HTTP/1.1 401 Unauthorized
+
 {
   "error": "invalid_token",
   "error_description": "Token has expired"
 }
 ```
 
-Normalmente acompañado de un 401 Unauthorized.
+Aquí es donde entra el refresh token.
 
-### 4. Renovación con Refresh Token
+### 4. Renovación silenciosa
 
 ```http
 POST /auth/refresh
+Content-Type: application/json
+
 {
-  "refresh_token": "eyJhbGciOiJIUzI1..."
+  "refresh_token": "eyJhbGciOiJIUzI1NiIs..."
 }
 ```
 
-#### _Respuesta del servidor_
+El servidor valida el refresh token y devuelve uno nuevo:
 
 ```json
 {
-  "access_token": "...nuevo",
-  "refresh_token": "...nuevo",
-  "expires_in": 3600,
+  "access_token": "eyJhbGciOiJIUzI1NiIs...nuevo",
+  "expires_in": 900,
   "token_type": "Bearer"
 }
 ```
 
-### 5. Refresh Token expirado
+El usuario ni se enteró. La app sigue funcionando.
 
-```json
-{
-  "error": "invalid_token",
-  "error_description": "Refresh token has expired"
-}
-```
+---
 
-En este caso, el usuario debe volver a autenticarse.
+## El error más común: dónde guardar los tokens
 
-## Durabilidad de los tokens
+Aquí es donde muchos tutoriales te llevan por mal camino. Te dicen que guardes los tokens en `localStorage` o `sessionStorage`. **No lo hagas.**
 
-Access token debe caducar rápido (minutos u horas).
-Refresh token puede durar más tiempo (días o semanas), pero con controles de seguridad adicionales.
+¿Por qué? Porque cualquier script JavaScript puede leerlos. Un ataque XSS, una extensión maliciosa del navegador, y adiós tokens.
 
-## Persistencia de los tokens en el front
+### La forma correcta
 
-Muchos tutoriales recomiendan guardarlos en localStorage o sessionStorage, pero esto es una mala práctica:
-Son vulnerables a extensiones maliciosas y ataques XSS. Una mejor solución:
+- **Refresh token**: en una cookie `HttpOnly` + `Secure` + `SameSite=Strict`
+- **Access token**: en memoria (una variable JavaScript, estado de React/Vue, etc.)
 
-- Guardar el refresh token en una cookie HttpOnly + Secure.
+Con esta estrategia:
 
-- Mantener el access token en memoria (variable global o estado).
+- El refresh token es invisible para JavaScript (previene XSS)
+- Solo viaja por HTTPS (previene sniffing)
+- El navegador lo envía automáticamente
+- Si alguien roba el access token de memoria, expira en minutos
 
-- De esta forma, el refresh token entrega un nuevo access token sin necesidad de persistirlo.
+---
 
-### Ventajas de usar cookies seguras
+## Implementación práctica
 
-#### Seguridad:
+Vamos a ver código real. Un backend en Node.js con Express y un frontend vanilla.
 
-- HttpOnly: inaccesibles desde JavaScript (previene XSS).
-
-- Secure: solo por HTTPS (previene sniffing).
-
-- SameSite: reduce ataques CSRF.
-
-#### Simplicidad:
-
-El navegador las envía automáticamente en cada request.
-
-### Consideraciones
-
-Desactivar Secure en entornos locales sin HTTPS.
-
-### Ejemplo práctico: Backend y Frontend
-
-#### Backend (Node.js + Express)
+### Backend (Node.js + Express)
 
 ```js
 import express from 'express'
 import jwt from 'jsonwebtoken'
 import cookieParser from 'cookie-parser'
 
-// Middleware para verificar access token
+const app = express()
+app.use(express.json())
+app.use(cookieParser())
+
+// En producción, usa variables de entorno
+const ACCESS_TOKEN_SECRET = 'tu_secreto_access'
+const REFRESH_TOKEN_SECRET = 'tu_secreto_refresh'
+const ACCESS_TOKEN_EXPIRY = '15m' // 15 minutos
+const REFRESH_TOKEN_EXPIRY = '7d' // 7 días
+
+// En producción, usa Redis o una base de datos
+let refreshTokensStore = []
+
+// Middleware de autenticación
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization']
-  const token = authHeader && authHeader.split(' ')[1]
-  if (!token) return res.status(401).json({ error: 'No token provided' })
+  const token = authHeader?.split(' ')[1]
+
+  if (!token) {
+    return res.status(401).json({ error: 'Token requerido' })
+  }
 
   jwt.verify(token, ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) return res.status(401).json({ error: 'Token expired or invalid' })
+    if (err) {
+      return res.status(401).json({ error: 'Token inválido o expirado' })
+    }
     req.user = user
     next()
   })
 }
 
-const app = express()
-app.use(express.json())
-app.use(cookieParser())
-
-const ACCESS_TOKEN_SECRET = 'super_secret_access'
-const REFRESH_TOKEN_SECRET = 'super_secret_refresh'
-const ACCESS_TOKEN_EXPIRY = '30s'
-const REFRESH_TOKEN_EXPIRY = '1d'
-let refreshTokensStore = []
-
-// Login: genera tokens
+// Login
 app.post('/login', (req, res) => {
-  const { username } = req.body
-  if (!username) return res.status(400).json({ error: 'Username required' })
+  const { username, password } = req.body
+
+  // Aquí validarías contra tu base de datos
+  if (!username || !password) {
+    return res.status(400).json({ error: 'Credenciales requeridas' })
+  }
 
   const accessToken = jwt.sign({ username }, ACCESS_TOKEN_SECRET, {
     expiresIn: ACCESS_TOKEN_EXPIRY,
   })
+
   const refreshToken = jwt.sign({ username }, REFRESH_TOKEN_SECRET, {
     expiresIn: REFRESH_TOKEN_EXPIRY,
   })
 
+  // Guardar refresh token (en producción: base de datos)
   refreshTokensStore.push(refreshToken)
 
+  // El refresh token va en cookie HttpOnly
   res.cookie('refreshToken', refreshToken, {
     httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 días
   })
+
+  // El access token va en el body
   res.json({ accessToken })
 })
 
-app.post('/refresh', async (req, res) => {
+// Refresh
+app.post('/refresh', (req, res) => {
+  const refreshToken = req.cookies.refreshToken
+
+  if (!refreshToken) {
+    return res.status(401).json({ error: 'Refresh token requerido' })
+  }
+
+  if (!refreshTokensStore.includes(refreshToken)) {
+    return res.status(403).json({ error: 'Refresh token inválido' })
+  }
+
   try {
-    const refreshToken = req.cookies.refreshToken
-    if (!refreshToken) {
-      return res.status(401).json({ error: 'No refresh token' })
-    }
-    if (!refreshTokensStore.includes(refreshToken)) {
-      return res.status(403).json({ error: 'Invalid refresh token' })
-    }
+    const user = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET)
 
-    const user = await jwt.verify(refreshToken, REFRESH_TOKEN_SECRET)
-
-    const newAccessToken = await jwt.sign(
+    const newAccessToken = jwt.sign(
       { username: user.username },
       ACCESS_TOKEN_SECRET,
       { expiresIn: ACCESS_TOKEN_EXPIRY }
@@ -223,45 +244,66 @@ app.post('/refresh', async (req, res) => {
 
     res.json({ accessToken: newAccessToken })
   } catch (err) {
-    return res.status(403).json({ error: 'Token not valid' })
+    return res.status(403).json({ error: 'Refresh token expirado' })
   }
 })
 
+// Logout
 app.post('/logout', (req, res) => {
   const refreshToken = req.cookies.refreshToken
+
+  // Eliminar de la lista de tokens válidos
   refreshTokensStore = refreshTokensStore.filter((t) => t !== refreshToken)
+
   res.clearCookie('refreshToken')
-  res.json({ message: 'Logged out' })
+  res.json({ message: 'Sesión cerrada' })
 })
 
-app.get('/protected', authenticateToken, (req, res) => {
-  res.json({ message: `Hello ${req.user.username}, this is protected data.` })
+// Ruta protegida de ejemplo
+app.get('/perfil', authenticateToken, (req, res) => {
+  res.json({
+    message: `Hola ${req.user.username}`,
+    datos: 'Información sensible aquí',
+  })
 })
 
-app.listen(4000, () => console.log('Server running on http://localhost:4000'))
+app.listen(4000, () => {
+  console.log('Server en http://localhost:4000')
+})
 ```
 
-#### Frontend (fetch API)
+### Frontend (JavaScript vanilla)
 
 ```js
+// El access token vive en memoria, no en storage
 let accessToken = null
 
-async function login() {
+async function login(username, password) {
   const res = await fetch('http://localhost:4000/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username: 'juan' }),
-    credentials: 'include',
+    body: JSON.stringify({ username, password }),
+    credentials: 'include', // Importante para las cookies
   })
+
+  if (!res.ok) throw new Error('Login fallido')
+
   const data = await res.json()
   accessToken = data.accessToken
 }
 
-async function refresh() {
+async function refreshAccessToken() {
   const res = await fetch('http://localhost:4000/refresh', {
     method: 'POST',
     credentials: 'include',
   })
+
+  if (!res.ok) {
+    // Refresh token expirado, hay que volver a loguear
+    accessToken = null
+    throw new Error('Sesión expirada')
+  }
+
   const data = await res.json()
   accessToken = data.accessToken
 }
@@ -274,43 +316,81 @@ async function logout() {
   accessToken = null
 }
 
-async function fetchProtected() {
-  let res = await fetch('http://localhost:4000/protected', {
-    method: 'GET',
-    headers: { Authorization: `Bearer ${accessToken}` },
-    credentials: 'include',
-  })
-
-  if (res.status === 401) {
-    await refresh()
-    res = await fetch('http://localhost:4000/protected', {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${accessToken}` },
+// Wrapper para peticiones autenticadas con retry automático
+async function fetchWithAuth(url, options = {}) {
+  const makeRequest = () =>
+    fetch(url, {
+      ...options,
+      headers: {
+        ...options.headers,
+        Authorization: `Bearer ${accessToken}`,
+      },
       credentials: 'include',
     })
+
+  let res = await makeRequest()
+
+  // Si el access token expiró, renovamos y reintentamos
+  if (res.status === 401) {
+    try {
+      await refreshAccessToken()
+      res = await makeRequest()
+    } catch (e) {
+      // Redirigir al login
+      window.location.href = '/login'
+      throw e
+    }
   }
 
+  return res
+}
+
+// Uso
+async function cargarPerfil() {
+  const res = await fetchWithAuth('http://localhost:4000/perfil')
   const data = await res.json()
-  console.log('Respuesta protegida:', data)
+  console.log(data)
 }
 ```
 
-## Persistencia del Refresh Token en el backend
+El `fetchWithAuth` es clave: intercepta los 401, renueva el token automáticamente, y reintenta la petición. El usuario no nota nada.
 
-Depende del negocio, pero guardarlo en DB ofrece ventajas claras:
+---
 
-- Revocar sesiones en logout o por decisión administrativa.
+## ¿Guardar refresh tokens en base de datos?
 
-- Controlar sesiones en múltiples dispositivos.
+Depende de tu caso, pero generalmente sí. Las ventajas son claras:
 
-- Inhabilitar tokens comprometidos.
+- **Revocar sesiones**: logout real, no solo borrar la cookie del cliente
+- **Cerrar todas las sesiones**: "cerrar sesión en todos los dispositivos"
+- **Invalidar tokens comprometidos**: si detectas actividad sospechosa
+- **Rotación de tokens**: cada refresh genera un nuevo refresh token e invalida el anterior
 
-- Implementar rotación de refresh tokens (recomendado en sistemas modernos).
+Sin base de datos (JWT puro) es más simple, pero pierdes la capacidad de revocar tokens antes de que expiren.
 
-La alternativa sin DB (JWT auto-contenido) reduce complejidad, pero pierdes la posibilidad de revocar tokens de forma granular.
+---
 
-## Conclusión
+## Tiempos de expiración recomendados
 
-El uso correcto de access tokens y refresh tokens es esencial para lograr aplicaciones seguras y con buena experiencia de usuario. Con estas prácticas, tu sistema de autenticación será mucho más sólido y tus usuarios estarán mejor protegidos.
+No hay una regla universal, pero estos valores funcionan bien para la mayoría de aplicaciones:
 
-Espero que te sea interesante este post, nos vemos en la proximo publicación
+| Token         | Duración      | Razón                                 |
+| ------------- | ------------- | ------------------------------------- |
+| Access token  | 15-30 minutos | Limita ventana de ataque si es robado |
+| Refresh token | 7-30 días     | Balance entre UX y seguridad          |
+
+Para apps bancarias o de salud, reduce estos tiempos. Para una app social, puedes ser más permisivo.
+
+---
+
+## Resumen
+
+Los puntos clave para implementar refresh tokens correctamente:
+
+1. **Access token corto, refresh token largo**: el primero para usar, el segundo para renovar
+2. **Nunca guardes tokens en localStorage**: usa cookies HttpOnly para el refresh y memoria para el access
+3. **Implementa renovación automática**: el usuario no debería saber que existen los tokens
+4. **Considera guardar refresh tokens en DB**: te da control total sobre las sesiones
+5. **Usa HTTPS siempre**: los tokens viajan en cada request
+
+Con estos conceptos claros, tu sistema de autenticación será mucho más robusto. Y tus usuarios tendrán una experiencia fluida sin sacrificar seguridad.

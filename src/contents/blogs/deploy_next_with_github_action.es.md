@@ -1,39 +1,41 @@
 ---
-title: 'Cómo desplegar Next.js con GitHub Actions'
+title: 'Desplegando Next.js en GitHub Pages: la guía que me hubiera ahorrado horas'
 createAt: '2025-09-07'
 updateAt: '2025-09-07'
 author: 'David Alfonso Pereira'
 authorPhoto: '/david-portafolio/profile.webp'
 authorPhotoAlt: 'David Alfonso'
-tags: ['nextjs', 'github', 'github action', 'deployment', 'reflections']
-description: 'En este post aprenderás cómo desplegar una aplicación creada con Next.js utilizando GitHub Actions.'
+tags: ['nextjs', 'github', 'github action', 'deployment']
+description: 'En este post aprenderás cómo desplegar una aplicación creada con Next.js utilizando GitHub Actions, con todos los trucos que la documentación oficial no te cuenta.'
 image: '/david-portafolio/blogs/deploy_next_with_github_action/home.webp'
 ---
 
-# Cómo desplegar Next.js con GitHub Actions
+# Desplegando Next.js en GitHub Pages: la guía que me hubiera ahorrado horas
 
 <img src="/david-portafolio/blogs/deploy_next_with_github_action/home.webp" alt="Configuración de GitHub Pages" class="img-blog" />
 
-## Un poco de contexto
+Este es mi primer post técnico, y decidí empezar con algo que me costó más de lo que debería: desplegar este portafolio hecho con Next.js en GitHub Pages.
 
-Este es mi primer post técnico, y quiero hablar de un tema que me generó bastantes dolores de cabeza: desplegar este portafolio con **Next.js**. Al final de este artículo compartiré una breve reflexión, porque descubrí que hay muy poca documentación al respecto y que, además, **Vercel no facilita demasiado usar Next.js fuera de su propia plataforma**.
+Spoiler: Next.js no te lo pone fácil si no usas Vercel.
 
-Quiero agradecer especialmente a [Greg Rickaby](https://github.com/gregrickaby) por su repositorio [nextjs-github-pages](https://github.com/gregrickaby/nextjs-github-pages), que me sirvió de guía para lograr desplegar mi portafolio en **GitHub Pages**.
+Pasé varias horas buscando documentación, probando configuraciones, y descubriendo errores que nadie menciona. Al final lo logré gracias al repositorio [nextjs-github-pages](https://github.com/gregrickaby/nextjs-github-pages) de Greg Rickaby, que fue mi salvavidas.
+
+Así que aquí está todo lo que aprendí, condensado para que no tengas que pasar por lo mismo.
 
 ---
 
-## Pasos para desplegar Next.js con GitHub Actions
+## El proceso paso a paso
 
-### 1. Configura `next.config.js`
+### 1. Configura `next.config.js` para exportación estática
 
-Primero, asegúrate de habilitar `output: "export"` para la generación de archivos estáticos. Configura también `basePath` con el nombre de tu repositorio, y deshabilita la optimización de imágenes, ya que solo funciona con SSR (Server-Side Rendering).
+Lo primero es decirle a Next.js que genere archivos estáticos en lugar de depender de un servidor. También necesitas configurar el `basePath` con el nombre de tu repositorio (porque GitHub Pages sirve desde `usuario.github.io/nombre-repo/`).
 
 ```ts
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   output: 'export',
-  basePath: '/nextjs-github-pages',
+  basePath: '/nombre-de-tu-repo',
   images: {
     unoptimized: true,
   },
@@ -42,61 +44,54 @@ const nextConfig: NextConfig = {
 export default nextConfig
 ```
 
-### 2. Agrega .nojekyll en la carpeta public
+¿Por qué `images: { unoptimized: true }`? Porque la optimización de imágenes de Next.js requiere un servidor corriendo (SSR), y GitHub Pages solo sirve archivos estáticos.
 
-Crea un archivo vacío llamado .nojekyll dentro de la carpeta public.
-Esto le indica a GitHub Pages que desactive el procesamiento automático de Jekyll, necesario para que funcione correctamente el directorio \_next/ generado por Next.js.
+### 2. Crea el archivo `.nojekyll`
 
-### 3. Ajusta las rutas de imágenes con basePath
+Este paso es fácil de olvidar y te va a romper todo si no lo haces.
 
-Cualquier imagen debe incluir el basePath configurado en next.config.js.
+Crea un archivo vacío llamado `.nojekyll` dentro de la carpeta `public/`.
+
+¿Para qué sirve? GitHub Pages usa Jekyll por defecto, y Jekyll ignora las carpetas que empiezan con guión bajo (como `_next/`). Sin este archivo, tu CSS y JavaScript simplemente no cargarán.
+
+### 3. Ajusta las rutas de imágenes
+
+Aquí viene una de las partes más molestas. A diferencia de otros frameworks como Angular o Create React App, Next.js **no** agrega automáticamente el `basePath` a las rutas de imágenes.
+
+Tienes que hacerlo manualmente:
 
 ```tsx
-<Image
-  src="/nextjs-github-pages/vercel.svg"
-  alt="Vercel Logo"
-  className={styles.vercelLogo}
-  width={100}
-  height={24}
-  priority
-/>
+// Así NO funciona en GitHub Pages
+<Image src="/logo.svg" alt="Logo" width={100} height={24} />
 
-// or
-
-<img
-  src="/nextjs-github-pages/vercel.svg"
-  alt="Vercel Logo"
-  className={styles.vercelLogo}
-/>
-
+// Así SÍ funciona
+<Image src="/nombre-de-tu-repo/logo.svg" alt="Logo" width={100} height={24} />
 ```
 
-En frameworks como Angular o React, esto se maneja automáticamente. Next.js aún no lo resuelve, así que puedes crear un helper para simplificarlo:
+Para no repetir el basePath en todos lados, te recomiendo crear un helper:
 
 ```tsx
-const getImagePath = (path: string) => {
-  return '/nextjs-github-pages/' + path
+// utils/paths.ts
+export const getAssetPath = (path: string) => {
+  const basePath =
+    process.env.NODE_ENV === 'production' ? '/nombre-de-tu-repo' : ''
+  return `${basePath}${path}`
 }
 
-const Foo = () => (
-  <Image
-    src={getImagePath('vercel.svg')}
-    alt="Vercel Logo"
-    className={styles.vercelLogo}
-    width={100}
-    height={24}
-    priority
-  />
-)
+// Uso
+import { getAssetPath } from '@/utils/paths'
+
+;<Image src={getAssetPath('/logo.svg')} alt="Logo" width={100} height={24} />
 ```
+
+Esto también te permite que funcione en desarrollo local sin el basePath.
 
 ### 4. Configura el workflow de GitHub Actions
 
-Ahora toca configurar el workflow que automatizará el despliegue.
-Crea un archivo en .github/workflows/deploy.yml con el siguiente contenido:
+Crea el archivo `.github/workflows/deploy.yml`:
 
 ```yml
-name: Deploy Next.js site to Pages
+name: Deploy Next.js to GitHub Pages
 
 on:
   push:
@@ -183,46 +178,74 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-Después:
+El workflow detecta automáticamente si usas npm, yarn o pnpm, así que no tienes que modificarlo.
 
-Ve a la pestaña Settings en tu repositorio.
+### 5. Configura GitHub Pages en tu repositorio
 
-Haz clic en Pages.
-
-En Build and Deployment, selecciona GitHub Actions.
+Ve a **Settings** → **Pages** → **Build and deployment** y selecciona **GitHub Actions**.
 
 <img src="/david-portafolio/blogs/deploy_next_with_github_action/001.webp" alt="Configuración de GitHub Pages" class="w-full" />
 
-### 5. Sube tus cambios a GitHub
+### 6. Push y a esperar
 
 ```sh
-git add . && git commit -m "initial commit" && git push
+git add .
+git commit -m "Setup GitHub Pages deployment"
+git push
 ```
 
-¡Y listo! Tu aplicación Next.js quedará desplegada en GitHub Pages.
+Ve a la pestaña **Actions** de tu repositorio y verás el workflow ejecutándose. En un par de minutos tu sitio estará disponible en `https://tu-usuario.github.io/nombre-de-tu-repo/`.
 
-## Detalles a tener en cuenta
+---
 
-Actualmente, en la versión más reciente de Next.js, el método webpack de next.config.js no se ejecuta dentro de GitHub Actions.
+## Cosas que pueden salir mal
+
+### El CSS no carga
+
+Probablemente olvidaste el archivo `.nojekyll`. Jekyll está ignorando la carpeta `_next/`.
+
+### Las imágenes no aparecen
+
+Revisa que todas las rutas incluyan el `basePath`. Es el error más común.
+
+### El build falla en GitHub Actions pero funciona local
+
+Verifica que no estés usando funciones de `webpack()` en tu `next.config.js`. En las versiones recientes de Next.js, el método webpack no se ejecuta correctamente dentro de GitHub Actions:
 
 ```ts
 const nextConfig: NextConfig = {
   output: 'export',
-  basePath: '/nextjs-github-pages',
+  basePath: '/mi-repo',
   images: { unoptimized: true },
-  webpack() {
-    // Esto no funciona en GitHub Actions
+  // ⚠️ Esto puede fallar en GitHub Actions
+  webpack(config) {
+    // configuraciones custom
+    return config
   },
 }
 ```
 
-Como recomendación evita depender de webpack() hasta que este problema esté solucionado.
+Si necesitas configuraciones de webpack, considera usar alternativas o espera a que se solucione este bug.
 
-## Una pequeña reflexión
+---
 
-Al terminar este despliegue, me quedó una sensación clara: Next.js está fuertemente atado a Vercel. La falta de documentación para escenarios fuera de su plataforma hace que el proceso sea más complejo de lo necesario.
+## Mi opinión sobre Next.js fuera de Vercel
 
-En mi opinión, la verdadera fortaleza de un framework radica en su flexibilidad y en brindar la mejor experiencia de desarrollo posible. Eso es lo que permite que más personas lo adopten.
+Después de pasar por todo esto, me queda claro que Next.js está diseñado pensando en Vercel primero. La documentación para desplegar en otras plataformas es escasa, y hay fricciones innecesarias (como el tema del basePath en imágenes).
 
-Espero que este artículo te sea útil y te ahorre horas de frustración.
-¡Gracias por leer! Nos vemos en próximos posts.
+No digo que sea malo, Next.js sigue siendo un framework excelente. Pero si tu plan es desplegarlo fuera de Vercel, prepárate para investigar más de lo que deberías.
+
+La fortaleza de un framework está en su flexibilidad. Espero que con el tiempo esto mejore.
+
+---
+
+## Resumen
+
+1. Configura `output: 'export'` y `basePath` en `next.config.js`
+2. Desactiva la optimización de imágenes
+3. Crea `.nojekyll` en la carpeta `public/`
+4. Ajusta las rutas de imágenes para incluir el basePath
+5. Configura el workflow de GitHub Actions
+6. Activa GitHub Actions como fuente de deploy en Settings → Pages
+
+Con esto deberías tener tu sitio Next.js corriendo en GitHub Pages sin problemas.

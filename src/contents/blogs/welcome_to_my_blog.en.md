@@ -1,55 +1,52 @@
 ---
-title: 'Welcome to My Programming Blog'
+title: 'Why I started this blog (and what you will find here)'
 createAt: '2025-09-05'
 updateAt: '2025-09-05'
 author: 'David Alfonso Pereira'
 authorPhoto: '/david-portafolio/profile.webp'
 authorPhotoAlt: 'David Alfonso'
-tags: ['programming', 'web development', 'reflections']
-description: 'In this first post, I share what this section of my site will be about, my personal goals, and how I plan to contribute to the community.'
+tags: ['programming', 'web development']
+description: 'First blog post: what this is about, why I write it, and what you can expect to find.'
 image: '/david-portafolio/blogs/welcome_to_my_blog.webp'
 ---
 
-# Welcome to My Programming Blog!
+# Why I started this blog (and what you will find here)
 
-<img src="/david-portafolio/blogs/welcome_to_my_blog.webp" alt="JavaScript Logo" class="img-blog" />
+<img src="/david-portafolio/blogs/welcome_to_my_blog.webp" alt="Welcome to the blog" class="img-blog" />
 
-Hi everyone, I'm David. This is the first of many posts I plan to share on my portfolio. I’d like to briefly tell you what these blogs will be about, why I’m writing them, and what you can expect going forward.
+Hi, I'm David.
 
----
+I've been working as a developer for over 4 years, and during all that time I've lost count of how many times a random blog post saved my day. That guy who documented how he fixed an obscure webpack bug at 3 AM, the person who explained a complex concept with clear examples, the tutorial that saved me hours of frustration.
 
-## Topics You'll Find Here
+I'll never meet those people, but I owe them a lot.
 
-In this space, I’ll be sharing experiences, lessons learned, and personal reflections I’ve gathered throughout my journey as a developer. Some of the topics I’ll cover include:
-
-- Solutions to real-world problems I’ve encountered.
-- Best practices in programming.
-- Personal opinions on tools or methodologies.
-- Personal projects and proof-of-concept experiments.
-- Explorations of technologies I’m still learning.
-
-The idea is for this blog to serve as a personal log, but also as a helpful resource for other developers.
+This blog is my way of paying it forward.
 
 ---
 
-## Why Did I Start a Blog?
+## What you'll find here
 
-I’ve wanted a space for a while where I could record my ideas, clarify common doubts, and share what I’m learning. Not just as a personal documentation tool, but also as a way to give back to the community.
+I'm not going to write generic tutorials that already exist on a thousand sites. The idea is to share things I wish I had found when I needed them:
 
-Over my more than 4 years of experience as a developer, I’ve often relied on blog posts, tutorials, and forums written by others. They’ve helped me solve specific problems in my daily work, and now I’d like to give something back.
+- **Real problems and how I solved them** — with context, not just the code that worked
+- **Honest opinions about tools** — the good, the bad, and when it makes sense to use them
+- **Things I'm learning** — because explaining something is the best way to understand it
+- **Personal projects** — the process, not just the end result
 
----
-
-## Do I Have Future Plans?
-
-Yes! In addition to the blog, I’m planning to add more sections to my portfolio, such as:
-
-- A lab for experimenting with new ideas and technologies.
-- A space to publish side projects and document their progress.
-- Possibly sections dedicated to books, useful tools, or interviews.
-
-The idea is for this site to grow with me, adapting to my interests and needs over time.
+Basically, a development logbook that I hope will be useful to someone else.
 
 ---
 
-Thank you for reading. I hope my posts will be helpful, interesting, or at least entertaining. See you in the next one!
+## What's coming
+
+Besides the blog, I have plans to add other sections to the portfolio:
+
+- A space to experiment with new technologies
+- Documentation of side projects as I build them
+- Maybe recommendations for books and tools I use
+
+The site will keep growing. For now, this is the starting point.
+
+---
+
+If you made it this far, thanks for reading. See you in the next post.
