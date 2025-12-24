@@ -107,7 +107,10 @@ export function Navbar({ icon, items }: Props) {
             ))}
             {items.getSubmenuItem().map((item, index) => (
               <NavigationMenuItem key={`menu_item_${index}`}>
-                <NavigationMenuTrigger className="bg-transparent">
+                <NavigationMenuTrigger
+                  className="bg-transparent"
+                  aria-label={item.title}
+                >
                   {item.title}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="right-0 left-auto">
@@ -115,7 +118,10 @@ export function Navbar({ icon, items }: Props) {
                     {item.submenu.map((submenuItem, subIndex) => (
                       <li key={`submenu_item_${subIndex}`}>
                         <NavigationMenuLink asChild>
-                          <Link href={submenuItem.href}>
+                          <Link
+                            href={submenuItem.href}
+                            aria-label={submenuItem.title}
+                          >
                             <div className="font-medium">
                               {submenuItem.title}
                             </div>

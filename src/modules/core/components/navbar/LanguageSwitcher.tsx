@@ -25,12 +25,22 @@ export const LanguageSwitcher = () => {
           </NavigationMenuTrigger>
           <NavigationMenuContent className="right-0 left-auto">
             <NavigationMenuLink asChild>
-              <Link href={`/en${currentPath}`} shallow replace>
+              <Link
+                href={`/en${currentPath}`}
+                shallow
+                replace
+                aria-label={'english'}
+              >
                 English
               </Link>
             </NavigationMenuLink>
             <NavigationMenuLink asChild>
-              <Link href={`/es${currentPath}`} shallow replace>
+              <Link
+                href={`/es${currentPath}`}
+                shallow
+                replace
+                aria-label={'spanish'}
+              >
                 Español
               </Link>
             </NavigationMenuLink>

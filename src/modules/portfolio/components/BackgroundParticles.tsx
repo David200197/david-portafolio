@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { PortfolioService } from '../services/portfolio-service'
 import { getService } from '@/modules/core/utils/di-utils'
 
@@ -9,11 +9,29 @@ const particleOptions = getService(PortfolioService).getParticlesOptions()
 export const BackgroundParticles = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const initialized = useRef(false)
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    if (initialized.current || !containerRef.current) return
+    const scheduleLoad = () => {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => setIsVisible(true), { timeout: 3000 })
+      } else {
+        setTimeout(() => setIsVisible(true), 2000)
+      }
+    }
 
-    const timeoutId = setTimeout(async () => {
+    if (document.readyState === 'complete') {
+      scheduleLoad()
+    } else {
+      window.addEventListener('load', scheduleLoad)
+      return () => window.removeEventListener('load', scheduleLoad)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isVisible || initialized.current || !containerRef.current) return
+
+    const loadParticles = async () => {
       const [{ tsParticles }, { loadSlim }] = await Promise.all([
         import('@tsparticles/engine'),
         import('@tsparticles/slim'),
@@ -22,7 +40,6 @@ export const BackgroundParticles = () => {
       await loadSlim(tsParticles)
 
       if (containerRef.current) {
-        // Reducir partículas en móvil
         const isMobile = window.innerWidth < 768
         const options = {
           ...particleOptions,
@@ -30,9 +47,10 @@ export const BackgroundParticles = () => {
             ...particleOptions.particles,
             number: {
               ...particleOptions.particles?.number,
-              value: isMobile ? 50 : 200,
+              value: isMobile ? 30 : 100,
             },
           },
+          detectRetina: false,
         }
 
         await tsParticles.load({
@@ -42,15 +60,18 @@ export const BackgroundParticles = () => {
         })
         initialized.current = true
       }
-    }, 100)
+    }
+
+    loadParticles()
 
     return () => {
-      clearTimeout(timeoutId)
       import('@tsparticles/engine').then(({ tsParticles }) => {
         tsParticles.dom().forEach((container) => container.destroy())
       })
     }
-  }, [])
+  }, [isVisible])
+
+  if (!isVisible) return null
 
   return (
     <div

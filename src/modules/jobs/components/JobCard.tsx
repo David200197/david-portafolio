@@ -13,16 +13,20 @@ import { Button } from '@/modules/core/ui/button'
 import { Badge } from '@/modules/core/ui/badge'
 import { getImagePath } from '@/modules/core/utils/get-img-path'
 import WebPImage from '@/modules/core/components/WebPImage'
+import Image from 'next/image'
 
 type Props = { job: Job }
 export const JobCard = ({ job }: Props) => (
   <Card className="hover:shadow-xl transition duration-600 ease-in-out">
     <CardHeader>
       <div className="flex">
-        <img
+        <Image
           src={getImagePath(`${job.logoSrc}`)}
           alt={job.title}
           width={30}
+          height={30}
+          sizes="30px"
+          loading="lazy"
           className="mr-3 object-contain"
         />
         <div>
@@ -61,8 +65,8 @@ export const JobCard = ({ job }: Props) => (
         </div>
         <div>
           {job.isPublic() && (
-            <Button asChild>
-              <a href={job.link} target="_blank">
+            <Button asChild aria-label="VIEW">
+              <a href={job.link} target="_blank" aria-label="VIEW">
                 VIEW
               </a>
             </Button>

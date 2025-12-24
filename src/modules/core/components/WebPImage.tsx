@@ -1,7 +1,7 @@
 import React, { ImgHTMLAttributes, JSX } from 'react'
 
 interface WebPImageProps
-  extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'srcSet'> {
+  extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'srcSet' | 'sizes'> {
   src: string
   alt: string
   width?: number
@@ -23,12 +23,25 @@ export default function WebPImage({
     .map((size) => `${base}-${size}w.webp ${size}w`)
     .join(', ')
 
+  const sizes = width
+    ? availableSizes
+        .filter((size) => size <= width)
+        .map((size, index, arr) => {
+          if (index === arr.length - 1) {
+            return `${size}px`
+          }
+          return `(max-width: ${size}px) ${size}px`
+        })
+        .join(', ') || `${width}px`
+    : '100vw'
+
   const webpSrc = `${base}.webp`
 
   return (
     <img
       src={webpSrc}
       srcSet={srcSet}
+      sizes={sizes}
       alt={alt}
       width={width}
       height={height}

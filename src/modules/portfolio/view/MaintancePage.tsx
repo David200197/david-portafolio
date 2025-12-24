@@ -14,8 +14,10 @@ export const MaintancePage = () => (
           height={200}
         />
         <p className="text-3xl">This Page is Under Maintenance</p>
-        <Button className="text-center mt-2">
-          <Link href="/en">Go to Home</Link>
+        <Button className="text-center mt-2" aria-label="home">
+          <Link href="/en" aria-label={'home'}>
+            Go to Home
+          </Link>
         </Button>
       </div>
     </div>

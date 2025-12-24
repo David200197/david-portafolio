@@ -8,5 +8,6 @@ export const AstronautAvatar = ({ className }: Props) => (
   <img
     src={getImagePath('astronaut_developer.svg')}
     className={cn(moduleCss.astronaut_avatar, className)}
+    alt="Astronaut Developer"
   />
 )

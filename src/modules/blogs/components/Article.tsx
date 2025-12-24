@@ -28,10 +28,18 @@ export const Article = ({ blog, nextBlog, prevBlog }: Props) => (
     </div>
     <div className="grid md:grid-cols-2 mt-4">
       <div className="flex justify-center">
-        {prevBlog && <NavigateBlogButton blog={prevBlog} />}
+        {prevBlog && (
+          <NavigateBlogButton blog={prevBlog} ariaLabel={prevBlog.title} />
+        )}
       </div>
       <div className="flex justify-center mt-3 md:mt-0">
-        {nextBlog && <NavigateBlogButton blog={nextBlog} isNext />}
+        {nextBlog && (
+          <NavigateBlogButton
+            blog={nextBlog}
+            isNext
+            ariaLabel={nextBlog.title}
+          />
+        )}
       </div>
     </div>
   </article>
@@ -40,15 +48,18 @@ export const Article = ({ blog, nextBlog, prevBlog }: Props) => (
 type NavigateBlogButtonProps = {
   blog: Blog
   isNext?: boolean
+  ariaLabel?: string
 }
 const NavigateBlogButton = ({
   blog,
   isNext = false,
+  ariaLabel,
 }: NavigateBlogButtonProps) => (
-  <Link href={blog.link}>
+  <Link href={blog.link} aria-label={blog.title}>
     <Button
       variant="secondary"
       className="flex h-[100px] w-[300px] items-center cursor-pointer"
+      aria-label={ariaLabel}
     >
       {isNext ? (
         <>
