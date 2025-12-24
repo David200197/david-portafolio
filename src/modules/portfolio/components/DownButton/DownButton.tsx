@@ -10,7 +10,7 @@ const DownButton = () => {
 
   return (
     <ButtonContainer>
-      <Link href={aboutMeHref}>
+      <Link href={aboutMeHref} aria-label={'down'}>
         <DownArrow width={35} height={35} fill={'#000000'} />
       </Link>
     </ButtonContainer>

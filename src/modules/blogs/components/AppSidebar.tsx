@@ -44,8 +44,8 @@ export function AppSidebar({ items, titleSideMenu }: Props) {
                 <Fragment key={item.title}>
                   {isSimpleItem(item) && (
                     <SidebarMenuItem>
-                      <SidebarMenuButton asChild>
-                        <Link href={item.url}>
+                      <SidebarMenuButton asChild aria-label={item.title}>
+                        <Link href={item.url} aria-label={item.title}>
                           <span>{item.title}</span>
                         </Link>
                       </SidebarMenuButton>
@@ -53,14 +53,14 @@ export function AppSidebar({ items, titleSideMenu }: Props) {
                   )}
                   {isSubmenuItem(item) && (
                     <SidebarMenuItem>
-                      <SidebarMenuButton asChild>
+                      <SidebarMenuButton asChild aria-label={item.title}>
                         <span>{item.title}</span>
                       </SidebarMenuButton>
                       {item.submenu.map((menu) => (
                         <SidebarMenuSub key={menu.url}>
                           <SidebarMenuSubItem key={item.title}>
-                            <SidebarMenuButton asChild>
-                              <Link href={menu.url}>
+                            <SidebarMenuButton asChild aria-label={menu.title}>
+                              <Link href={menu.url} aria-label={item.title}>
                                 <span>{menu.title}</span>
                               </Link>
                             </SidebarMenuButton>

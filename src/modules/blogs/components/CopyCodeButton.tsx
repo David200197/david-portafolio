@@ -22,6 +22,7 @@ export function CopyCodeButton() {
       btn.className =
         'copy-btn absolute right-2 top-2 p-2 rounded bg-gray-700 hover:bg-gray-600 text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer'
       btn.setAttribute('aria-label', 'Copiar código')
+      btn.ariaLabel = 'copy'
 
       let isCopied = false
 

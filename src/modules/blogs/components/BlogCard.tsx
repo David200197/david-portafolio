@@ -13,7 +13,7 @@ import WebPImage from '@/modules/core/components/WebPImage'
 type Props = { blog: Blog }
 
 export const BlogCard = ({ blog }: Props) => (
-  <Link href={blog.link}>
+  <Link href={blog.link} aria-label={blog.title}>
     <Card className="shadow-sm hover:shadow-xl transition duration-600 ease-in-out h-full">
       <CardHeader>
         <CardTitle>{blog.title}</CardTitle>

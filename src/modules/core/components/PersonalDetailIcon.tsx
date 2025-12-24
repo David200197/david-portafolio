@@ -65,7 +65,11 @@ export const PersonalDetailIcon = ({ personalDetail, ...props }: Props) => {
   return (
     <Tooltip>
       <TooltipTrigger>
-        <a href={personalDetail.ref} target="_blank">
+        <a
+          href={personalDetail.ref}
+          target="_blank"
+          aria-label={personalDetail.tooltip}
+        >
           {Icon && <Icon {...props} />}
         </a>
       </TooltipTrigger>
