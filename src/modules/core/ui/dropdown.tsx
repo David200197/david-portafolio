@@ -6,8 +6,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from './select'
-import { ItemSelectors } from '../components/forms/types/form-type'
 import { useRef } from 'react'
+
+type ItemSelectors = {
+  label: string
+  value: any
+}[]
 
 type Props = {
   onChange: (...event: any[]) => void
