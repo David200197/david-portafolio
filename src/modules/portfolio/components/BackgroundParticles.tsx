@@ -1,10 +1,8 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { loadFull } from 'tsparticles'
 import { PortfolioService } from '../services/portfolio-service'
 import { getService } from '@/modules/core/utils/di-utils'
-import { tsParticles } from '@tsparticles/engine'
 
 const particleOptions = getService(PortfolioService).getParticlesOptions()
 
@@ -15,27 +13,42 @@ export const BackgroundParticles = () => {
   useEffect(() => {
     if (initialized.current || !containerRef.current) return
 
-    const initializeParticles = async () => {
-      await loadFull(tsParticles)
+    const timeoutId = setTimeout(async () => {
+      const [{ tsParticles }, { loadSlim }] = await Promise.all([
+        import('@tsparticles/engine'),
+        import('@tsparticles/slim'),
+      ])
+
+      await loadSlim(tsParticles)
 
       if (containerRef.current) {
+        // Reducir partículas en móvil
+        const isMobile = window.innerWidth < 768
+        const options = {
+          ...particleOptions,
+          particles: {
+            ...particleOptions.particles,
+            number: {
+              ...particleOptions.particles?.number,
+              value: isMobile ? 50 : 200,
+            },
+          },
+        }
+
         await tsParticles.load({
           id: 'tsparticles',
           element: containerRef.current,
-          options: particleOptions,
+          options,
         })
         initialized.current = true
       }
-    }
-
-    initializeParticles()
+    }, 100)
 
     return () => {
-      if (containerRef.current) {
-        tsParticles.dom().forEach((container) => {
-          container.destroy()
-        })
-      }
+      clearTimeout(timeoutId)
+      import('@tsparticles/engine').then(({ tsParticles }) => {
+        tsParticles.dom().forEach((container) => container.destroy())
+      })
     }
   }, [])
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/nextjs'
 import { z } from 'zod'
 import {
   DynamicForm,
