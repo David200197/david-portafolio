@@ -50,7 +50,7 @@ export function Navbar({ icon, items }: Props) {
       <div className="flex items-center">
         <div className="lg:hidden flex">
           <Drawer direction="right">
-            <DrawerTrigger>
+            <DrawerTrigger aria-label="open menu">
               <Menu fill="#000" width="24px" />
             </DrawerTrigger>
             <DrawerContent>

@@ -20,7 +20,10 @@ export const LanguageSwitcher = () => {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent">
+          <NavigationMenuTrigger
+            className="bg-transparent"
+            aria-label={'switch language'}
+          >
             <LanguageSvg width={25} height={25} />
           </NavigationMenuTrigger>
           <NavigationMenuContent className="right-0 left-auto">
