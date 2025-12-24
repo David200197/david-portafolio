@@ -22,10 +22,21 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'David | Fullstack Developer',
+  title: 'David | Fullstack Developer - Next.js, React & Node.js',
   description:
-    'Portfolio de David - Desarrollador Fullstack especializado en Next.js, NestJS, React y soluciones escalables.',
-  keywords: ['fullstack developer', 'next.js', 'nestjs', 'react', 'portfolio'],
+    'Portfolio de David - Desarrollador Fullstack especializado en Next.js, Nest.jS, React. Diseño y desarrollo de aplicaciones web modernas y escalables.',
+  keywords: [
+    'fullstack developer',
+    'desarrollador fullstack',
+    'next.js',
+    'nestjs',
+    'react',
+    'node.js',
+    'graphql',
+    'typescript',
+    'portfolio',
+    'web developer',
+  ],
   authors: [{ name: 'David' }],
   creator: 'David',
   metadataBase: new URL('https://david200197.github.io'),
@@ -34,23 +45,24 @@ export const metadata: Metadata = {
     locale: 'es_ES',
     alternateLocale: 'en_US',
     url: 'https://david200197.github.io/david-portafolio/',
-    siteName: 'David Portfolio',
-    title: 'David | Fullstack Developer',
+    siteName: 'David | Fullstack Developer Portfolio',
+    title: 'David | Fullstack Developer - Next.js, React & Nest.js',
     description:
-      'Portfolio de David - Desarrollador Fullstack especializado en Next.js, NestJS, React y soluciones escalables.',
+      'Portfolio de David - Desarrollador Fullstack especializado en Next.js, Nest.js, React. Diseño y desarrollo de aplicaciones web modernas y escalables.',
     images: [
       {
         url: '/david-portafolio/og_image.webp',
         width: 1200,
         height: 630,
-        alt: 'David - Fullstack Developer',
+        alt: 'David - Fullstack Developer | Portfolio de desarrollo web con Next.js, React y Nest.js',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'David | Fullstack Developer',
-    description: 'Portfolio de David - Desarrollador Fullstack',
+    title: 'David | Fullstack Developer - Next.js, React & Node.js',
+    description:
+      'Portfolio de David - Desarrollador Fullstack especializado en Next.js, NestJS, React. Aplicaciones web modernas y escalables.',
     images: ['/david-portafolio/og_image.webp'],
   },
   robots: {
