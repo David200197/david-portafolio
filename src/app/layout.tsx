@@ -7,6 +7,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { ErrorBoundaryProvider } from '@/modules/core/providers/ErrorBoundaryProvider'
 import { DiProvider } from '@/modules/core/contexts/DiContext'
 import { Toaster } from 'react-hot-toast'
+import { Metadatas } from '@/modules/core/components/Metadatas'
 
 const Provider = composeProviders([ErrorBoundaryProvider, DiProvider])
 
@@ -21,10 +22,43 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Portfolio',
-  description: 'The Portfolio of a Fullstack Engineer',
-  icons: {
-    icon: '/david-portafolio/favicon.svg',
+  title: 'David | Fullstack Developer',
+  description:
+    'Portfolio de David - Desarrollador Fullstack especializado en Next.js, NestJS, React y soluciones escalables.',
+  keywords: ['fullstack developer', 'next.js', 'nestjs', 'react', 'portfolio'],
+  authors: [{ name: 'David' }],
+  creator: 'David',
+  metadataBase: new URL('https://david200197.github.io'),
+  openGraph: {
+    type: 'website',
+    locale: 'es_ES',
+    alternateLocale: 'en_US',
+    url: 'https://david200197.github.io/david-portafolio/',
+    siteName: 'David Portfolio',
+    title: 'David | Fullstack Developer',
+    description:
+      'Portfolio de David - Desarrollador Fullstack especializado en Next.js, NestJS, React y soluciones escalables.',
+    images: [
+      {
+        url: '/david-portafolio/og_image.webp',
+        width: 1200,
+        height: 630,
+        alt: 'David - Fullstack Developer',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'David | Fullstack Developer',
+    description: 'Portfolio de David - Desarrollador Fullstack',
+    images: ['/david-portafolio/og_image.webp'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  other: {
+    'X-Content-Type-Options': 'nosniff',
   },
 }
 
@@ -36,6 +70,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Metadatas />
         <Provider>
           <Toaster position="top-right" />
           {children}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://david200197.github.io/david-portafolio/sitemap.xml
