@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import { format } from 'date-fns'
 import { GetBlogDTO } from '../dto/GetBlogDTO'
 import { ItemSideMenu } from '../model/ItemSideMenu'
 
@@ -77,11 +77,11 @@ export class Blog {
   }
 
   get createAtWithFormat() {
-    return dayjs(this.createAt).format('DD/MM/YYYY')
+    return format(this.createAt, 'dd/MM/yyyy')
   }
 
   get updateAtWithFormat() {
-    return dayjs(this.updateAt).format('DD/MM/YYYY')
+    return format(this.updateAt, 'dd/MM/yyyy')
   }
 
   get createAtDate() {

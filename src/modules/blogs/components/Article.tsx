@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../../core/ui/avatar'
 import { Blog } from '@/modules/blogs/entities/Blog'
 import { Button } from '@/modules/core/ui/button'
 import Link from 'next/link'
+import { CopyCodeButton } from './CopyCodeButton'
 
 type Props = {
   blog: Blog
@@ -10,6 +11,7 @@ type Props = {
 }
 export const Article = ({ blog, nextBlog, prevBlog }: Props) => (
   <article className="pt-[120px] pb-[30px] px-5 md:px-0 w-[inherit]">
+    <CopyCodeButton />
     <div
       className="prose prose-lg mx-auto"
       dangerouslySetInnerHTML={{ __html: blog.contentHtml }}

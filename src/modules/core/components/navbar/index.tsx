@@ -65,13 +65,10 @@ export function Navbar({ icon, items }: Props) {
                   <NavigationMenuList className="flex flex-col">
                     {items.toLinkItem().map((item, index) => (
                       <NavigationMenuItem key={`menu_item_${index}`}>
-                        <Link
-                          href={item.href}
-                          legacyBehavior
-                          passHref
-                          scroll={item.isHashLink()}
-                        >
-                          <NavigationMenuLink
+                        <NavigationMenuLink asChild>
+                          <Link
+                            href={item.href}
+                            scroll={item.isHashLink()}
                             className={cn(
                               navigationMenuTriggerStyle(),
                               'text-md bg-transparent'
@@ -80,8 +77,8 @@ export function Navbar({ icon, items }: Props) {
                             <DrawerClose>
                               {item.title.toUpperCase()}
                             </DrawerClose>
-                          </NavigationMenuLink>
-                        </Link>
+                          </Link>
+                        </NavigationMenuLink>
                       </NavigationMenuItem>
                     ))}
                   </NavigationMenuList>
@@ -94,21 +91,18 @@ export function Navbar({ icon, items }: Props) {
           <NavigationMenuList>
             {items.getLinkItems().map((item, index) => (
               <NavigationMenuItem key={`menu_item_${index}`}>
-                <Link
-                  href={item.href}
-                  legacyBehavior
-                  passHref
-                  scroll={item.isHashLink()}
-                >
-                  <NavigationMenuLink
+                <NavigationMenuLink asChild>
+                  <Link
+                    href={item.href}
+                    scroll={item.isHashLink()}
                     className={cn(
                       navigationMenuTriggerStyle(),
                       'text-md bg-transparent'
                     )}
                   >
                     {item.title}
-                  </NavigationMenuLink>
-                </Link>
+                  </Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
             ))}
             {items.getSubmenuItem().map((item, index) => (
