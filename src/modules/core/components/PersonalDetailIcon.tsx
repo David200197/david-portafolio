@@ -64,13 +64,14 @@ export const PersonalDetailIcon = ({ personalDetail, ...props }: Props) => {
 
   return (
     <Tooltip>
-      <TooltipTrigger>
+      <TooltipTrigger asChild>
         <a
           href={personalDetail.ref}
           target="_blank"
           aria-label={personalDetail.tooltip}
+          className="inline-flex items-center justify-center min-w-[44px] min-h-[44px]"
         >
-          {Icon && <Icon {...props} />}
+          {Icon && <Icon {...props} aria-hidden="true" />}
         </a>
       </TooltipTrigger>
       <TooltipContent>
