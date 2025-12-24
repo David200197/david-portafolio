@@ -24,7 +24,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'David | Fullstack Developer - Next.js, React & Node.js',
   description:
-    'Portfolio de David - Desarrollador Fullstack especializado en Next.js, NestJS, React y GraphQL. Diseño y desarrollo de aplicaciones web modernas y escalables.',
+    'Portfolio de David - Desarrollador Fullstack especializado en Next.js, Nest.jS, React. Diseño y desarrollo de aplicaciones web modernas y escalables.',
   keywords: [
     'fullstack developer',
     'desarrollador fullstack',
@@ -46,15 +46,15 @@ export const metadata: Metadata = {
     alternateLocale: 'en_US',
     url: 'https://david200197.github.io/david-portafolio/',
     siteName: 'David | Fullstack Developer Portfolio',
-    title: 'David | Fullstack Developer - Next.js, React & Node.js',
+    title: 'David | Fullstack Developer - Next.js, React & Nest.js',
     description:
-      'Portfolio de David - Desarrollador Fullstack especializado en Next.js, NestJS, React y GraphQL. Diseño y desarrollo de aplicaciones web modernas y escalables.',
+      'Portfolio de David - Desarrollador Fullstack especializado en Next.js, Nest.js, React. Diseño y desarrollo de aplicaciones web modernas y escalables.',
     images: [
       {
         url: '/david-portafolio/og_image.webp',
         width: 1200,
         height: 630,
-        alt: 'David - Fullstack Developer | Portfolio de desarrollo web con Next.js, React y Node.js',
+        alt: 'David - Fullstack Developer | Portfolio de desarrollo web con Next.js, React y Nest.js',
       },
     ],
   },
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'David | Fullstack Developer - Next.js, React & Node.js',
     description:
-      'Portfolio de David - Desarrollador Fullstack especializado en Next.js, NestJS, React y GraphQL. Aplicaciones web modernas y escalables.',
+      'Portfolio de David - Desarrollador Fullstack especializado en Next.js, NestJS, React. Aplicaciones web modernas y escalables.',
     images: ['/david-portafolio/og_image.webp'],
   },
   robots: {
