@@ -1,0 +1,7 @@
+{
+  "src": "./src",
+  "ignore": "*.log, temp/, node_modules/, .git/",
+  "output": "./mkctx",
+  "first_comment": "/* Project Context */",
+  "last_comment": "/* End of Context */"
+}
