@@ -1,6 +1,5 @@
-import { BlogService } from '@/modules/blogs/services/blog-service'
 import { Article } from '@/modules/blogs/components/Article'
-import { getService } from '@/modules/core/utils/di-utils'
+import { getBlogService } from '@/modules/core/utils/di-utils'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { AppSidebar } from '@/modules/blogs/components/AppSidebar'
@@ -8,7 +7,7 @@ import { SidebarProvider } from '@/modules/blogs/context/sidebar-context'
 import { TriggerSidebarButton } from '@/modules/blogs/components/TriggerSidebarButton'
 import { getDomain } from '@/modules/core/utils/get-domain'
 
-const blogService = getService(BlogService)
+const blogService = getBlogService()
 
 export async function generateStaticParams() {
   const slugs = await blogService.getAllSlugNames()

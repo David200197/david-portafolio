@@ -1,4 +1,3 @@
-import { Injectable } from '@/modules/core/decorators/Injectable'
 import { ZodValidator } from '@/modules/core/services/zod-validator'
 import { BlogDataDTO, GetBlogDTO } from '../dto/GetBlogDTO'
 import { z } from 'zod'
@@ -6,7 +5,7 @@ import { BlogValidator } from '../model/BlogValidator'
 
 const BlogDataSchema = z.object({
   title: z.string(),
-  createAt: z.string().datetime().or(z.string()), // Puede ser ISO string o cualquier string
+  createAt: z.string().datetime().or(z.string()),
   updateAt: z.string().datetime().optional().or(z.string().optional()),
   author: z.string(),
   authorPhoto: z.string().url().or(z.string()),
@@ -33,7 +32,6 @@ export const ItemSideMenuSchema = z.union([
   SubmenuItemSideMenuSchema,
 ])
 
-// Esquema para GetBlogDTO que extiende BlogDataDTO
 const GetBlogSchema = BlogDataSchema.extend({
   content: z.string(),
   contentHtml: z.string(),
@@ -44,7 +42,6 @@ const GetBlogSchema = BlogDataSchema.extend({
 
 const GetBlogsSchema = z.array(GetBlogSchema)
 
-@Injectable()
 export class BlogZodValidator implements BlogValidator {
   constructor(private readonly zodValidator: ZodValidator) {}
 

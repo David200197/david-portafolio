@@ -1,6 +1,3 @@
-import { Injectable } from '../decorators/Injectable'
-
-@Injectable()
 export class CacheManager {
   private readonly cache = new Map<string, unknown>()
 

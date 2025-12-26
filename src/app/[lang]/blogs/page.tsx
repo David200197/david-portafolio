@@ -1,6 +1,5 @@
 import { BlogsProvider } from '@/modules/blogs/context/blogs-context'
-import { BlogService } from '@/modules/blogs/services/blog-service'
-import { getService } from '@/modules/core/utils/di-utils'
+import { getBlogService } from '@/modules/core/utils/di-utils'
 
 import dynamic from 'next/dynamic'
 
@@ -20,7 +19,7 @@ const SearchBlog = dynamic(
   }
 )
 
-const blogService = getService(BlogService)
+const blogService = getBlogService()
 
 type Props = { params: Promise<{ lang: string }> }
 

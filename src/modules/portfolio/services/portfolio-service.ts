@@ -1,10 +1,8 @@
-import { Injectable } from '@/modules/core/decorators/Injectable'
 import { particlesOptions } from './options/particles'
 import { ItemMenues } from '../entities/ItemMenues'
 import { LocalRepository } from '@/modules/core/services/local-respository'
 import { GetItemMenuDTO } from '../models/GetItemMenuDTO'
 
-@Injectable()
 export class PortfolioService {
   constructor(private readonly localRepository: LocalRepository) {}
 

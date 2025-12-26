@@ -1,8 +1,6 @@
 import { AxiosResponse } from 'axios'
-import { Injectable } from '../decorators/Injectable'
 import toast from 'react-hot-toast'
 
-@Injectable()
 export class HttpResponseInterceptor {
   handle = (response: AxiosResponse<any, any>) => {
     const { status, config, data } = response

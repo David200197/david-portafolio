@@ -1,13 +1,13 @@
 'use client'
 
-import { Container } from 'inversify'
 import { Component, ErrorInfo, ReactNode } from 'react'
-import { ErrorBoundaryInterceptor } from '../interceptors/error-boundary.interceptor'
+import { AwilixContainer } from 'awilix'
+import { Cradle } from '../di/container'
 
 interface ErrorBoundaryProps {
   children: ReactNode
   fallback?: ReactNode
-  container: Container
+  container: AwilixContainer<Cradle>
 }
 
 // State del ErrorBoundary
@@ -30,7 +30,7 @@ export class ErrorBoundary extends Component<
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     const container = this.props.container
-    const errorBoundaryException = container.get(ErrorBoundaryInterceptor)
+    const errorBoundaryException = container.resolve('errorBoundaryInterceptor')
     errorBoundaryException.handle(error, errorInfo)
   }
 

@@ -1,5 +1,4 @@
 import toast from 'react-hot-toast'
-import { Injectable } from '../decorators/Injectable'
 import { ServerError } from '../exceptions/server-error'
 import { NotFoundError } from '../exceptions/not-found-error'
 import { UnauthorizedError } from '../exceptions/unathorized-error'
@@ -8,7 +7,6 @@ import { ApiError } from '../exceptions/api-error'
 import { NetworkError } from '../exceptions/network-error'
 import { UnknownError } from '../exceptions/uknown-error'
 
-@Injectable()
 export class HttpErrorInterceptor {
   handle = (error: any) => {
     const { response, request, message } = error
