@@ -1,10 +1,9 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { PortfolioService } from '../services/portfolio-service'
-import { getService } from '@/modules/core/utils/di-utils'
+import { getPortfolioService } from '@/modules/core/utils/di-utils'
 
-const particleOptions = getService(PortfolioService).getParticlesOptions()
+const particleOptions = getPortfolioService().getParticlesOptions()
 
 export const BackgroundParticles = () => {
   const containerRef = useRef<HTMLDivElement>(null)

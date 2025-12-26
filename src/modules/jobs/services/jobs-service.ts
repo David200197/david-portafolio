@@ -1,9 +1,7 @@
-import { Injectable } from '@/modules/core/decorators/Injectable'
 import { Jobs } from '../entities/jobs'
 import { LocalRepository } from '@/modules/core/services/local-respository'
 import { GetJobsResponseDTO } from '../dtos/get-jobs-response-dto'
 
-@Injectable()
 export class JobsService {
   constructor(private readonly localRepository: LocalRepository) {}
 

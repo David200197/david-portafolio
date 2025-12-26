@@ -1,8 +1,7 @@
 import { Navbar } from '@/modules/core/components/navbar'
-import { getService } from '@/modules/core/utils/di-utils'
-import { PortfolioService } from '@/modules/portfolio/services/portfolio-service'
+import { getPortfolioService } from '@/modules/core/utils/di-utils'
 
-const portfolioService = getService(PortfolioService)
+const portfolioService = getPortfolioService()
 
 export function generateStaticParams() {
   return [{ lang: 'en' }, { lang: 'es' }]

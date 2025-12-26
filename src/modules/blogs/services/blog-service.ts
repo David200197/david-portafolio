@@ -1,11 +1,8 @@
-import { Injectable } from '@/modules/core/decorators/Injectable'
 import { BlogSection } from '../model/BlogSection'
 import { LocalRepository } from '@/modules/core/services/local-respository'
-import { InjectMdRender } from '@/modules/core/decorators/InjectMdRender'
 import type { MdRender } from '@/modules/core/models/MdRender'
 import { Blog } from '../entities/Blog'
 import { BlogDataDTO } from '../dto/GetBlogDTO'
-import { InjectBlogValidator } from '../decorator/InjectBlogValidator'
 import type { BlogValidator } from '../model/BlogValidator'
 import { Blogs } from '../entities/Blogs'
 import { CacheManager } from '@/modules/core/services/cache-manager'
@@ -13,12 +10,11 @@ import { getPath } from '@/modules/core/utils/fallbacks/get-path'
 import { getFs } from '@/modules/core/utils/fallbacks/get-fs'
 import { ItemSideMenu } from '../model/ItemSideMenu'
 
-@Injectable()
 export class BlogService {
   constructor(
     private readonly localRepository: LocalRepository,
-    @InjectMdRender() private readonly mdRender: MdRender,
-    @InjectBlogValidator() private readonly blogValidator: BlogValidator,
+    private readonly mdRender: MdRender,
+    private readonly blogValidator: BlogValidator,
     private readonly cacheManager: CacheManager
   ) {}
 

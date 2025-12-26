@@ -1,7 +1,5 @@
 import { z, ZodRawShape } from 'zod'
-import { Injectable } from '../decorators/Injectable'
 
-@Injectable()
 export class ZodValidator {
   validate = <T>(
     name: string,
