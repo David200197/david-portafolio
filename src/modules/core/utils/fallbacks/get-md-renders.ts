@@ -1,4 +1,4 @@
-import { createServerGetter } from './server-import'
+import { createServerGetter } from '../create-server-getter'
 
 export const getGrayMatter = async () => {
   const mod =
