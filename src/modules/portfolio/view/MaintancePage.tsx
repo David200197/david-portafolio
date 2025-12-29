@@ -2,12 +2,13 @@ import { Button } from '@/modules/core/ui/button'
 import Link from 'next/link'
 import { getImagePath } from '@/modules/core/utils/get-img-path'
 import { PageContainer } from '../components/PageContainer'
+import Image from 'next/image'
 
 export const MaintancePage = () => (
   <PageContainer>
     <div className="w-full h-[660px] flex">
       <div className="m-auto flex flex-col items-center">
-        <img
+        <Image
           src={getImagePath('maintenance.svg')}
           alt="maintenance"
           width={200}

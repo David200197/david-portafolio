@@ -22,10 +22,9 @@ export const BlogCard = ({ blog }: Props) => (
       <CardContent className="mt-auto">
         <WebPImage
           src={blog.image}
-          width={250}
-          height={250}
           alt={'blog image'}
-          className="img-blog"
+          containerClassName="h-48 w-full"
+          className="rounded-md"
         />
       </CardContent>
       <CardFooter className="mt-auto">

@@ -1,7 +1,7 @@
 ---
 title: 'How I use AI to modernize legacy projects without breaking anything'
-createAt: '2025-12-23'
-updateAt: '2025-12-23'
+createAt: '2025-12-24'
+updateAt: '2025-12-24'
 author: 'David Alfonso Pereira'
 authorPhoto: '/david-portafolio/profile.webp'
 authorPhotoAlt: 'David Alfonso'
