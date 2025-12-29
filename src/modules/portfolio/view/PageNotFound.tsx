@@ -2,12 +2,18 @@ import { Button } from '@/modules/core/ui/button'
 import Link from 'next/link'
 import { getImagePath } from '@/modules/core/utils/get-img-path'
 import { PageContainer } from '../components/PageContainer'
+import Image from 'next/image'
 
 export const PageNotFound = () => (
   <PageContainer>
     <div className="w-full h-[660px] flex">
       <div className="m-auto flex flex-col items-center">
-        <img src={getImagePath('404.svg')} alt="404" width={200} height={200} />
+        <Image
+          src={getImagePath('404.svg')}
+          alt="404"
+          width={200}
+          height={200}
+        />
         <p className="text-3xl">Page not Found</p>
         <Button className="text-center mt-2" aria-label="home">
           <Link href="/en" aria-label={'home'}>

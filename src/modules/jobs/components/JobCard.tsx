@@ -43,7 +43,7 @@ export const JobCard = ({ job }: Props) => (
     <WebPImage
       src={getImagePath(job.image)}
       alt={job.alt}
-      className="object-cover h-[200px]"
+      containerClassName="h-52 w-full"
     />
     <CardContent>
       <p>{job.description}</p>

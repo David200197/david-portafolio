@@ -1,11 +1,16 @@
+import Image from 'next/image'
 import React, { ImgHTMLAttributes, JSX } from 'react'
 
 interface WebPImageProps
-  extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'srcSet' | 'sizes'> {
+  extends Omit<
+    ImgHTMLAttributes<HTMLImageElement>,
+    'srcSet' | 'sizes' | 'width' | 'height'
+  > {
   src: string
   alt: string
   width?: number
   height?: number
+  containerClassName?: string
 }
 
 export default function WebPImage({
@@ -13,38 +18,38 @@ export default function WebPImage({
   alt,
   width,
   height,
+  containerClassName,
+  className = '',
   ...props
 }: WebPImageProps): JSX.Element {
   const base = src.replace(/\.[^/.]+$/, '')
-
-  const availableSizes = [320, 640, 768, 1024, 1280, 1536, 1920] as const
-
-  const srcSet = availableSizes
-    .map((size) => `${base}-${size}w.webp ${size}w`)
-    .join(', ')
-
-  const sizes = width
-    ? availableSizes
-        .filter((size) => size <= width)
-        .map((size, index, arr) => {
-          if (index === arr.length - 1) {
-            return `${size}px`
-          }
-          return `(max-width: ${size}px) ${size}px`
-        })
-        .join(', ') || `${width}px`
-    : '100vw'
-
   const webpSrc = `${base}.webp`
 
+  if (containerClassName) {
+    return (
+      <div className={`relative ${containerClassName}`}>
+        <Image
+          src={webpSrc}
+          alt={alt}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className={`object-cover ${className}`}
+          loading="lazy"
+          decoding="async"
+          {...props}
+        />
+      </div>
+    )
+  }
+
   return (
-    <img
+    <Image
       src={webpSrc}
-      srcSet={srcSet}
-      sizes={sizes}
       alt={alt}
       width={width}
       height={height}
+      style={{ width: '100%', height: 'auto' }}
+      className={className}
       loading="lazy"
       decoding="async"
       {...props}
