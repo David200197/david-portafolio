@@ -1,9 +1,7 @@
+// src/modules/portfolio/components/BackgroundParticles.tsx
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { getPortfolioService } from '@/modules/core/utils/di-utils'
-
-const particleOptions = getPortfolioService().getParticlesOptions()
 
 export const BackgroundParticles = () => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -11,11 +9,13 @@ export const BackgroundParticles = () => {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
+    const delay = window.innerWidth < 768 ? 4000 : 2500
+
     const scheduleLoad = () => {
       if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => setIsVisible(true), { timeout: 3000 })
+        requestIdleCallback(() => setIsVisible(true), { timeout: delay })
       } else {
-        setTimeout(() => setIsVisible(true), 2000)
+        setTimeout(() => setIsVisible(true), delay)
       }
     }
 
@@ -31,31 +31,31 @@ export const BackgroundParticles = () => {
     if (!isVisible || initialized.current || !containerRef.current) return
 
     const loadParticles = async () => {
-      const [{ tsParticles }, { loadSlim }] = await Promise.all([
-        import('@tsparticles/engine'),
-        import('@tsparticles/slim'),
-      ])
+      const [{ tsParticles }, { loadSlim }, { particlesOptions }] =
+        await Promise.all([
+          import('@tsparticles/engine'),
+          import('@tsparticles/slim'),
+          import('@/modules/portfolio/services/options/particles'),
+        ])
 
       await loadSlim(tsParticles)
 
       if (containerRef.current) {
         const isMobile = window.innerWidth < 768
-        const options = {
-          ...particleOptions,
-          particles: {
-            ...particleOptions.particles,
-            number: {
-              ...particleOptions.particles?.number,
-              value: isMobile ? 30 : 100,
-            },
-          },
-          detectRetina: false,
-        }
-
         await tsParticles.load({
           id: 'tsparticles',
           element: containerRef.current,
-          options,
+          options: {
+            ...particlesOptions,
+            particles: {
+              ...particlesOptions.particles,
+              number: {
+                ...particlesOptions.particles?.number,
+                value: isMobile ? 20 : 80,
+              },
+            },
+            detectRetina: false,
+          },
         })
         initialized.current = true
       }
@@ -65,7 +65,7 @@ export const BackgroundParticles = () => {
 
     return () => {
       import('@tsparticles/engine').then(({ tsParticles }) => {
-        tsParticles.dom().forEach((container) => container.destroy())
+        tsParticles.dom().forEach((c) => c.destroy())
       })
     }
   }, [isVisible])
@@ -76,14 +76,7 @@ export const BackgroundParticles = () => {
     <div
       ref={containerRef}
       id="tsparticles"
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: -1,
-      }}
+      className="absolute inset-0 -z-10"
     />
   )
 }

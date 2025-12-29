@@ -6,19 +6,23 @@ import { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { ErrorBoundaryProvider } from '@/modules/core/providers/ErrorBoundaryProvider'
 import { DiProvider } from '@/modules/core/contexts/DiContext'
-import { Toaster } from 'react-hot-toast'
 import { Metadatas } from '@/modules/core/components/Metadatas'
+import { ToasterClient } from '@/modules/core/components/ToasterClient'
 
 const Provider = composeProviders([ErrorBoundaryProvider, DiProvider])
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
+  display: 'swap',
+  preload: true,
 })
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+  display: 'swap',
+  preload: true,
 })
 
 export const metadata: Metadata = {
@@ -84,7 +88,7 @@ export default async function RootLayout({
       >
         <Metadatas />
         <Provider>
-          <Toaster position="top-right" />
+          <ToasterClient />
           {children}
         </Provider>
       </body>
