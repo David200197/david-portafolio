@@ -1,4 +1,3 @@
-import { Article } from '@/modules/blogs/components/Article'
 import { getBlogService } from '@/modules/core/utils/di-utils'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
@@ -6,6 +5,21 @@ import { AppSidebar } from '@/modules/blogs/components/AppSidebar'
 import { SidebarProvider } from '@/modules/blogs/context/sidebar-context'
 import { TriggerSidebarButton } from '@/modules/blogs/components/TriggerSidebarButton'
 import { getDomain } from '@/modules/core/utils/get-domain'
+import dynamic from 'next/dynamic'
+
+const Article = dynamic(
+  () => import('@/modules/blogs/components/Article').then((mod) => mod.Article),
+  {
+    loading: () => (
+      <div className="animate-pulse p-8">
+        <div className="h-8 bg-gray-200 rounded w-3/4 mb-4" />
+        <div className="h-4 bg-gray-200 rounded w-full mb-2" />
+        <div className="h-4 bg-gray-200 rounded w-full mb-2" />
+        <div className="h-4 bg-gray-200 rounded w-2/3" />
+      </div>
+    ),
+  }
+)
 
 const blogService = getBlogService()
 

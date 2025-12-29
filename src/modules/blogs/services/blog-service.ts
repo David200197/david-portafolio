@@ -6,9 +6,9 @@ import { BlogDataDTO } from '../dto/GetBlogDTO'
 import type { BlogValidator } from '../model/BlogValidator'
 import { Blogs } from '../entities/Blogs'
 import { CacheManager } from '@/modules/core/services/cache-manager'
-import { getPath } from '@/modules/core/utils/fallbacks/get-path'
 import { getFs } from '@/modules/core/utils/fallbacks/get-fs'
 import { ItemSideMenu } from '../model/ItemSideMenu'
+import path from 'path'
 
 export class BlogService {
   constructor(
@@ -19,7 +19,6 @@ export class BlogService {
   ) {}
 
   private getBlogContentPath = async () => {
-    const path = await getPath()
     return path.join(process.cwd(), 'src', 'contents', 'blogs')
   }
 
@@ -37,7 +36,6 @@ export class BlogService {
 
   async getAllSlugNames() {
     const fs = await getFs()
-    const path = await getPath()
     const blogContentPath = await this.getBlogContentPath()
     const blogFiles = await fs.readdir(blogContentPath, {
       recursive: true,
@@ -50,7 +48,6 @@ export class BlogService {
 
   private async createBlog(lang: string, slug: string) {
     const fs = await getFs()
-    const path = await getPath()
     const blogContentPath = await this.getBlogContentPath()
     const filePath = path.join(blogContentPath, `${slug}.${lang}.md`)
     const fileContents = await fs.readFile(filePath, 'utf8')
