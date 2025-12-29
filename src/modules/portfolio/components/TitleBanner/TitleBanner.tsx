@@ -1,48 +1,43 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { WrapperTitle } from './WrapperTitle'
-import Typer from '../Typer'
 import { usePorfolio } from '../../context/PortfolioContext'
+import dynamic from 'next/dynamic'
+
+const Typer = dynamic(() => import('../Typer'), {
+  ssr: false,
+  loading: () => null,
+})
 
 const TitleBanner = () => {
-  const [isEndLine, setIsEndLine] = useState(false)
-  const onComplete = () => {
-    setIsEndLine(true)
-  }
+  const [showTyper, setShowTyper] = useState(false)
   const { title } = usePorfolio()
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowTyper(true), 100)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <WrapperTitle>
-      {isEndLine ? (
-        <h3
-          className="font-sans text-3xl lg:text-5xl"
-          style={{ paddingTop: 1.699 }}
-          color={'#000000'}
-        >
-          {title.big}
-        </h3>
-      ) : (
-        <Typer
-          color={'#000000'}
-          className="font-sans text-3xl lg:text-5xl"
-          fontSizeCursor={'3rem'}
-          strings={[title.big]}
-          typeSpeed={25}
-          onComplete={onComplete}
-        />
-      )}
+      <h1 className="font-sans text-3xl lg:text-5xl" style={{ color: '#000' }}>
+        {title.big}
+      </h1>
 
-      {isEndLine ? (
+      {/* Efecto secundario: carga después */}
+      {showTyper ? (
         <Typer
           className="font-sans text-base lg:text-xl mt-2"
-          color={'#000000'}
+          color="#000"
           fontSizeCursor="1.5rem"
           strings={[title.small]}
           typeSpeed={25}
         />
       ) : (
-        <div className="mt-0 md:mt-2" />
+        <p className="font-sans text-base lg:text-xl mt-2 opacity-0">
+          {title.small}
+        </p>
       )}
     </WrapperTitle>
   )
