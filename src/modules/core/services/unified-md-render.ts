@@ -1,16 +1,27 @@
-import matter from 'gray-matter'
-import { unified } from 'unified'
-import remarkParse from 'remark-parse'
-import remarkGfm from 'remark-gfm'
-import remarkRehype from 'remark-rehype'
-import rehypeHighlight from 'rehype-highlight'
-import rehypeStringify from 'rehype-stringify'
 import { MdRender } from '../models/MdRender'
-import rehypeRaw from 'rehype-raw'
+import {
+  getGrayMatter,
+  getRehypeHighlight,
+  getRehypeRaw,
+  getRehypeStringify,
+  getRemarkGfm,
+  getRemarkParse,
+  getRemarkRehype,
+  getUnified,
+} from '../utils/fallbacks/get-md-renders'
 
 export class UnifiedMdRender implements MdRender {
   async tranformToHTML<Data = Record<string, string>>(fileContents: string) {
     const mutateContent = fileContents
+
+    const matter = await getGrayMatter()
+    const { unified } = await getUnified()
+    const remarkParse = (await getRemarkParse()).default
+    const remarkGfm = (await getRemarkGfm()).default
+    const remarkRehype = (await getRemarkRehype()).default
+    const rehypeRaw = (await getRehypeRaw()).default
+    const rehypeHighlight = (await getRehypeHighlight()).default
+    const rehypeStringify = (await getRehypeStringify()).default
 
     const { data, content } = matter(mutateContent)
     const processedContent = await unified()

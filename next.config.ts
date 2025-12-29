@@ -3,6 +3,8 @@ import analyzer from '@next/bundle-analyzer'
 
 const withBundleAnalyzer = analyzer({
   enabled: Boolean(process.env.ANALYZE),
+  openAnalyzer: true,
+  analyzerMode: 'json',
 })
 
 const nextConfig: NextConfig = {
