@@ -1,7 +1,7 @@
 ---
 title: 'JavaScript y Rust: Dos direcciones para optimizar tu backend'
-createAt: '2026-10-01'
-updateAt: '2026-10-01'
+createAt: '2026-01-30'
+updateAt: '2026-01-30'
 author: 'David Alfonso Pereira'
 authorPhoto: '/david-portafolio/profile.webp'
 authorPhotoAlt: 'David Alfonso'
