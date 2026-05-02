@@ -54,7 +54,7 @@ const getTemplateHtml = async () => {
 }
 
 const getSocials = async (profile) => {
-  const filterLinks = profile.links.filter((link) => link.ref !== '/cv/en.pdf')
+  const filterLinks = profile.links.filter((link) => link.icon !== 'cv')
 
   return await Promise.all(
     filterLinks.map(async (link) => ({
