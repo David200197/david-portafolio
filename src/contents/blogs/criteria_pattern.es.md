@@ -1,7 +1,7 @@
 ---
 title: 'Patrón Criteria: Cómo dejé de crear métodos findByX para cada consulta'
 createAt: '2025-12-02'
-updateAt: '2025-12-02'
+updateAt: '2026-06-10'
 author: 'David Alfonso Pereira'
 authorPhoto: '/david-portafolio/profile.webp'
 authorPhotoAlt: 'David Alfonso'
@@ -56,7 +56,8 @@ En este artículo vamos a implementar un sistema completo de Criteria que incluy
 3. Criterios especializados reutilizables
 4. Transformadores para SQL y MongoDB
 5. Un filtro para colecciones en memoria (súper útil para testing)
-6. Integración con un Repository
+6. Un transformador a Drizzle con tipado y seguridad reales
+7. Integración con un Repository
 
 ---
 
@@ -259,7 +260,9 @@ Nada de revisar qué filtros aplicar, ni copiar código de otro lado.
 
 El Criteria es agnóstico a la base de datos. Para ejecutarlo, necesitamos transformarlo al lenguaje que entienda nuestro motor de base de datos.
 
-### Transformador a SQL
+### Transformador a SQL (versión didáctica, **no usar en producción**)
+
+Empecemos con la versión más obvia: construir el SQL como un string. Es útil para _entender_ el patrón, pero más abajo verás por qué no debe llegar a producción tal cual.
 
 ```typescript
 // CriteriaToSqlTransformer.ts
@@ -320,6 +323,10 @@ export class CriteriaToSqlTransformer {
   }
 }
 ```
+
+> ⚠️ **Advertencia de seguridad.** Este transformador escapa el _valor_ (las comillas simples), pero interpola `f.field` y `f.operator` **crudos** dentro del string SQL. Y aquí está el problema de fondo: el caso de uso natural del Criteria es construir filtros dinámicos a partir de entrada externa (query params, body de una petición). Eso significa que `field` puede venir del cliente. Un `field` como `"1=1; DROP TABLE products; --"` o un valor que escape el patrón `LIKE` abre la puerta a **inyección SQL**. El escape manual de comillas es, justamente, el antipatrón que los parámetros de consulta resuelven de raíz.
+>
+> Nunca construyas SQL concatenando identificadores ni valores que provengan del exterior. La sección 6 muestra cómo cerrar este agujero usando un ORM que parametriza y, de paso, valida los campos contra el schema real.
 
 ### Transformador a MongoDB
 
@@ -402,6 +409,8 @@ export class CriteriaToMongoTransformer {
   }
 }
 ```
+
+> 📝 **Nota.** Mongo sale mejor parado que el string SQL porque el driver trata los valores como datos, no como código: el `$regex` del operador `LIKE` no permite escapar a "otra consulta" como sí ocurre concatenando SQL. Pero `f.field` sigue siendo un nombre de campo que viene del exterior sin validar. Un campo arbitrario puede exponer datos que no querías filtrar (por ejemplo, un campo interno tipo `passwordHash`) o, con operadores de Mongo mal saneados, habilitar _NoSQL injection_. La misma solución de la sección 6 —un allowlist de campos— aplica aquí.
 
 ---
 
@@ -781,6 +790,231 @@ Un solo método `find()` que acepta cualquier `Criteria`. Adiós a los 20 métod
 
 ---
 
+## 6. Tipado y seguridad reales: transformador a Drizzle
+
+Hasta aquí el patrón está completo, pero hay una pieza que en la mayoría de los artículos sobre Criteria queda fuera y que en producción es la más importante: **el tipado y la seguridad de los campos**.
+
+Volvamos al problema. Nuestro `Filter` define `field: string`. Eso significa que **cualquier string** es un campo válido para filtrar u ordenar. Y si el `Criteria` se construye a partir de la petición HTTP —que es el caso de uso real del patrón— entonces el cliente decide qué campos consultar. Eso abre dos agujeros:
+
+1. **Inyección.** Como vimos en la sección 3, concatenar `field` en un string SQL es inyección directa.
+2. **Sobreexposición de datos.** Aunque parametrices los valores, si no restringes los nombres de campo, el cliente puede filtrar u ordenar por columnas que nunca quisiste exponer (`passwordHash`, `internalScore`, flags de feature, etc.) e inferir información de la base mediante respuestas.
+
+El tipado no es solo comodidad de autocompletado: **es la mitigación del agujero**. Cuando los campos permitidos están declarados en un mapa de columnas reales, un campo arbitrario simplemente no existe en el mapa, y la consulta falla de forma controlada en vez de ejecutarse.
+
+[Drizzle ORM](https://orm.drizzle.team/) encaja con Criteria mucho mejor que un constructor de strings, por una razón estructural: sus operadores (`eq`, `gt`, `like`, `and`, `or`, …) son **funciones que devuelven condiciones componibles de primera clase**, no fragmentos de texto. Eso convierte el transformador en, básicamente, un `map` sobre los filtros. Además, Drizzle **parametriza** los valores por debajo, así que la inyección por valor desaparece.
+
+### El allowlist tipado
+
+La pieza central es un mapa que asocia los nombres de campo _públicos_ del Criteria con las columnas _reales_ de Drizzle. Solo lo declarado aquí es filtrable u ordenable:
+
+```typescript
+// products.schema.ts
+import { pgTable, serial, text, integer, boolean } from 'drizzle-orm/pg-core'
+
+export const products = pgTable('products', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  category: text('category').notNull(),
+  price: integer('price').notNull(),
+  stock: integer('stock').notNull(),
+  status: text('status').notNull(),
+  sales: integer('sales').notNull(),
+  rating: integer('rating'),
+})
+```
+
+```typescript
+// CriteriaToDrizzleTransformer.ts
+import {
+  and,
+  or,
+  eq,
+  ne,
+  gt,
+  gte,
+  lt,
+  lte,
+  inArray,
+  like,
+  asc,
+  desc,
+  type Column,
+  type SQL,
+} from 'drizzle-orm'
+import {
+  Criteria,
+  CriteriaFilter,
+  Filter,
+  CompositeFilter,
+  Operator,
+} from './Criteria'
+
+/**
+ * Mapa de campos permitidos: nombre público del Criteria -> columna real de Drizzle.
+ * Actúa como allowlist. Lo que no esté aquí, no se puede filtrar ni ordenar.
+ */
+export type FieldMap = Record<string, Column>
+
+/**
+ * Tabla de operadores -> constructores de condición de Drizzle.
+ * Centralizar esto evita el `switch` disperso y deja explícito qué operadores existen.
+ */
+const OPERATOR_BUILDERS: Record<Operator, (column: Column, value: any) => SQL> =
+  {
+    '=': (c, v) => eq(c, v),
+    '!=': (c, v) => ne(c, v),
+    '>': (c, v) => gt(c, v),
+    '>=': (c, v) => gte(c, v),
+    '<': (c, v) => lt(c, v),
+    '<=': (c, v) => lte(c, v),
+    IN: (c, v) => inArray(c, Array.isArray(v) ? v : [v]),
+    LIKE: (c, v) => like(c, `%${v}%`),
+  }
+
+export class CriteriaToDrizzleTransformer {
+  constructor(private readonly fieldMap: FieldMap) {}
+
+  /**
+   * Resuelve un nombre de campo público a su columna real.
+   * Si el campo no está en el allowlist, lanza error: este es el punto
+   * donde un campo arbitrario del exterior se convierte en un fallo
+   * controlado en lugar de una consulta peligrosa.
+   */
+  private resolveColumn(field: string): Column {
+    const column = this.fieldMap[field]
+    if (!column) {
+      throw new Error(`Campo no permitido para filtrar/ordenar: "${field}"`)
+    }
+    return column
+  }
+
+  private isComposite(f: CriteriaFilter): f is CompositeFilter {
+    return 'filters' in f
+  }
+
+  private buildCondition(f: CriteriaFilter): SQL {
+    if (this.isComposite(f)) {
+      const inner = f.filters.map((sub) => this.buildCondition(sub))
+      // and()/or() de Drizzle aceptan condiciones y devuelven una nueva condición
+      const combined = f.operator === 'AND' ? and(...inner) : or(...inner)
+      // and()/or() pueden devolver undefined si reciben lista vacía; lo normalizamos
+      if (!combined) {
+        throw new Error('Filtro compuesto sin condiciones')
+      }
+      return combined
+    }
+
+    const simple = f as Filter
+    const column = this.resolveColumn(simple.field)
+    const builder = OPERATOR_BUILDERS[simple.operator]
+    if (!builder) {
+      throw new Error(`Operador no soportado: ${simple.operator}`)
+    }
+    return builder(column, simple.value)
+  }
+
+  /**
+   * Devuelve las piezas que la query de Drizzle necesita: la condición WHERE,
+   * el ORDER BY, y limit/offset. No ejecuta nada: eso es trabajo del repositorio.
+   */
+  transform(criteria: Criteria): {
+    where?: SQL
+    orderBy: SQL[]
+    limit?: number
+    offset?: number
+  } {
+    const filters = criteria.getFilters()
+
+    let where: SQL | undefined
+    if (filters.length === 1) {
+      where = this.buildCondition(filters[0])
+    } else if (filters.length > 1) {
+      // Varios filtros de nivel superior se combinan con AND, igual que en el resto del artículo
+      where = and(...filters.map((f) => this.buildCondition(f)))
+    }
+
+    const orderBy: SQL[] = criteria.getOrders().map((o) => {
+      const column = this.resolveColumn(o.field)
+      return o.direction === 'ASC' ? asc(column) : desc(column)
+    })
+
+    return {
+      where,
+      orderBy,
+      limit: criteria.getLimit(),
+      offset: criteria.getOffset(),
+    }
+  }
+}
+```
+
+### El repositorio con Drizzle
+
+Ahora el repositorio ejecuta esas piezas. Fíjate en que ya no maneja strings ni nombres de tabla sueltos: trabaja con la tabla tipada de Drizzle.
+
+```typescript
+// DrizzleProductRepository.ts
+import { drizzle } from 'drizzle-orm/node-postgres'
+import { Criteria } from './Criteria'
+import {
+  CriteriaToDrizzleTransformer,
+  FieldMap,
+} from './CriteriaToDrizzleTransformer'
+import { products } from './products.schema'
+
+// El allowlist se declara una sola vez, junto a la tabla. Solo estos campos
+// son consultables desde el exterior, aunque la tabla tenga más columnas.
+const PRODUCT_FIELDS: FieldMap = {
+  id: products.id,
+  name: products.name,
+  category: products.category,
+  price: products.price,
+  stock: products.stock,
+  status: products.status,
+  sales: products.sales,
+  rating: products.rating,
+}
+
+export class DrizzleProductRepository {
+  private readonly transformer = new CriteriaToDrizzleTransformer(
+    PRODUCT_FIELDS
+  )
+
+  constructor(private readonly db: ReturnType<typeof drizzle>) {}
+
+  async find(criteria: Criteria) {
+    const { where, orderBy, limit, offset } =
+      this.transformer.transform(criteria)
+
+    let query = this.db.select().from(products).$dynamic()
+
+    if (where) query = query.where(where)
+    if (orderBy.length > 0) query = query.orderBy(...orderBy)
+    if (limit !== undefined) query = query.limit(limit)
+    if (offset !== undefined) query = query.offset(offset)
+
+    return query
+  }
+}
+```
+
+Lo que ganamos respecto al string SQL de la sección 3:
+
+- **Sin inyección por valor.** Drizzle parametriza: el `value` de cada filtro viaja como parámetro, nunca como texto interpolado.
+- **Sin inyección por campo.** `resolveColumn` rechaza cualquier nombre que no esté en el allowlist, antes de tocar la base.
+- **Sin sobreexposición.** Aunque `products` tenga columnas internas, solo las declaradas en `PRODUCT_FIELDS` son consultables.
+- **Tipado donde importa.** `OPERATOR_BUILDERS` está tipado contra `Operator`, así que si añades un operador nuevo al `Criteria` y olvidas implementarlo, el compilador te avisa.
+
+### El borde que el tipado no cubre (y hay que aceptar)
+
+Seamos honestos sobre el límite: el `fieldMap` es un `Record<string, Column>` y el `field` del `Criteria` sigue siendo un `string` libre. TypeScript **no** puede garantizar en tiempo de compilación que un `field` cualquiera exista en el mapa, porque ese `field` nace de datos en tiempo de ejecución (la petición HTTP). Por eso `resolveColumn` valida en runtime y lanza error.
+
+Esto es inherente al patrón Criteria, no una carencia de Drizzle: en el momento en que aceptas filtros dinámicos desde el exterior, la validación _tiene_ que ocurrir en runtime. Lo que el tipado sí te da es que el lado interno —el catálogo de operadores, las columnas, la construcción de condiciones— está verificado por el compilador, y que el único punto de entrada de datos no confiables es uno solo, explícito y fácil de auditar: `resolveColumn`. Concentrar ahí toda la desconfianza es justo lo que quieres.
+
+> Si quieres llevar el tipado más lejos, puedes tipar el `field` del `Criteria` como `keyof FieldMap` mediante genéricos (`Criteria<keyof typeof PRODUCT_FIELDS>`). Eso te da autocompletado y verificación cuando construyes criterios _en el código_. Pero en cuanto el Criteria se arma a partir de un DTO de la petición, vuelves a `string` y necesitas la validación en runtime de todos modos. Mi recomendación: valida siempre en runtime y usa los genéricos solo como ayuda ergonómica para los criterios escritos a mano.
+
+---
+
 ## Poniendo todo junto
 
 ```typescript
@@ -796,7 +1030,7 @@ const featuredProducts = new Criteria({
 // Combinarlos
 const cheapOrFeatured = Criteria.or(cheapProducts, featuredProducts);
 
-// Usar con SQL
+// Usar con SQL (didáctico)
 const sqlTransformer = new CriteriaToSqlTransformer();
 const sqlQuery = sqlTransformer.transform(cheapOrFeatured, 'products');
 // SELECT * FROM products WHERE (price < 50) OR (featured = true);
@@ -806,10 +1040,15 @@ const mongoTransformer = new CriteriaToMongoTransformer();
 const { filter, options } = mongoTransformer.transform(cheapOrFeatured);
 // filter: { $or: [{ price: { $lt: 50 } }, { featured: true }] }
 
+// Usar con Drizzle (producción)
+const repo = new DrizzleProductRepository(db);
+const results = await repo.find(cheapOrFeatured);
+// Parametrizado, con allowlist de campos y tipado en el lado interno
+
 // Usar en memoria para tests
 const products = [...]; // tus datos de prueba
 const collectionFilter = new CollectionFilter(products);
-const results = collectionFilter.findAll(cheapOrFeatured);
+const inMemoryResults = collectionFilter.findAll(cheapOrFeatured);
 ```
 
 ---
@@ -820,10 +1059,12 @@ El patrón Criteria transformó cómo estructuro el acceso a datos en mis proyec
 
 - **Un método en lugar de muchos**: `find(criteria)` reemplaza docenas de `findByX`
 - **Criterios reutilizables**: la lógica de negocio queda encapsulada en clases
-- **Agnóstico a la base de datos**: el mismo criterio funciona con SQL, MongoDB o arrays en memoria
+- **Agnóstico a la base de datos**: el mismo criterio funciona con SQL, MongoDB, Drizzle o arrays en memoria
 - **Testing simple**: el `CollectionFilter` elimina la necesidad de mockear bases de datos
 - **Composable**: combina criterios con AND/OR sin complicaciones
 
-La inmutabilidad del `Criteria` es clave: evita bugs donde un criterio se modifica sin querer en algún lugar del código.
+Pero hay una lección que aprendí en producción y que vale más que todas las anteriores: **un Criteria que acepta campos dinámicos sin un allowlist es una vulnerabilidad, no una feature.** La flexibilidad del patrón —que cualquier campo sea filtrable— es exactamente lo que un atacante aprovecha. Por eso el transformador a Drizzle de la sección 6 no es un lujo: es la versión del patrón que de verdad debería llegar a producción. Concentra la validación de datos no confiables en un único punto (`resolveColumn`), parametriza los valores y deja que el compilador verifique todo lo demás.
 
-Si estás cansado de mantener repositorios con métodos que se multiplican como conejos, dale una oportunidad a este patrón. Tu yo del futuro te lo agradecerá.
+La inmutabilidad del `Criteria` evita bugs donde un criterio se modifica sin querer. El allowlist tipado evita algo peor: que tu flexibilidad se convierta en la puerta de entrada de un atacante.
+
+Si estás cansado de mantener repositorios con métodos que se multiplican como conejos, dale una oportunidad a este patrón. Pero móntalo con el allowlist desde el día uno. Tu yo del futuro —y tu equipo de seguridad— te lo agradecerán.
